@@ -52,13 +52,6 @@ repos:
         pass_filenames: false
       - id: vale
         args: [--output=line, --minAlertLevel=error]
-        # paper/ holds the working-paper text verbatim, as posted. Vale
-        # reports 139 errors on it, most of them wrong for an academic
-        # paper: decree dates, numbered title-case headings, first person,
-        # and "robust" in its statistical sense. Run `vale paper/` to see
-        # them. The style rules and the prose both change in a later pass,
-        # and this exclusion goes with that change.
-        exclude: ^paper/
 
   # General English checks that do not overlap the Vale styles.
   - repo: https://github.com/amperser/proselint
