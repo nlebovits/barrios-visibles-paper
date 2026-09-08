@@ -71,6 +71,15 @@ section in `.vale.ini`.
 Commit messages follow the Conventional Commits format. The commitizen hook
 checks each message at commit time.
 
+## Funding
+
+Nissim Lebovits gratefully acknowledges financial support for this research by
+the Fulbright U.S. Student Program, which is sponsored by the U.S. Department
+of State and the Comisión Fulbright Argentina. Its contents are solely the
+responsibility of the author and do not necessarily represent the official
+views of the Fulbright Program, the Government of the United States, or the
+Comisión Fulbright Argentina.
+
 ## License
 
 [Apache-2.0](LICENSE) covers the code in this repository.
