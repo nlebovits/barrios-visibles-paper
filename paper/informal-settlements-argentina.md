@@ -179,6 +179,12 @@ The purpose of this analysis is not to replace proper census operations, but to 
 
 ---
 
+## Acknowledgements
+
+Nissim Lebovits gratefully acknowledges financial support for this research by the Fulbright U.S. Student Program, which is sponsored by the U.S. Department of State and the Comisión Fulbright Argentina. Its contents are solely the responsibility of the author and do not necessarily represent the official views of the Fulbright Program, the Government of the United States, or the Comisión Fulbright Argentina.
+
+---
+
 ## Data and Code Availability
 
 All data used in this analysis are freely available at the URLs cited in §2. The analysis code is published as a public GitHub gist at [https://gist.github.com/nlebovits/fd3e5f9a0e5ea1eeb4c6313917fbbbbe](https://gist.github.com/nlebovits/fd3e5f9a0e5ea1eeb4c6313917fbbbbe). An interactive web map at [https://barriosvisibles.org](https://barriosvisibles.org) displays every settlement boundary and every building footprint in Argentina against current high-resolution basemap imagery, enabling readers to explore the estimates and visually verify detection quality settlement by settlement.
