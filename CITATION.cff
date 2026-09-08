@@ -1,0 +1,48 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite the working paper below."
+title: "Barrios Visibles: analysis code and manuscript source"
+abstract: >-
+  Analysis code and manuscript source for Barrios Visibles, which compares
+  RENABAP's enumeration of Argentina's informal settlements against 1.97
+  million building footprints from the combined Google, Microsoft, and
+  OpenStreetMap dataset.
+type: software
+authors:
+  - family-names: Lebovits
+    given-names: Nissim
+    affiliation: Vanderbilt University
+    email: nlebovits@pm.me
+license: Apache-2.0
+repository-code: "https://github.com/nlebovits/barrios-visibles-paper"
+keywords:
+  - informal settlements
+  - Argentina
+  - RENABAP
+  - building footprints
+  - population undercount
+  - GeoParquet
+  - DuckDB
+
+preferred-citation:
+  type: report
+  title: "Barrios Visibles: Building Footprint Evidence of Systematic Population Undercount in Argentina's Informal Settlements"
+  authors:
+    - family-names: Lebovits
+      given-names: Nissim
+      affiliation: Vanderbilt University
+  year: 2026
+  month: 4
+  url: "https://ssrn.com/abstract=6588819"
+  notes: "Working paper, posted on SSRN."
+
+references:
+  - type: report
+    title: "Barrios Visibles, Part II: Open Building Footprint Evidence of Substantial Population Undercount in Argentina's 2022 Census"
+    authors:
+      - family-names: Lebovits
+        given-names: Nissim
+        affiliation: Vanderbilt University
+    year: 2026
+    month: 5
+    url: "https://nlebovits.github.io/posts/writing/barrios-visibles-part-ii/"
+    notes: "Working paper."
