@@ -105,7 +105,7 @@ IGN_WFS_PAGE_SIZE = 1000
 # A version-specific record id, not the concept id. The concept id follows the
 # latest version, so pinning it would change the data under a reader without
 # changing this file.
-ZENODO_RECORD_ID = ""
+ZENODO_RECORD_ID = "22656880"
 ZENODO_API = "https://zenodo.org/api/records"
 
 # Record filename -> local destination. The optimized inputs only. The analysis
@@ -314,6 +314,12 @@ def prepare_from_zenodo() -> None:
 
     with timed("Read the Zenodo record"):
         r = requests.get(f"{ZENODO_API}/{ZENODO_RECORD_ID}", timeout=60)
+        if r.status_code == 404:
+            raise RuntimeError(
+                f"Zenodo record {ZENODO_RECORD_ID} is not public. A reserved "
+                "DOI stays private until the deposit is published. Run with "
+                "--source live until then."
+            )
         r.raise_for_status()
         record = r.json()
         entries = {f["key"]: f for f in record.get("files", [])}
