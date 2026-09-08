@@ -2,11 +2,17 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22656880.svg)](https://doi.org/10.5281/zenodo.22656880)
 
-Argentina's Registro Nacional de Barrios Populares (RENABAP) records about
-1.24 million families across 6,467 registered informal settlements. This
-analysis compares that enumeration against 1.97 million building footprints
-from the combined Google, Microsoft, and OpenStreetMap dataset, joined to the
-same polygons.
+This repository contains the manuscript source and analysis code for *Barrios
+Visibles*, a working paper on Argentina's informal settlements. Argentina's
+Registro Nacional de Barrios Populares (RENABAP) records about 1.24 million
+families across 6,467 registered informal settlements. The paper compares that
+enumeration against 1.97 million building footprints from the combined Google,
+Microsoft, and OpenStreetMap dataset, joined to the same polygons.
+
+The data snapshot behind every number is archived at
+[10.5281/zenodo.22656880](https://doi.org/10.5281/zenodo.22656880).
+
+## Findings
 
 Inside registered boundaries, detected footprints exceed recorded families by
 59%. A per-settlement household floor exceeds RENABAP's national total by 83%.
@@ -17,11 +23,9 @@ The gap splits by geography. In the consolidated vertical villas of CABA,
 RENABAP records residents whom footprints miss. Everywhere else, building
 counts run well above the recorded family estimates.
 
-This repository contains the analysis code and the manuscript source. The data
-snapshot behind every number is archived at
-[10.5281/zenodo.22656880](https://doi.org/10.5281/zenodo.22656880).
+## Reproduce the analysis
 
-## Environment
+### Install the environment
 
 [pixi](https://pixi.sh) manages the dependencies. `pixi.lock` pins every
 version. Install the environment once:
@@ -30,7 +34,14 @@ version. Install the environment once:
 pixi install
 ```
 
-## Analysis
+### Provide the urban-areas data
+
+The analysis downloads the RENABAP boundaries and the VIDA building footprints
+into `data/`, which `.gitignore` excludes. It also reads an IGN Planta Urbana
+Parquet file. That layer has no public download URL, so point
+`URBAN_AREAS_PATH` at a local copy before the first run.
+
+### Run the estimates
 
 `estimate.py` estimates household counts in the informal settlements of
 Argentina. It joins satellite-derived building footprints to the RENABAP
@@ -41,12 +52,7 @@ occupation rates, and two population multipliers.
 pixi run estimate
 ```
 
-The script downloads the RENABAP boundaries and the VIDA building footprints
-into `data/`, which `.gitignore` excludes. It also reads an IGN Planta Urbana
-parquet file. That layer has no public download URL, so point
-`URBAN_AREAS_PATH` at a local copy before the first run.
-
-## Papers
+## Build the papers
 
 The manuscript source is in `paper/`. Render both papers to PDF:
 
@@ -77,8 +83,8 @@ Run every check against the whole tree:
 pixi run lint
 ```
 
-Vale needs its pinned style packages before the first run. `vale sync` fetches
-them into `styles/`, and `.gitignore` keeps them out of the repository:
+To run Vale directly, first fetch its pinned style packages. `vale sync` puts
+them in `styles/`, which `.gitignore` excludes:
 
 ```bash
 vale sync
@@ -99,7 +105,7 @@ A comment toggle works on a local style only. Vale ignores it for a rule from
 a package such as `ai-tells` or `Google`. Suppress one of those with a path
 section in `.vale.ini`.
 
-## Commits
+## Commit messages
 
 Commit messages follow the Conventional Commits format. The commitizen hook
 checks each message at commit time.
