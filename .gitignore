@@ -29,6 +29,9 @@ styles/config/templates/
 
 # Downloaded and derived analysis inputs. estimate.py writes them.
 data/
+# Analysis results. estimate.py writes them, and the Zenodo record holds
+# the published copy.
+outputs/
 
 # OS
 .DS_Store

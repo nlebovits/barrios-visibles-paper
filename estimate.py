@@ -22,19 +22,35 @@ Data sources:
 - RENABAP boundaries: argentina.gob.ar GeoJSON (downloaded, then gpio-optimized)
 - Buildings: Google/MS/OSM Open Buildings via VIDA on Source Cooperative
   (downloaded, then gpio-optimized: bbox column + Hilbert order + ideal row groups)
-- Urban areas: IGN Planta Urbana polygons (local file; see URBAN_AREAS_PATH)
+- Urban areas: IGN Planta Urbana polygons from the IGN GeoServer WFS
+  (downloaded as EPSG:4326 GeoJSON, then gpio-optimized)
 
 Optimization rationale: the raw VIDA national file is not spatially organized for a
 join like this. gpio re-writes it with a bbox column, Hilbert-curve row ordering, and
 ideal row-group sizes so DuckDB can prune row groups during the spatial join.
 
-Output:
-- Per-settlement GeoJSON: ~/Documents/settlement_estimates.geojson
-- Summary markdown: ~/Documents/settlement_analysis_summary.md
+Licensing: the VIDA footprints are ODbL v1.0. A redistributed database derived
+from them carries the same license and the same attribution requirement.
 
-Run with: pixi run python estimate.py
+Two data sources, selected with --source:
+- zenodo (default): read the pinned snapshot, which reproduces the published
+  numbers. Every file is verified against the md5 in the Zenodo record.
+- live: pull the current endpoints. The upstream sources change, so a live run
+  reflects today's data and need not match the paper.
+
+Output, written to outputs/ beside this script:
+- settlement_estimates.geojson
+- settlement_estimates.parquet
+- settlement_analysis_summary.md
+
+Run with:
+    pixi run estimate
+    pixi run python estimate.py --source live
 """
 
+import argparse
+import hashlib
+import json
 import time
 from contextlib import contextmanager
 from datetime import datetime
@@ -48,21 +64,23 @@ import requests
 # Paths
 # --------------------------------------------------------------------------- #
 DATA_DIR = Path(__file__).resolve().parent / "data"
-DOWNLOADS = Path.home() / "Downloads"
+OUTPUT_DIR = Path(__file__).resolve().parent / "outputs"
 
 # RENABAP: downloaded GeoJSON, then gpio-optimized parquet
 RENABAP_GEOJSON = DATA_DIR / "renabap-2023-12-06.geojson"
 RENABAP_PATH = DATA_DIR / "renabap.parquet"
 
 # Buildings: raw VIDA national file (cached download), then gpio-optimized parquet
-BUILDINGS_RAW = DOWNLOADS / "ARG.parquet"
+BUILDINGS_RAW = DATA_DIR / "ARG.parquet"
 BUILDINGS_PATH = DATA_DIR / "buildings_arg.parquet"
 
-# Urban areas: local-only (no public URL wired). if-not-exists guard below.
-URBAN_AREAS_PATH = DOWNLOADS / "areas_de_asentamientos_y_edificios_020105.parquet"
+# Urban areas: IGN Planta Urbana, pulled from the IGN WFS, then gpio-optimized
+URBAN_AREAS_GEOJSON = DATA_DIR / "ign_planta_urbana.geojson"
+URBAN_AREAS_PATH = DATA_DIR / "urban_areas.parquet"
 
-OUTPUT_GEOJSON = Path.home() / "Documents/settlement_estimates.geojson"
-OUTPUT_MD = Path.home() / "Documents/settlement_analysis_summary.md"
+OUTPUT_GEOJSON = OUTPUT_DIR / "settlement_estimates.geojson"
+OUTPUT_PARQUET = OUTPUT_DIR / "settlement_estimates.parquet"
+OUTPUT_MD = OUTPUT_DIR / "settlement_analysis_summary.md"
 
 # --------------------------------------------------------------------------- #
 # Download sources
@@ -74,6 +92,29 @@ VIDA_URL = (
     "https://data.source.coop/vida/google-microsoft-open-buildings/"
     "geoparquet/by_country/country_iso=ARG/ARG.parquet"
 )
+
+# IGN Planta Urbana (areas de asentamientos y edificios), served as WFS 2.0.
+# GeoServer pages the response, so the download loops on startIndex.
+IGN_WFS_URL = "https://wms.ign.gob.ar/geoserver/ign/ows"
+IGN_WFS_TYPENAME = "ign:areas_de_asentamientos_y_edificios_020105"
+IGN_WFS_PAGE_SIZE = 1000
+
+# --------------------------------------------------------------------------- #
+# Zenodo snapshot
+# --------------------------------------------------------------------------- #
+# A version-specific record id, not the concept id. The concept id follows the
+# latest version, so pinning it would change the data under a reader without
+# changing this file.
+ZENODO_RECORD_ID = ""
+ZENODO_API = "https://zenodo.org/api/records"
+
+# Record filename -> local destination. The optimized inputs only. The analysis
+# rebuilds every output from them.
+ZENODO_SNAPSHOT_FILES = {
+    "renabap.parquet": RENABAP_PATH,
+    "urban_areas.parquet": URBAN_AREAS_PATH,
+    "buildings_arg.parquet": BUILDINGS_PATH,
+}
 
 # --------------------------------------------------------------------------- #
 # Sensitivity analysis parameters
@@ -183,15 +224,123 @@ def prepare_buildings() -> None:
             )
 
 
-def check_urban_areas() -> None:
-    """Urban-areas layer has no wired download URL; guard for the local file."""
-    if not URBAN_AREAS_PATH.exists():
-        raise FileNotFoundError(
-            f"Urban-areas file not found: {URBAN_AREAS_PATH}\n"
-            "No public download URL is wired for this layer. Place the IGN "
-            "Planta Urbana parquet at the path above (or update URBAN_AREAS_PATH)."
+def _download_wfs_geojson(dest: Path) -> None:
+    """Page through the IGN WFS and write one GeoJSON FeatureCollection.
+
+    Requests EPSG:4326 so the layer lands in the same CRS as RENABAP; the
+    service publishes it in EPSG:3857.
+    """
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    features: list[dict] = []
+    start = 0
+    while True:
+        r = requests.get(
+            IGN_WFS_URL,
+            params={
+                "service": "WFS",
+                "version": "2.0.0",
+                "request": "GetFeature",
+                "typeNames": IGN_WFS_TYPENAME,
+                "outputFormat": "application/json",
+                "srsName": "EPSG:4326",
+                "count": IGN_WFS_PAGE_SIZE,
+                "startIndex": start,
+            },
+            headers={"User-Agent": "Mozilla/5.0"},
+            timeout=300,
         )
-    print(f"    urban areas: {URBAN_AREAS_PATH}")
+        r.raise_for_status()
+        page = r.json()
+        batch = page.get("features", [])
+        features.extend(batch)
+        matched = page.get("numberMatched")
+        print(
+            f"    fetched {len(features):,}"
+            + (f" / {matched:,}" if isinstance(matched, int) else "")
+        )
+        if len(batch) < IGN_WFS_PAGE_SIZE:
+            break
+        start += IGN_WFS_PAGE_SIZE
+
+    if not features:
+        raise RuntimeError(f"IGN WFS returned no features for {IGN_WFS_TYPENAME}")
+
+    tmp = dest.with_suffix(dest.suffix + ".part")
+    with open(tmp, "w") as f:
+        json.dump({"type": "FeatureCollection", "features": features}, f)
+    tmp.rename(dest)
+    print(f"    saved {_fmt_bytes(dest.stat().st_size)} -> {dest}")
+
+
+def prepare_urban_areas() -> None:
+    """Pull IGN Planta Urbana from the WFS (cached) and gpio-optimize it."""
+    with timed("Download IGN Planta Urbana (WFS)"):
+        if URBAN_AREAS_GEOJSON.exists() or URBAN_AREAS_PATH.exists():
+            print(
+                f"    cached: {URBAN_AREAS_GEOJSON if URBAN_AREAS_GEOJSON.exists() else URBAN_AREAS_PATH}"
+            )
+        else:
+            _download_wfs_geojson(URBAN_AREAS_GEOJSON)
+
+    with timed("Optimize urban areas (gpio: bbox + Hilbert)"):
+        if URBAN_AREAS_PATH.exists():
+            print(f"    cached: {URBAN_AREAS_PATH}")
+        else:
+            (
+                gpio.convert(str(URBAN_AREAS_GEOJSON))
+                .add_bbox()
+                .sort_hilbert()
+                .write(str(URBAN_AREAS_PATH), geoparquet_version="1.1", overwrite=True)
+            )
+
+
+def _md5(path: Path, chunk: int = 8 * 1024 * 1024) -> str:
+    """Return the md5 of a file, read in chunks so a 4 GB input fits in memory."""
+    digest = hashlib.md5()
+    with open(path, "rb") as f:
+        for block in iter(lambda: f.read(chunk), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def prepare_from_zenodo() -> None:
+    """Fetch the pinned snapshot and verify every file against its md5."""
+    if not ZENODO_RECORD_ID:
+        raise RuntimeError(
+            "ZENODO_RECORD_ID is empty. Publish the data record, set the "
+            "version-specific id at the top of this file, or run with "
+            "--source live."
+        )
+
+    with timed("Read the Zenodo record"):
+        r = requests.get(f"{ZENODO_API}/{ZENODO_RECORD_ID}", timeout=60)
+        r.raise_for_status()
+        record = r.json()
+        entries = {f["key"]: f for f in record.get("files", [])}
+        print(f"    record {ZENODO_RECORD_ID}: {record['metadata']['title']}")
+
+    missing = sorted(set(ZENODO_SNAPSHOT_FILES) - set(entries))
+    if missing:
+        raise RuntimeError(
+            f"Zenodo record {ZENODO_RECORD_ID} has no file named: {', '.join(missing)}"
+        )
+
+    for key, dest in ZENODO_SNAPSHOT_FILES.items():
+        entry = entries[key]
+        expected = entry["checksum"].split(":", 1)[1]
+        with timed(f"Zenodo snapshot: {key}"):
+            if dest.exists() and _md5(dest) == expected:
+                print(f"    cached and verified: {dest}")
+                continue
+            _stream_download(entry["links"]["self"], dest)
+            actual = _md5(dest)
+            if actual != expected:
+                dest.unlink()
+                raise RuntimeError(
+                    f"{key}: md5 is {actual}, and the record says {expected}. "
+                    "The download is corrupt and the file was removed."
+                )
+            print(f"    md5 verified: {actual}")
 
 
 # --------------------------------------------------------------------------- #
@@ -525,9 +674,10 @@ def export_outputs(results: dict) -> None:
 
     n_settlements, renabap_fam, total_bldg, est_fam = national
 
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
     # Export per-settlement GeoJSON
     print(f"    writing {OUTPUT_GEOJSON}...")
-    OUTPUT_GEOJSON.parent.mkdir(parents=True, exist_ok=True)
     con.execute(f"""
         COPY (
             SELECT
@@ -546,6 +696,29 @@ def export_outputs(results: dict) -> None:
             ORDER BY provincia, departamento, nombre
         ) TO '{OUTPUT_GEOJSON}'
         WITH (FORMAT GDAL, DRIVER 'GeoJSON')
+    """)
+
+    # The same table as GeoParquet, for the Zenodo record and for anyone
+    # reading the results in DuckDB rather than in a GIS.
+    print(f"    writing {OUTPUT_PARQUET}...")
+    con.execute(f"""
+        COPY (
+            SELECT
+                id_renabap,
+                nombre,
+                provincia,
+                departamento,
+                localidad,
+                is_urban,
+                familias_aproximadas as renabap_families,
+                building_count,
+                estimated_families,
+                CASE WHEN building_count * 1.1 > familias_aproximadas THEN 'buildings' ELSE 'renabap' END as estimate_source,
+                geometry
+            FROM settlement_buildings
+            ORDER BY provincia, departamento, nombre
+        ) TO '{OUTPUT_PARQUET}'
+        (FORMAT PARQUET, COMPRESSION ZSTD)
     """)
 
     # Write markdown summary
@@ -670,9 +843,12 @@ def export_outputs(results: dict) -> None:
             renabap_pop = renabap_fam * mult
             est_pop = est_fam * mult
             diff = est_pop - renabap_pop
-            pct_arg = est_pop / ARGENTINA_POP * 100
+            # The share belongs to the difference, which is what this column
+            # reports. Using the estimated total here read as though the
+            # undercount were twice its actual share.
+            pct_arg = diff / ARGENTINA_POP * 100
             f.write(
-                f"| Population (×{mult}) | {int(renabap_pop):,} | {int(est_pop):,} | +{int(diff):,} ({pct_arg:.1f}% of Argentina) |\n"
+                f"| Population (×{mult}) | {int(renabap_pop):,} | {int(est_pop):,} | +{int(diff):,} ({pct_arg:.1f}% of Argentina's total population) |\n"
             )
 
         f.write("\n")
@@ -731,14 +907,35 @@ def export_outputs(results: dict) -> None:
 # --------------------------------------------------------------------------- #
 # Orchestration
 # --------------------------------------------------------------------------- #
-def main():
-    pipeline_start = time.perf_counter()
+def main(argv: list[str] | None = None) -> None:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Estimate household counts in Argentina's informal settlements "
+            "from building footprints and the RENABAP registry."
+        )
+    )
+    parser.add_argument(
+        "--source",
+        choices=("zenodo", "live"),
+        default="zenodo",
+        help=(
+            "zenodo: read the pinned snapshot and reproduce the published "
+            "numbers. live: pull the current endpoints, which reflects "
+            "today's data and need not match the paper. Default: zenodo."
+        ),
+    )
+    args = parser.parse_args(argv)
 
-    # Phase 1+2: download + optimize
-    prepare_renabap()
-    prepare_buildings()
-    with timed("Check urban-areas layer"):
-        check_urban_areas()
+    pipeline_start = time.perf_counter()
+    print(f"Data source: {args.source}")
+
+    # Phase 1+2: fetch the inputs
+    if args.source == "zenodo":
+        prepare_from_zenodo()
+    else:
+        prepare_renabap()
+        prepare_buildings()
+        prepare_urban_areas()
 
     # Phase 3: query
     with timed("Spatial-join query + sensitivity analysis"):
@@ -763,6 +960,7 @@ def main():
 
     print("\nDone! Output files:")
     print(f"  - {OUTPUT_GEOJSON}")
+    print(f"  - {OUTPUT_PARQUET}")
     print(f"  - {OUTPUT_MD}")
 
 
