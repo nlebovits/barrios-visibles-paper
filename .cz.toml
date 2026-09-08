@@ -1,0 +1,3 @@
+# Conventional commits, checked by the commitizen hook at commit-msg.
+[tool.commitizen]
+name = "cz_conventional_commits"

@@ -1,0 +1,22 @@
+[workspace]
+authors = ["nlebovits <nissim.lebovits@vanderbilt.edu>"]
+channels = ["conda-forge"]
+name = "barrios-visibles-paper"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+estimate = "python estimate.py"
+lint = "prek run --all-files"
+
+[dependencies]
+python = ">=3.11,<3.14"
+duckdb = ">=1.5.2,<2"
+pandas = ">=3.0.2,<4"
+pyarrow = ">=23.0.1,<24"
+requests = ">=2.32,<3"
+
+# geoparquet-io and prek publish to PyPI only.
+[pypi-dependencies]
+geoparquet-io = "*"
+prek = "*"

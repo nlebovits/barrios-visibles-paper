@@ -1,11 +1,13 @@
 # Python
 __pycache__/
-.venv/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
 .coverage
 coverage.xml
+
+# pixi environments
+.pixi/
 
 # Jupyter
 .ipynb_checkpoints/
@@ -24,6 +26,9 @@ styles/Readability/
 styles/ai-tells/
 # `vale sync` also unpacks the ai-tells agent template here.
 styles/config/templates/
+
+# Downloaded and derived analysis inputs. estimate.py writes them.
+data/
 
 # OS
 .DS_Store

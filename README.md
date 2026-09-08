@@ -2,13 +2,38 @@
 
 Analysis code and manuscript source for the Barrios Visibles paper.
 
-## Prose checks
+## Environment
 
-Vale and proselint run through [prek](https://github.com/j178/prek). Install
-the hooks once:
+[pixi](https://pixi.sh) manages the dependencies. `pixi.lock` pins every
+version. Install the environment once:
 
 ```bash
-uvx prek install \
+pixi install
+```
+
+## Analysis
+
+`estimate.py` estimates household counts in the informal settlements of
+Argentina. It joins satellite-derived building footprints to the RENABAP
+settlement boundaries, then sweeps three building-size filters, four
+occupation rates, and two population multipliers.
+
+```bash
+pixi run estimate
+```
+
+The script downloads the RENABAP boundaries and the VIDA building footprints
+into `data/`, which `.gitignore` excludes. It also reads an IGN Planta Urbana
+parquet file. That layer has no public download URL, so point
+`URBAN_AREAS_PATH` at a local copy before the first run.
+
+## Prose checks
+
+Vale and proselint run through [prek](https://github.com/j178/prek), which
+pixi provides. Install the git hooks once:
+
+```bash
+pixi run prek install \
   --hook-type pre-commit \
   --hook-type commit-msg
 ```
@@ -16,7 +41,7 @@ uvx prek install \
 Run every check against the whole tree:
 
 ```bash
-uvx prek run --all-files
+pixi run lint
 ```
 
 Vale needs its pinned style packages before the first run. `vale sync` fetches

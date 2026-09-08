@@ -1,0 +1,4 @@
+[codespell]
+# Spanish words that the English dictionary reports. Add a word here when
+# codespell flags correct Spanish.
+ignore-words-list = visibles
