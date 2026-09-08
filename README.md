@@ -2,13 +2,12 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22656880.svg)](https://doi.org/10.5281/zenodo.22656880)
 
-This repository contains the analysis code and manuscript source for a
-comparison of two records of Argentina's informal settlements:
-
-- The Registro Nacional de Barrios Populares (RENABAP), which records about
-  1.24 million families across 6,467 registered settlements
-- 1.97 million building footprints from the combined Google, Microsoft, and
-  OpenStreetMap dataset, joined to the same settlement polygons
+This repository contains the manuscript source and analysis code for *Barrios
+Visibles*, a working paper on Argentina's informal settlements. Argentina's
+Registro Nacional de Barrios Populares (RENABAP) records about 1.24 million
+families across 6,467 registered informal settlements. The paper compares that
+enumeration against 1.97 million building footprints from the combined Google,
+Microsoft, and OpenStreetMap dataset, joined to the same polygons.
 
 The data snapshot behind every number is archived at
 [10.5281/zenodo.22656880](https://doi.org/10.5281/zenodo.22656880).
@@ -67,9 +66,7 @@ engine comes from a system TeX installation, because a full TeX distribution
 would dwarf the rest of this environment. On Debian or Ubuntu, install
 `texlive-xetex` and `fonts-dejavu`.
 
-## Contribute
-
-### Check the prose
+## Prose checks
 
 Vale and proselint run through [prek](https://github.com/j178/prek), which
 pixi provides. Install the git hooks once:
@@ -108,7 +105,7 @@ A comment toggle works on a local style only. Vale ignores it for a rule from
 a package such as `ai-tells` or `Google`. Suppress one of those with a path
 section in `.vale.ini`.
 
-### Format commits
+## Commit messages
 
 Commit messages follow the Conventional Commits format. The commitizen hook
 checks each message at commit time.
