@@ -2,15 +2,22 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22656880.svg)](https://doi.org/10.5281/zenodo.22656880)
 
-This repository contains the manuscript source and analysis code for *Barrios
-Visibles*, a working paper on Argentina's informal settlements. Argentina's
-Registro Nacional de Barrios Populares (RENABAP) records about 1.24 million
-families across 6,467 registered informal settlements. The paper compares that
-enumeration against 1.97 million building footprints from the combined Google,
-Microsoft, and OpenStreetMap dataset, joined to the same polygons.
+This repository contains the canonical manuscript, supplement, and analysis
+code for submission of *Barrios Visibles* to Cambridge University Press's
+*Data & Policy*. Paper I is the submission manuscript. The former Paper II
+remains as a historical working paper; its Census 2022 evidence is integrated
+into Paper I as a compact robustness comparison.
 
-The data snapshot behind every number is archived at
+Argentina's Registro Nacional de Barrios Populares (RENABAP) records about
+1.24 million families across 6,467 registered informal settlements. The
+article compares that enumeration against 1.97 million building footprints
+from the combined Google, Microsoft, and OpenStreetMap dataset, joined to the
+same polygons.
+
+The version 1.0.0 data snapshot is archived at
 [10.5281/zenodo.22656880](https://doi.org/10.5281/zenodo.22656880).
+A recovered mismatch between its derived footprint total and the manuscript is
+documented in REPRODUCIBILITY.md and must be resolved before submission.
 
 ## Findings
 
@@ -21,7 +28,10 @@ residents, or 2.9 to 3.4 million above the official figure.
 
 The gap splits by geography. In the consolidated vertical villas of CABA,
 RENABAP records residents whom footprints miss. Everywhere else, building
-counts run well above the recorded family estimates.
+counts run well above the recorded family estimates. A Census 2022 robustness
+comparison declines from 2.62 to 1.88 as the analysis is restricted to radios
+increasingly covered by registered settlements. It is a consistency check, not
+an independent population count.
 
 ## Reproduce the analysis
 
@@ -34,37 +44,39 @@ version. Install the environment once:
 pixi install
 ```
 
-### Provide the urban-areas data
+### Run the frozen analyses
 
-The analysis downloads the RENABAP boundaries and the VIDA building footprints
-into `data/`, which `.gitignore` excludes. It also reads an IGN Planta Urbana
-Parquet file. That layer has no public download URL, so point
-`URBAN_AREAS_PATH` at a local copy before the first run.
+The default RENABAP analysis uses the version-specific Zenodo snapshot:
 
-### Run the estimates
+    pixi run estimate
 
-`estimate.py` estimates household counts in the informal settlements of
-Argentina. It joins satellite-derived building footprints to the RENABAP
-settlement boundaries, then sweeps three building-size filters, four
-occupation rates, and two population multipliers.
+The Census comparison requires a new Zenodo version containing the processed
+radio and recovered settlement-count files. Until the author publishes that
+version and inserts its record id, run it against the recovered inputs:
 
-```bash
-pixi run estimate
-```
+    pixi run census-comparison -- \
+      --census-path /path/to/radios-hilbert.parquet \
+      --settlements-path /path/to/barrios-hilbert.parquet
 
-## Build the papers
+After the archive update:
 
-The manuscript source is in `paper/`. Render both papers to PDF:
+    pixi run reproduce
 
-```bash
-pixi run pdf
-```
+Live modes retrieve changing upstream sources and need not reproduce publication
+values. See REPRODUCIBILITY.md for file hashes, data lineage, and unresolved
+provenance issues.
 
-That writes `outputs/barrios-visibles-part-i.pdf` and
-`outputs/barrios-visibles-part-ii.pdf`. pandoc comes from pixi. The xelatex
-engine comes from a system TeX installation, because a full TeX distribution
-would dwarf the rest of this environment. On Debian or Ubuntu, install
-`texlive-xetex` and `fonts-dejavu`.
+## Build the submission files
+
+The canonical article and supplement are in paper/. Render both with:
+
+    pixi run pdf
+
+This writes outputs/barrios-visibles-data-and-policy.pdf and
+outputs/barrios-visibles-supplement.pdf. The historical Paper II can still be
+rendered with pixi run pdf-part-ii. Pandoc comes from pixi. The xelatex engine
+comes from a system TeX installation; on Debian or Ubuntu, install
+texlive-xetex and fonts-dejavu.
 
 ## Prose checks
 
