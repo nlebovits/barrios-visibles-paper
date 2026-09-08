@@ -85,6 +85,12 @@ OUTPUT_MD = OUTPUT_DIR / "settlement_analysis_summary.md"
 # --------------------------------------------------------------------------- #
 # Download sources
 # --------------------------------------------------------------------------- #
+# Zenodo's WAF answers 403 to a spoofed browser agent. Every source here
+# accepts a descriptive one, so identify the script honestly.
+USER_AGENT = (
+    "barrios-visibles-paper/1.0 (+https://github.com/nlebovits/barrios-visibles-paper)"
+)
+
 RENABAP_URL = (
     "https://www.argentina.gob.ar/sites/default/files/renabap-2023-12-06.geojson"
 )
@@ -159,7 +165,7 @@ def _stream_download(url: str, dest: Path) -> None:
     dest.parent.mkdir(parents=True, exist_ok=True)
     tmp = dest.with_suffix(dest.suffix + ".part")
     with requests.get(
-        url, headers={"User-Agent": "Mozilla/5.0"}, stream=True, timeout=300
+        url, headers={"User-Agent": USER_AGENT}, stream=True, timeout=300
     ) as r:
         r.raise_for_status()
         total = int(r.headers.get("content-length", 0))
@@ -246,7 +252,7 @@ def _download_wfs_geojson(dest: Path) -> None:
                 "count": IGN_WFS_PAGE_SIZE,
                 "startIndex": start,
             },
-            headers={"User-Agent": "Mozilla/5.0"},
+            headers={"User-Agent": USER_AGENT},
             timeout=300,
         )
         r.raise_for_status()
