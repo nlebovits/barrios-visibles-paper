@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Agent and editor state
+.serena/
+# Claude Code worktrees: nested checkouts, never part of this repo.
+.claude/worktrees/
+# Personal Claude Code settings. The shared ones live in .claude/settings.json.
+.claude/settings.local.json
+
+# Vale packages fetched by `vale sync`.
+styles/Google/
+styles/Microsoft/
+styles/Readability/
+styles/ai-tells/
+# `vale sync` also unpacks the ai-tells agent template here.
+styles/config/templates/
+
+# OS
+.DS_Store
