@@ -1,0 +1,17 @@
+% LaTeX preamble for `pixi run pdf`. Each line fixes a measured overflow.
+% Without them, xelatex reported 20 overfull boxes in Part I, the worst
+% 233pt, which is 3.2 inches past the right margin.
+
+% Break a long URL anywhere. The reference list carries DOIs and query
+% strings with no hyphenation point, so TeX could not break them.
+% The build also passes -f markdown+autolink_bare_uris, because a bare URL
+% in Markdown is plain text by default and this package never sees it.
+\usepackage{xurl}
+
+% Let TeX stretch a line rather than run past the margin.
+\setlength{\emergencystretch}{3em}
+
+% The wide tables have narrow columns. A smaller face keeps a long header
+% word such as "Settlements" inside its column.
+\usepackage{etoolbox}
+\AtBeginEnvironment{longtable}{\small}

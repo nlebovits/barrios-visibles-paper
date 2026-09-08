@@ -12,11 +12,20 @@ lint = "prek run --all-files"
 # installation, not from pixi, because a full TeX distribution would dwarf
 # the rest of this environment. DejaVu carries the glyphs the papers use,
 # such as the >= in the building-size filters, which Latin Modern lacks.
+#
+# --columns=24 makes pandoc give each table column a relative width. At the
+# default of 72 it emits bare `l` columns, which never wrap, and the widest
+# table ran 185pt past the right margin. autolink_bare_uris turns a bare URL
+# in the reference list into a link, which paper/pdf-header.tex can break.
 pdf-part-i = """pandoc paper/informal-settlements-argentina.md \
+  -f markdown+autolink_bare_uris --columns=24 \
+  --include-in-header=paper/pdf-header.tex \
   -o outputs/barrios-visibles-part-i.pdf --pdf-engine=xelatex \
   -V geometry:margin=1in -V linkcolor=blue -V fontsize=11pt \
   -V mainfont='DejaVu Serif' -V monofont='DejaVu Sans Mono'"""
 pdf-part-ii = """pandoc paper/barrios-visibles-part-ii.md \
+  -f markdown+autolink_bare_uris --columns=24 \
+  --include-in-header=paper/pdf-header.tex \
   -o outputs/barrios-visibles-part-ii.pdf --pdf-engine=xelatex \
   -V geometry:margin=1in -V linkcolor=blue -V fontsize=11pt \
   -V mainfont='DejaVu Serif' -V monofont='DejaVu Sans Mono'"""
