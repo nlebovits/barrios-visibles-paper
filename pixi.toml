@@ -8,9 +8,23 @@ version = "0.1.0"
 [tasks]
 estimate = "python estimate.py"
 lint = "prek run --all-files"
+# Render each paper for submission. xelatex comes from the system TeX
+# installation, not from pixi, because a full TeX distribution would dwarf
+# the rest of this environment. DejaVu carries the glyphs the papers use,
+# such as the >= in the building-size filters, which Latin Modern lacks.
+pdf-part-i = """pandoc paper/informal-settlements-argentina.md \
+  -o outputs/barrios-visibles-part-i.pdf --pdf-engine=xelatex \
+  -V geometry:margin=1in -V linkcolor=blue -V fontsize=11pt \
+  -V mainfont='DejaVu Serif' -V monofont='DejaVu Sans Mono'"""
+pdf-part-ii = """pandoc paper/barrios-visibles-part-ii.md \
+  -o outputs/barrios-visibles-part-ii.pdf --pdf-engine=xelatex \
+  -V geometry:margin=1in -V linkcolor=blue -V fontsize=11pt \
+  -V mainfont='DejaVu Serif' -V monofont='DejaVu Sans Mono'"""
+pdf = { depends-on = ["pdf-part-i", "pdf-part-ii"] }
 
 [dependencies]
 python = ">=3.11,<3.14"
+pandoc = ">=3.1,<4"
 duckdb = ">=1.5.2,<2"
 pandas = ">=3.0.2,<4"
 pyarrow = ">=23.0.1,<24"

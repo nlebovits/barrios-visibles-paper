@@ -1,6 +1,25 @@
 # Barrios Visibles
 
-Analysis code and manuscript source for the Barrios Visibles paper.
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22656880.svg)](https://doi.org/10.5281/zenodo.22656880)
+
+Argentina's Registro Nacional de Barrios Populares (RENABAP) records about
+1.24 million families across 6,467 registered informal settlements. This
+analysis compares that enumeration against 1.97 million building footprints
+from the combined Google, Microsoft, and OpenStreetMap dataset, joined to the
+same polygons.
+
+Inside registered boundaries, detected footprints exceed recorded families by
+59%. A per-settlement household floor exceeds RENABAP's national total by 83%.
+Under conservative population multipliers that implies 6.3 to 7.6 million
+residents, or 2.9 to 3.4 million above the official figure.
+
+The gap splits by geography. In the consolidated vertical villas of CABA,
+RENABAP records residents whom footprints miss. Everywhere else, building
+counts run well above the recorded family estimates.
+
+This repository contains the analysis code and the manuscript source. The data
+snapshot behind every number is archived at
+[10.5281/zenodo.22656880](https://doi.org/10.5281/zenodo.22656880).
 
 ## Environment
 
@@ -26,6 +45,20 @@ The script downloads the RENABAP boundaries and the VIDA building footprints
 into `data/`, which `.gitignore` excludes. It also reads an IGN Planta Urbana
 parquet file. That layer has no public download URL, so point
 `URBAN_AREAS_PATH` at a local copy before the first run.
+
+## Papers
+
+The manuscript source is in `paper/`. Render both papers to PDF:
+
+```bash
+pixi run pdf
+```
+
+That writes `outputs/barrios-visibles-part-i.pdf` and
+`outputs/barrios-visibles-part-ii.pdf`. pandoc comes from pixi. The xelatex
+engine comes from a system TeX installation, because a full TeX distribution
+would dwarf the rest of this environment. On Debian or Ubuntu, install
+`texlive-xetex` and `fonts-dejavu`.
 
 ## Prose checks
 

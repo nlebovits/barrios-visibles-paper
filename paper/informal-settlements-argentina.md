@@ -1,6 +1,7 @@
 ---
 layout: post.njk
 title: "Barrios Visibles: Building Footprint Evidence of Systematic Population Undercount in Argentina's Informal Settlements"
+author: Nissim Lebovits
 date: 2026-04-16
 tags: ["writing", "research", "geospatial"]
 ---

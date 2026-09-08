@@ -1,6 +1,7 @@
 ---
 layout: post.njk
 title: "Barrios Visibles, Part II: Open Building Footprint Evidence of Substantial Population Undercount in Argentina's 2022 Census"
+author: Nissim Lebovits
 date: 2026-05-06
 tags: ["writing", "research", "geospatial"]
 ---
