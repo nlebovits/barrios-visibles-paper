@@ -187,7 +187,11 @@ Nissim Lebovits gratefully acknowledges financial support for this research by t
 
 ## Data and Code Availability
 
-All data used in this analysis are freely available at the URLs cited in §2. The analysis code is published as a public GitHub gist at [https://gist.github.com/nlebovits/fd3e5f9a0e5ea1eeb4c6313917fbbbbe](https://gist.github.com/nlebovits/fd3e5f9a0e5ea1eeb4c6313917fbbbbe). An interactive web map at [https://barriosvisibles.org](https://barriosvisibles.org) displays every settlement boundary and every building footprint in Argentina against current high-resolution basemap imagery, enabling readers to explore the estimates and visually verify detection quality settlement by settlement.
+All data used in this analysis are freely available at the URLs cited in §2. The analysis code is published at [https://github.com/nlebovits/barrios-visibles-paper](https://github.com/nlebovits/barrios-visibles-paper). A pinned snapshot of the optimized inputs and of the results is archived at [https://doi.org/10.5281/zenodo.22656880](https://doi.org/10.5281/zenodo.22656880) under ODbL v1.0, the license the building-footprint sources require.
+
+`pixi run estimate` reads that snapshot and rebuilds every number reported here, after checking each file against the md5 recorded with it. `--source live` pulls the current endpoints instead, which reflects today's data and need not match these results.
+
+An interactive web map at [https://barriosvisibles.org](https://barriosvisibles.org) displays every settlement boundary and every building footprint in Argentina against current high-resolution basemap imagery, enabling readers to explore the estimates and visually verify detection quality settlement by settlement.
 
 ---
 
