@@ -43,8 +43,9 @@ repos:
     rev: v2.4.3
     hooks:
       - id: codespell
-        # The Vale styles list misspellings on purpose.
-        exclude: ^styles/
+        # The Vale styles list misspellings on purpose. docs/ holds audit
+        # working notes that quote INDEC in Spanish and await a prose pass.
+        exclude: ^(styles/|docs/)
 
   # Prose rules. The styles live in styles/, and .vale.ini configures them.
   # `sync` fetches the pinned third-party packages; it takes no filenames.
@@ -57,6 +58,8 @@ repos:
         pass_filenames: false
       - id: vale
         args: [--output=line, --minAlertLevel=error]
+        # docs/ is excluded for the reason given under codespell.
+        exclude: ^docs/
 
   # General English checks that do not overlap the Vale styles.
   - repo: https://github.com/amperser/proselint
@@ -71,4 +74,5 @@ repos:
           (?x)^(
             \.claude/
             |paper/
+            |docs/
           )

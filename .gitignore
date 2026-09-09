@@ -35,3 +35,6 @@ outputs/
 
 # OS
 .DS_Store
+
+# External literature review, not for publication with the repo.
+docs/argentina_census_accuracy_literature_review_final.docx

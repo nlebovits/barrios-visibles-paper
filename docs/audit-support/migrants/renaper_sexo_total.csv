@@ -1,0 +1,5 @@
+genero_dni,cantidad,porcentaje,pagina_impresa,pagina_pdf,nota,fuente
+Mujeres,1568350,51.7,9,10,"Texto narrativo, no tabla","DNP/RENAPER (Dec 2022), Caracterizacion de la migracion internacional en Argentina a partir de los registros administrativos del RENAPER"
+Varones,1465430,48.3,9,10,"Texto narrativo, no tabla","DNP/RENAPER (Dec 2022), Caracterizacion de la migracion internacional en Argentina a partir de los registros administrativos del RENAPER"
+No binario,6,0.000198,9,10,"""solo 6 personas tienen su DNI con genero no binario""","DNP/RENAPER (Dec 2022), Caracterizacion de la migracion internacional en Argentina a partir de los registros administrativos del RENAPER"
+Total,3033786,100.0,9,10,1568350+1465430+6 = 3033786 (cuadra exactamente),"DNP/RENAPER (Dec 2022), Caracterizacion de la migracion internacional en Argentina a partir de los registros administrativos del RENAPER"
