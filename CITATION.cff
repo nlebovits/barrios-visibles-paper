@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this repository, please cite the working paper below."
+message: "If you use this repository, please cite the manuscript below."
 title: "Barrios Visibles: analysis code and manuscript source"
 abstract: >-
   Analysis code and manuscript source for Barrios Visibles, which compares
@@ -10,7 +10,7 @@ type: software
 authors:
   - family-names: Lebovits
     given-names: Nissim
-    affiliation: Vanderbilt University
+    affiliation: Independent Researcher
     email: nlebovits@pm.me
     orcid: "https://orcid.org/0009-0001-5083-9838"
 license: Apache-2.0
@@ -26,11 +26,11 @@ keywords:
 
 preferred-citation:
   type: report
-  title: "Barrios Visibles: Building Footprint Evidence of Systematic Population Undercount in Argentina's Informal Settlements"
+  title: "Barrios Visibles: Building-footprint evidence of a systematic population undercount in Argentina's informal settlements"
   authors:
     - family-names: Lebovits
       given-names: Nissim
-      affiliation: Vanderbilt University
+      affiliation: Independent Researcher
       orcid: "https://orcid.org/0009-0001-5083-9838"
   year: 2026
   month: 4
@@ -43,7 +43,7 @@ references:
     authors:
       - family-names: Lebovits
         given-names: Nissim
-        affiliation: Vanderbilt University
+        affiliation: Independent Researcher
         orcid: "https://orcid.org/0009-0001-5083-9838"
     year: 2026
     month: 5

@@ -6,6 +6,12 @@ date: 2026-05-06
 tags: ["writing", "research", "geospatial"]
 ---
 
+> **Historical working paper.** The submission manuscript is
+> paper/informal-settlements-argentina.md, which integrates and qualifies the
+> Census comparison below. The Census analysis supports a ratio
+> in selected high-coverage comparisons; it does not independently estimate a
+> national number of missing residents.
+
 *Argentina's 2022 national census appears to undercount the population of registered informal settlements by roughly half, a finding that converges with what I documented earlier this month in a [working paper](/posts/writing/informal-settlements-argentina/) on the country's informal-settlement registry, RENABAP. These findings show how open global datasets like building footprints can now surface coverage problems that traditional methods cannot, and that this capacity matters most precisely where official data is weakest.*
 
 ---
@@ -28,7 +34,7 @@ The deeper point is about what's now possible. Five years ago, an analysis of th
 
 This is what cloud-native geospatial actually changes. Anyone with basic technical literacy can now run an analysis that previously required institutional resources. A municipal GIS staffer in La Plata can run the same queries I ran. So can a journalist in Bogotá or an analyst at a community organization in Lima. So can a researcher at a small university in Lagos.
 
-In Argentina specifically, this matters more than it did a few years ago. SISU, the institution that maintained RENABAP, was [effectively closed](https://www.pagina12.com.ar/2026/02/11/cierre-de-subsecretaria-de-integracion-sociourbana-fuerte-golpe-a-la-politica-publica-de-vivienda/) earlier this year. Whatever one's view of that decision, the question of how the country counts the residents of its informal settlements doesn't pause with it. Open global data offers something the national infrastructure no longer reliably provides: a baseline that any municipality, NGO, journalist, or researcher can use to check official counts in their own jurisdiction. It isn't a replacement for state statistical capacity, and shouldn't be framed as one. But it's a real complement, and right now in Argentina, it's among the few options available.
+In Argentina specifically, this matters more than it did a few years ago. National-government restructuring changed the former SISU, but formal responsibility for RENABAP administration and follow-up continued within the Secretaría de Obras Públicas ([Decreto 764/2024](https://www.argentina.gob.ar/normativa/nacional/decreto-764-2024-403418/texto); [Decreto 70/2025](https://www.boletinoficial.gob.ar/detalleAviso/primera/320901/1)). That institutional continuity does not make the publicly available December 2023 RENABAP dataset current. Open global data offers a baseline that municipalities, NGOs, journalists, and researchers can use to check official counts in their jurisdictions. It complements state statistical capacity.
 
 ---
 

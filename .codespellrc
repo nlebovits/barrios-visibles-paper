@@ -1,4 +1,4 @@
 [codespell]
 # Spanish words and author surnames that the English dictionary reports.
 # Add a word here when codespell flags correct text.
-ignore-words-list = visibles,leasure
+ignore-words-list = visibles,leasure,Oficial,edn

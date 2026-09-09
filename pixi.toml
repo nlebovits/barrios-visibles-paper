@@ -1,5 +1,5 @@
 [workspace]
-authors = ["nlebovits <nissim.lebovits@vanderbilt.edu>"]
+authors = ["Nissim Lebovits <nlebovits@pm.me>"]
 channels = ["conda-forge"]
 name = "barrios-visibles-paper"
 platforms = ["linux-64"]
@@ -7,6 +7,8 @@ version = "0.1.0"
 
 [tasks]
 estimate = "python estimate.py"
+census-comparison = "python census_comparison.py"
+reproduce = { depends-on = ["estimate", "census-comparison"] }
 lint = "prek run --all-files"
 # Render each paper for submission. xelatex comes from the system TeX
 # installation, not from pixi, because a full TeX distribution would dwarf
@@ -17,11 +19,18 @@ lint = "prek run --all-files"
 # default of 72 it emits bare `l` columns, which never wrap, and the widest
 # table ran 185pt past the right margin. autolink_bare_uris turns a bare URL
 # in the reference list into a link, which paper/pdf-header.tex can break.
-pdf-part-i = """pandoc paper/informal-settlements-argentina.md \
-  -f markdown+autolink_bare_uris --columns=24 \
+pdf-article = """pandoc paper/informal-settlements-argentina.md \
+  -f markdown+autolink_bare_uris --columns=18 --citeproc \
   --include-in-header=paper/pdf-header.tex \
-  -o outputs/barrios-visibles-part-i.pdf --pdf-engine=xelatex \
+  -o outputs/barrios-visibles-data-and-policy.pdf --pdf-engine=xelatex \
   -V geometry:margin=1in -V linkcolor=blue -V fontsize=11pt \
+  -V mainfont='DejaVu Serif' -V monofont='DejaVu Sans Mono'"""
+pdf-part-i = { depends-on = ["pdf-article"] }
+pdf-supplement = """pandoc paper/supplement.md \
+  -f markdown+autolink_bare_uris --columns=18 \
+  --include-in-header=paper/pdf-header.tex \
+  -o outputs/barrios-visibles-supplement.pdf --pdf-engine=xelatex \
+  -V geometry:margin=0.75in -V linkcolor=blue -V fontsize=10pt \
   -V mainfont='DejaVu Serif' -V monofont='DejaVu Sans Mono'"""
 pdf-part-ii = """pandoc paper/barrios-visibles-part-ii.md \
   -f markdown+autolink_bare_uris --columns=24 \
@@ -29,7 +38,7 @@ pdf-part-ii = """pandoc paper/barrios-visibles-part-ii.md \
   -o outputs/barrios-visibles-part-ii.pdf --pdf-engine=xelatex \
   -V geometry:margin=1in -V linkcolor=blue -V fontsize=11pt \
   -V mainfont='DejaVu Serif' -V monofont='DejaVu Sans Mono'"""
-pdf = { depends-on = ["pdf-part-i", "pdf-part-ii"] }
+pdf = { depends-on = ["pdf-article", "pdf-supplement"] }
 
 [dependencies]
 python = ">=3.11,<3.14"
