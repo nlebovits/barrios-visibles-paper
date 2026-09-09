@@ -1,0 +1,272 @@
+# Evidence memo: INDEC's 2022 demographic reconciliation and the Barrios Visibles Census claims
+
+Date: 2026-09-09. Read-only audit. No file in the repository was changed.
+
+Sources are cited as document, section, table, and printed page. Abbreviations: AD39, AD40, AD42 = INDEC Análisis Demográfico N° 39 (Oct 2025), N° 40 (Oct 2025), N° 42 (Feb 2026). RD = INDEC, Censo 2022 Resultados definitivos, Indicadores demográficos por sexo y edad (Nov 2023). AM = INDEC, Censo 2022 Aspectos metodológicos (Redatam edition). RP = INDEC, Censo 2022 Resultados provisionales (Jan 2023). DEIS = Dirección de Estadísticas e Información en Salud. IDECBA = Instituto de Estadística y Censos de la Ciudad de Buenos Aires.
+
+Supporting files are in `docs/audit-support/`: `vitals_findings.md`, `births_deaths_2001_2022.csv`, `geo_findings.md`, `jurisdiction_comparison.csv`, `renabap_by_province.csv`, `ad40_table4_reconciled_18may2022.csv`, `census2022_definitive_by_jurisdiction.csv`. Source PDFs are INDEC publications at the URLs cited in the appendix; they are not stored in the repository.
+
+---
+
+## 0. Three terms that must not be mixed
+
+| Term | Definition used in this memo | What measures it | What it cannot see |
+|---|---|---|---|
+| **National net omission** (INDEC: "diferencial de población neto") | Estimated population minus censused population, both national, signed. AD39 Table 4: 46,122,853 − 45,886,580 = +236,273, printed as −0.5% of the estimate. | A national balance equation by sex and single age (AD39 §3.1). | Anything that cancels within a sex-age cell: overcount of some people and undercount of others in the same cell. |
+| **Gross demographic enumeration error** (INDEC: "diferencial de población bruto") | Sum of absolute sex-age cell differences, weighted. AD39 reports 1.6% by sex (p. 18). By sex × three age groups it is 2.4% (computed from Table 4). | The same balance equation, read cell by cell. | Any error that cancels *inside* a cell. It is a lower bound on total enumeration error, never an upper bound. |
+| **Geographic misallocation** | A person counted, but at a radio, partido, or province other than the habitual residence, or a person missed in one place and a different person double-counted in another. | Only a post-enumeration survey, a record-level match to an address register, or a local re-enumeration. | Not measured by AD39, AD40, or AD42 at any level below the province, and only weakly at the province level. |
+
+The net figure is a residual. The gross figure is a partial decomposition of that residual by demographic cell. Neither one is a coverage measurement by place. Every verdict below states which term it speaks to.
+
+---
+
+## Verdict table
+
+| Claim | Rating | Term addressed | Shortest evidence chain |
+|---|---|---|---|
+| **A.** "INDEC independently demonstrates that only 0.5% of Argentines were missing from Census 2022." | **Unsupported** as worded | Net omission | (1) INDEC calls −0.5% a *net differential*, and states that the 2022 method "impide realizar una comparación directa" with earlier omission rates (AD39 §3.1.2, p. 18). (2) The estimate is not independent of Census 2022: the 2001 base was smoothed "a la luz de los censos próximos" (AD39 §3.1.1, p. 17), non-native immigration comes from the Census 2022 year-of-arrival variable, and return migration from the Census 2022 residence-five-years-ago variable (AD39 §6.1, p. 30). (3) The corrected births and deaths that produce the 236,273 gap are unpublished; with raw DEIS counts the same identity lands 15,209 above the census count (vitals §3.3). (4) "Only 0.5% missing" reads a net residual as a coverage rate. The gross error by sex alone is 1.6%. |
+| **B.** "INDEC's reconciliation strongly rules out a ~3 million error in the national population total." | **Partly supported** | Net omission (national total) | A 3 million undercount needs a 2.77 million error in the reconstruction. Section 3 shows no single component can carry it within its published error range. All components at their worst published bound together reach about 2.3 million. So the reconciliation makes 3 million unlikely but does not bound it, because (a) INDEC publishes no uncertainty for the reconstruction, (b) the corrected component series are unpublished, (c) the 2001 precedent: conciliation gave 2.75% and the unpublished post-censal survey gave about 7% (Sacco 2017, citing INDEC 2010b). |
+| **C.** "INDEC's reconciliation rules out large population undercounts specifically in barrios populares." | **Contradicted** | Geographic misallocation | (1) The national equation has no place-of-enumeration term (AD39 §3.1). (2) AD42 sets each department's 2022 population to its censused count times one province-wide scalar (AD42 §1, p. 8); a barrio undercount passes through unchanged. (3) IDECBA documents about 19,573 persons omitted in one CABA barrio (Barrio Padre Ricciardelli, ex Villa 1-11-14) using INDEC's own fraction summary sheets, while AD40 revises CABA by +757 persons (AD40 Table 4). |
+| **D.** "A large barrio-level spatial undercount could coexist with a roughly correct national Census total." | **Supported** in mechanism; magnitude **Unresolved** | Geographic misallocation vs net omission | Coexistence requires either (i) an offsetting overcount elsewhere inside the same sex-age cells or (ii) reconstruction error of the same size. Neither is measured. The CABA case shows (i) or (ii) happened at the scale of tens of thousands in one jurisdiction. Whether it happened at the scale of millions nationally is not testable with any published INDEC product. Section 4 states what would be needed. |
+| **E.** "The current Barrios Visibles evidence establishes a national Census undercount of ~3 million." | **Unsupported** | Net omission | The canonical manuscript already says so (`paper/informal-settlements-argentina.md` L122, L124, L252, L270). Paper II still asserts it (`paper/barrios-visibles-part-ii.md` L25, L72) and `CITATION.cff` L42-47 cites Paper II's title without a superseded note. The Census comparison measures allocated Census population inside barrio radios; it has no instrument for the national total. INDEC's national net figure and the scale test in Section 3 both weigh against a 3 million national number. |
+
+---
+
+## 1. Reconciliation dependency table
+
+The identity (AD39 §3.1, p. 16): P(18 May 2022) = P(1 Jan 2001, revised) + births − deaths + net international migration, by sex and single age.
+
+| Component | Source | Role | Census-2022 dependence | Independently constrains total? | Uncertainty |
+|---|---|---|---|---|---|
+| 2001 base, 37,530,617 at 1 Jan 2001 (AD40 Table 3, p. 13) | INDEC (2004) 1950-2015 series, Beers disaggregation, spline-smoothed sex ratio, re-estimated under-15s, extinct generations for 80+ (AD39 §3.1.1, pp. 16-17) | Constructs | **Partial.** Sex ratio smoothed because published values had "no justificación … a la luz de los censos próximos" (2010 and 2022). Age-sex correction vector published only as a chart (AD39 Gráfico 4). | Partly. Cohorts aged 21+ in 2022 are pinned here, not by registers. | Net uplift +1.52% (men +1.40%, women +1.63%), not the printed 1.6% (vitals §1.5). 2001 conciliation omission 2.75%; unpublished 2001 post-censal survey about 7% (Sacco 2017). Range of plausible base error: several hundred thousand to about 1.5 million. |
+| Births 2001-2022 | DEIS databases 1991-2022, by year of occurrence, "incluyen los nacimientos anotados como tardíos" (AD39 §2.4.1.2, p. 14); corrected for late registration (AD39 §5.1, p. 25) | Constructs | **None** for the counts. Fertility rates use the balance-equation female population, not the census. | Yes, for ages 0-21. | Raw registrations 2001-2021: 14,774,414. DEIS coverage studies: 6% omission vs Census 2001 and 2010 on published figures, under 3% and 3.8% after late registrations; some provinces above 10% (Serie 5 N° 66, pp. 15-17). INDEC's corrected series unpublished. |
+| Deaths 2001-2022 | DEIS by sex, age, year of occurrence, "con un ajuste en la mortalidad infantil en determinados años y provincias" (AD39 §4.1, p. 20) | Constructs | **None.** | Yes. | Raw 2001-2021: 6,810,190. Late-registered deaths about 1 per 1,000. Corrected series unpublished. |
+| Immigration of non-natives, 1,082,402 (AD39 Table 11, p. 31) | Year-of-arrival variable, Censuses 2010 and 2022 (AD39 §6.1, p. 30) | Constructs | **Direct.** Arrivals 2010-2022 (622,234) are read from Census 2022 respondents. A foreign-born person missed by the census is also missing from this flow. | No. | Unpublished. Foreign-born censused 1,933,463 in private dwellings. |
+| Return migration of natives, 206,701 | Residence-five-years-ago, Censuses 2010 and 2022, plus Spanish padrón exits (AD39 §6.1, p. 30) | Constructs | **Direct** for 2017-2022. | No. | Unpublished. |
+| Emigration of natives, 731,522 | Destination-country statistics: INE Spain, ACS, ISTAT, INE Paraguay, INEGI, OECD, UN (AD39 §2.4.2, p. 15) | Constructs | None. | Yes. | Unpublished. Country coverage partial (footnote 16, p. 30). |
+| Emigration of non-natives, 181,779 | Indirect: census foreign-born stock minus survivors of prior stock minus arrivals (AD39 §6.1, p. 30) | Constructs | **Direct.** Uses the Census 2022 foreign-born stock. | No. | Unpublished. Set to 0 for 2001-2009 (Table 11). |
+| Net migration 2001-2022, +375,802 | Sum of the above | Constructs | Direct through three of four flows. | No. | Components in Table 11 sum to 375,646 for 2001-2022 by period (150,805 + 224,849); the printed total is 375,802. |
+| Education enrolment, ARCA padrón, SIPA, migration entry/exit records, RENAPER (May 2022), COVID vaccination (≥1 dose by 18 May 2022), ANSES | AD39 §2.4.1.3, p. 14: "aportaron a la evaluación de la población censada y la estimada … comparando agregados por sexo y edad; también se utilizaron para la estimación de migrantes" | **Validates** (aggregate comparison by sex and age); migration records also **calibrate** the migration flows | Indirect. | No. INDEC publishes neither the registry totals nor the gaps. | Not quantifiable from published material. |
+| Foreign censuses and registers | AD39 §2.4.2, p. 15 | Constructs (emigration) and validates (stocks) | None. | Partly. | Unpublished. |
+| Jurisdiction level (AD40) | Own balance equation per jurisdiction from a rescaled 2001 base; internal migration from residence-five-years-ago matrices of Censuses 2001, 2010, 2022, interpolated (AD40 §2.1, §5.2, pp. 12-14, 25-26) | Constructs | Direct through the 2022 internal-migration matrix and the international split. Jurisdiction censused count is never a level target. | Weakly: province residuals mix coverage error with internal-migration model error. | No jurisdiction omission rate published. Row sum of Table 4 is 46,122,851 vs printed 46,122,853. |
+| Department level (AD42) | Censused department population × one province-wide, sex-specific scalar so that departments sum to AD40 (AD42 §1, p. 8); vital statistics and RENAPER address changes used "para contrastar" | **Derived from Census 2022 shares.** | Total. | No. | "Ajustes específicos" agreed with provincial offices are unnamed and unquantified (AD42 §1, p. 8). |
+
+Every place Census 2022 enters the "independent" reconstruction: (1) 2001 base smoothing, (2) non-native immigration 2010-2022, (3) return migration 2017-2022, (4) non-native emigration via the foreign-born stock, (5) age-sex structure of projected immigration, (6) jurisdiction internal-migration matrix, (7) department shares. Items 2 to 4 make the migration component partly circular: an undercount of foreign-born residents lowers the estimate as well as the count.
+
+---
+
+## 2. Reproduced arithmetic
+
+### 2.1 AD39 Table 4 (p. 19), recomputed
+
+| Cell | Censused | Estimated | Diff (persons) | Relative (%) | AD39 prints |
+|---|---:|---:|---:|---:|---:|
+| Total | 45,886,580 | 46,122,853 | −236,273 | −0.51 | −0.5 |
+| Men | 22,182,317 | 22,665,883 | −483,566 | −2.13 | −2.1 |
+| Women | 23,704,263 | 23,456,970 | +247,293 | +1.05 | +1.1 |
+| 0-14 | 10,079,357 | 10,445,663 | −366,306 | −3.51 | −3.5 |
+| 15-64 | 30,343,166 | 30,155,630 | +187,536 | +0.62 | +0.6 |
+| 65+ | 5,464,057 | 5,521,560 | −57,503 | −1.04 | −1.0 |
+| Men 0-14 | 5,113,132 | 5,361,465 | −248,333 | −4.63 | −4.6 |
+| Men 15-64 | 14,792,266 | 15,032,285 | −240,019 | −1.60 | −1.6 |
+| Men 65+ | 2,276,919 | 2,272,133 | +4,786 | +0.21 | +0.2 |
+| Women 0-14 | 4,966,225 | 5,084,198 | −117,973 | −2.32 | −2.3 |
+| Women 15-64 | 15,550,900 | 15,123,345 | +427,555 | +2.83 | +2.8 |
+| Women 65+ | 3,187,138 | 3,249,427 | −62,289 | −1.92 | −1.9 |
+
+Checks: rows sum by sex and by age. Relative difference = (censused − estimated) / estimated. INDEC's glossary definition of "omisión censal" uses the censused denominator (AD39 p. 55); on that basis the figure is +0.51%.
+
+Gross differential by sex: (483,566 + 247,293) / 46,122,853 = 1.58%, printed 1.6% (AD39 p. 18). By six sex-age cells: 1,100,955 / 46,122,853 = 2.39%.
+
+Cancellation inside the net figure: undercount of children (−366,306), men 15-64 (−240,019), and women 65+ (−62,289) is offset by an apparent overcount of women 15-64 (+427,555). INDEC labels these "sobrenumeración" and "subnumeración" (p. 18). The overcount of women 15-64 is the single largest cell and has no published explanation.
+
+### 2.2 Why 45,886,580 and not 46,044,703 or 45,892,285
+
+| Figure | What it is | Source |
+|---|---|---|
+| 47,327,407 | Preliminary count announced 19 May 2022, before de-duplication | press, RP |
+| 46,044,703 | Provisional results, Jan 2023, after removing 3.6% duplicated persons among digital records | RP Table 4, p. 63 |
+| 45,892,285 | Definitive count, Nov 2023, after removing 4.8% duplicated persons | RD p. 81; AD39 Gráfico 1 |
+| 45,886,580 | Definitive count minus 5,705 street-population persons without age data | AD39 Table 4 footnote |
+| 46,234,830 | 1 July 2022 projection from the 2010-based series; the "0.74%" comparison in RD p. 86 | INDEC 2013, Cuadro 1 |
+| 46,122,853 | Reconciled population at 18 May 2022 | AD39 Table 4 |
+| 46,135,579 | Base population at 1 July 2022 | AD39 Cuadro 1 |
+
+45,886,580 + 5,705 = 45,892,285 exactly.
+
+### 2.3 The identity with published inputs
+
+Timing: 1 Jan 2001 to 18 May 2022 = 21.37 years; 2022 events prorated by 137/365.
+
+| Term | Value | Status |
+|---|---:|---|
+| 2001 base (AD40 Table 3) | 37,530,617 | INDEC corrected, published |
+| + births 2001-2021 (DEIS Serie 5, raw) | +14,774,414 | uncorrected registrations |
+| + births 2022 × 0.3753 | +185,905 | uncorrected |
+| − deaths 2001-2021 (raw) | −6,810,190 | uncorrected |
+| − deaths 2022 × 0.3753 | −149,054 | uncorrected |
+| + net migration (AD39 Table 11) | +375,802 | INDEC estimate, published |
+| **= identity result** | **45,907,494** | |
+| INDEC reconciled | 46,122,853 | |
+| **Residual** | **+215,359 (0.47%)** | = INDEC's unpublished component corrections, net |
+| Census definitive count | 45,892,285 | |
+| Identity minus count | +15,209 (0.03%) | |
+
+Reading: with INDEC's revised base and raw vital statistics, the balance equation reproduces the census count almost exactly. The whole 236,273 net omission is produced by INDEC's corrections to births and deaths (late registrations, infant mortality), which are not published. The size of that correction is consistent with published late-registration rates: closing the residual needs a birth uplift of about 1.44%, DEIS Serie 5 Cuadro 19 shows late registrations of 1.55% (2013) and 1.60% (2015) of published births, and AD40 §4.1 caps the extra provincial fertility correction at "inferior a 2%" nationally in 2001 (vitals §2.3b, §3.3). The correction is therefore of the expected order even though its annual values are unpublished. With the original INDEC (2004) base interpolated to 1 Jan 2001 (36,970,027) and the same raw flows, the identity gives 45,346,904, which is 545,381 *below* the count. The published inputs therefore span a range from −1.2% to +0.5% around the census count depending on which base and which birth correction is accepted. This is the practical uncertainty band of the reconstruction from public data; INDEC publishes none.
+
+Cross-check with the 2010-based series: the 2013 projection for 1 July 2022 was 46,234,830; the new base for 1 July 2022 is 46,135,579. Difference 99,251 (0.22%). Two reconstructions from different starting censuses agree within a quarter of one percent, but the 2013 series used assumed rather than observed fertility and migration after 2010, so the agreement is partly coincidental.
+
+Exact reproduction is impossible because INDEC does not publish: the corrected annual births and deaths by sex and age; the 2001 base by single age as numbers; the annual migration flows by sex and age; any population estimate for 2002-2021 (AD39 Cuadro 1 is titled 2001-2040 but prints 2022-2040 only; the CSV `proyecciones_nacionales_2022_2040_base.csv` starts in 2022).
+
+---
+
+## 3. Required-error calculation for the ~3 million hypothesis
+
+Target: true population = census count + 3,000,000 = 48,892,285. Required reconstruction error = 48,892,285 − 46,122,853 = **2,769,432**, or 6.0% of the reconciled total.
+
+| Component | Published value | Error needed if this component alone absorbs 2.77 M | Published or literature scale of error | Verdict for this component alone |
+|---|---:|---|---|---|
+| 2001 base | 37,530,617 | +7.4% | Revision already applied +1.52%. Conciliation omission 2001: 2.75%. Unpublished 2001 post-censal survey: about 7% (Sacco 2017). If the survey were right and conciliation wrong, the base is low by about 4.3% × 36.3 M ≈ 1.5 M. | Cannot reach 2.77 M. Could reach 1.5 M only if the 2001 survey result is accepted over the conciliation. |
+| Births 2001-May 2022 | 14,960,319 raw | +18.5% (2.77 M births unregistered) | DEIS census-anchored omission: 6% before late registrations, 3-3.8% after; INDEC's own correction appears to be about 1.4% net (Section 2.3). Worst published: 6% ≈ 0.9 M. | Cannot reach 2.77 M. Maximum about 0.9 M. |
+| Deaths 2001-May 2022 | 6,959,244 raw | −40% (2.77 M deaths never occurred) | Late-registered deaths about 0.1%. | Excluded. |
+| Net international migration | +375,802 | +2,769,432, i.e. net migration of +3.15 M, 8.4 times the estimate | Immigrants estimated 1,289,103 over 21 years; censused foreign-born 1,933,463 in private dwellings (2022) vs 1,805,957 (2010). For net migration to be 3.15 M, immigration would have to be about 4 M, more than double the entire censused foreign-born stock. **Circularity:** arrivals since 2010 are read from Census 2022; if the census missed foreign-born residents, the estimate falls one-for-one. **External signal:** RENAPER counted 3,033,786 foreign-born persons with a digital DNI and residence in Argentina in August 2022, after removing persons absent more than six months per DNM (Dirección Nacional de Población, *Caracterización de la migración internacional*, Dec 2022, pp. 7-8 and 24). That is 1.10 M above the census figure. Reconciliation by country and age (`docs/audit-support/migrants/renaper_census_reconciliation.md`) shows the excess sits at working ages (ratio 2.00 at 30-34, 1.14 at 95-99) and is lowest for Italy; that is the signature of non-residents retained in the register, not of census omission. RENAPER's own later series fell to 2,349,816 by June 2025. The census-side undercount of the foreign-born is bounded at 10,000 to 250,000, central about 100,000, with the high end from the sex-ratio discrepancy (census 121.7 women per 100 men vs register 107.0). INDEC used the RENAPER file by country of birth (AD39 §2.4.1.3) and published no comparison. | Cannot reach 2.77 M. Upper bound about 0.25 M through the census-dependence channel. |
+| Combined worst case | | | 1.5 M (base, survey basis) + 0.9 M (births) + 0.25 M (migration) = 2.65 M | Falls short of 2.77 M even with every component at its worst external bound at the same time: the 2001 survey accepted over the conciliation, DEIS raw omission with no late registrations, and the full sex-ratio deficit of migrant men treated as census omission. |
+
+Reading: the reconciliation does not rule out a 3 million national undercount by logic, but it makes it a compounding-of-extremes hypothesis. No published evidence supports any single component being off by that scale, and the sum of every component at its worst external bound is 2.65 million, below the 2.77 million required. The same table shows that a national undercount of 0.5 to 1.5 million sits inside the external error ranges of the base or births taken one at a time. That is the scale at which the reconciliation stops discriminating. The RENAPER migrant-stock gap, once reconciled by country and age, is mostly non-resident records and adds at most about a quarter of a million to the census side.
+
+---
+
+## 4. Geographic and misallocation analysis
+
+### 4.1 Can the reconciliation detect misallocation?
+
+No, by construction. The national identity is by sex and single age. It has no term for place of enumeration. A person counted in the wrong radio, partido, or province leaves every national cell unchanged. A person missed in a barrio and a different person of the same sex and age double-counted elsewhere also leave every cell unchanged. The gross differential is therefore not a bound on barrio-level undercount.
+
+### 4.2 What each INDEC product constrains
+
+| Level | What it is | Constrains misallocation? |
+|---|---|---|
+| National (AD39) | Sex-age balance | No. |
+| Jurisdiction (AD40) | Own balance per province; internal migration interpolated from three census residence-five-years-ago matrices; no province omission rate published | Weakly. Province residuals (reconciled − censused) range from +5.3% (Chaco) to −3.4% (Tierra del Fuego). They mix coverage error with internal-migration model error and are not labelled omission by INDEC. |
+| Department (AD42) | Censused department count × one province-wide scalar | No. The within-province distribution *is* the Census 2022 distribution. |
+| Radio | Not covered by any INDEC estimate | No. |
+
+Validation datasets: RENAPER (province of residence), COVID vaccination (province and department of residence and application), education enrolment (jurisdiction), ARCA and SIPA (province). RP p. 64 and RD p. 86 say the census was checked against vaccination counts "según departamento, partido o comuna de residencia y de aplicación", and against provincial summary sheets down to radio (planillas J2, D2, F2, R2). INDEC publishes none of these comparisons and no result at any geography.
+
+### 4.3 Direct evidence that barrio-level undercount escaped the reconciliation
+
+IDECBA, *Los Barrios Populares Informales de la Ciudad de Buenos Aires, 2001/2022* (primera entrega), Annex II, pp. 27-29: after detecting inconsistencies, the city compared INDEC's Redatam base with INDEC's own fraction summary sheets (Planilla F2) for the 20 radios of Barrio Padre Ricciardelli (ex Villa 1-11-14).
+
+| Measure | Value |
+|---|---:|
+| Population 2001 / 2010 / 2022 (Redatam) | 32,448 / 36,406 / 12,823 |
+| Change 2010-2022 | −64.8% |
+| Persons per radio, Ricciardelli villa sector vs other CABA villa radios | 182 vs 829 |
+| F2 sheets: dwellings visited / population, same radios | 4,906 / 23,213 |
+| Redatam: dwellings / population, same radios | 1,118 / 3,640 |
+| Difference, "subenumeración u omisión censal" | 3,788 dwellings / 19,573 persons |
+
+Footnote 1 to Table C.3 (p. 11): "presentan una subenumeración u omisión censal de, aproximadamente, 19.500 personas". In the same city, AD40 Table 4 moves CABA by +757 persons against the census. A documented barrio-level omission of about 19,500 persons therefore coexisted with a jurisdiction-level reconciliation residual of near zero. Either the omission was offset within CABA's sex-age cells, or the jurisdiction balance did not resolve it. This is the geographic evidence that claim D requires, at the scale of one barrio.
+
+Other CABA facts from the same source: total villa population 180,792 (2022) vs 183,098 (2010), −1.3%; Barrio Padre Mugica (Villa 31) 35,374 in 2022 versus city estimates near 40,000 in 2017 (press citing SECISYU).
+
+### 4.4 Province-level geography vs the RENABAP/footprint gap
+
+From `docs/audit-support/jurisdiction_comparison.csv` and `docs/audit-support/renabap_by_province.csv`:
+
+| Jurisdiction | Reconciled − censused (persons) | (%) | Footprint − RENABAP gap at ×2.8 (persons) | Footprint gap as % of censused |
+|---|---:|---:|---:|---:|
+| Buenos Aires | −116,450 | −0.66 | 1,486,211 | 8.5 |
+| CABA | +757 | +0.02 | 1,240 | 0.0 |
+| Santa Fe | +124,665 | +3.52 | 169,106 | 4.8 |
+| Córdoba | +80,927 | +2.11 | 72,961 | 1.9 |
+| Chaco | +60,278 | +5.34 | 176,388 | 15.6 |
+| Misiones | +33,524 | +2.62 | 116,671 | 9.1 |
+| Tucumán | +25,641 | +1.48 | 123,316 | 7.1 |
+| Salta | +24,954 | +1.73 | 99,282 | 6.9 |
+| Corrientes | −24,312 | −2.00 | 75,854 | 6.3 |
+| Santiago del Estero | −16,319 | −1.54 | 80,397 | 7.6 |
+| Jujuy | −16,501 | −2.03 | 34,771 | 4.3 |
+| National | +230,566 | +0.50 | 2,870,008 | 6.3 |
+
+Spearman rank correlation between the province reconciliation residual (%) and the footprint gap (% of censused): 0.04. Buenos Aires holds 48% of RENABAP families and 52% of the national footprint gap and is revised *down*. Chaco, Misiones, and Formosa move in the same direction on both measures. Corrientes, Santiago del Estero, Jujuy, Neuquén, and Tierra del Fuego have large footprint gaps and negative residuals.
+
+Reading, with the caveat from §4.1: this table does not test coexistence. Province residuals are net figures inside each province and are dominated by internal-migration modelling. The absence of correlation shows that the reconciliation does not *register* the barrio geography; it does not show that the barrio geography is wrong. Buenos Aires' negative residual is compatible with a large barrio undercount inside the province if offset within the province's cells, and equally compatible with none.
+
+### 4.5 Duplicate resolution and the retained address (Audit 8)
+
+Sources: AM pp. 15-19; RP pp. 62-63; RD pp. 81-82.
+
+Detection. Intra-vivienda duplicates were found within one digital questionnaire. Inter-vivienda duplicates were found in two stages: (a) dwellings with the same number of members and the same geographic location code (UG); (b) person-level matching across dwellings with different member counts, "apoyada en la coincidencia o similitud de … nombre, sexo, edad y fecha de nacimiento". Automatic detection with sampled manual review, plus systematic manual review.
+
+Integration and retention rules (AM p. 19, verbatim numbering):
+1. Paper and digital records matched by completion code (CF) and confirmed UG: keep digital, discard paper.
+2. No CF match: try UG match against paper records of unoccupied dwellings; then as in 1.
+3. No CF and no UG match: add the digital record.
+4. Same address, person censused digitally and in person: keep paper only.
+
+What is not published: any rule for a person found at two *different* UGs (stage b of inter-vivienda detection). The documents say duplicated records "fueron removidos" but not which of the two addresses was retained. Footnote 5 (RD p. 81) gives the known mechanism: "niños y niñas a cargo de personas separadas, que fueron censadas en ambas viviendas". Rule 3 adds digital-only records at their self-reported coordinates or address, with no field confirmation.
+
+Consequence for the three terms: the de-duplication preserves the national count (one record per detected person) while the address of the surviving record for a cross-address duplicate follows an unpublished rule. This is a channel for geographic misallocation that leaves net and gross national figures unchanged. It cannot be quantified from published material.
+
+Magnitude of duplication:
+
+| Stage | Rate | Denominator as stated | Implied removed records |
+|---|---:|---|---:|
+| Provisional (Jan 2023) | 3.6% of persons, 2.7% of dwellings | "del total de registros del Censo digital" (RP p. 63) | about 0.9 M if digital records ≈ 25 M |
+| Definitive (Nov 2023) | 4.8% of persons | "respecto del total de registros considerados en conjunto entre digital y papel" (RD p. 82; AM p. 16), while the table title says persons in private dwellings who completed the online form more than once | 2.3 M if of all records (45.9 M / 0.952); 1.3 M if of digital records only (about 25.4 M, from the 55.6% digital share in AD39 p. 9) |
+| Provisional to definitive count | −152,418 | 46,044,703 → 45,892,285 | not decomposed by INDEC |
+
+Geography of duplication (definitive, % of persons, AM Cuadro 2 p. 16): CABA 3.5, Buenos Aires 4.4, Mendoza 4.5, Córdoba 4.8, Santa Fe 4.9, Misiones 5.1, Tucumán 6.2, Formosa 6.2, Salta 6.3, Corrientes 6.5, Chaco 6.6, Jujuy 6.6. Duplication is highest in the NOA and NEA provinces where the digital share was lowest (about 35%, AD39 p. 9), and lowest in CABA where the digital share was about 70%. The rate therefore does not scale with digital take-up. Whether it correlates with informal-settlement incidence cannot be tested below province level.
+
+Territorial coverage (AM Cuadro 3 p. 17): 98.6% of segments covered on census day; San Juan 93.9%, Formosa 96.8%, Mendoza 96.8%, CABA 97.4%. The 1.4% of uncovered segments are not located in any publication.
+
+No post-enumeration survey was conducted for 2022. RD p. 81 states that omission "resta todavía evaluar … mediante el método de conciliación censal". The 2001 post-censal survey result of about 7% was not published and the 2010 survey was not conducted (Sacco 2017, *Estudios Demográficos y Urbanos* 32(3), citing INDEC 2010b p. 4).
+
+---
+
+## 5. Important missing evidence
+
+1. INDEC's corrected annual births and deaths by sex and age, 2001-2022. Without them the 236,273 net figure cannot be reproduced and its uncertainty cannot be stated.
+2. Any published uncertainty or sensitivity for the reconciled population.
+3. Annual national population estimates 2002-2021 from the new series, including the implied 2010 value against the 2010 count of 40,117,096.
+4. The comparison results between the census and RENAPER, vaccination, enrolment, ARCA, and SIPA, at any geography.
+5. Jurisdiction- and department-level omission rates. None exists.
+6. The rule for which address survives a cross-address duplicate, and counts of such cases.
+7. The location of the 1.4% of uncovered census segments.
+8. The "ajustes específicos" to departments agreed with provincial offices (AD42 §1).
+9. Any INDEC or academic evaluation of Census 2022 coverage inside RENABAP polygons outside CABA. The IDECBA Ricciardelli case is the only documented one found.
+10. A post-enumeration survey for 2022. None was done.
+11. Independent technical literature on the 2025 reconciliation itself. None found; the only technical evaluation of a recent Argentine conciliation is Sacco (2017) on 2010, which estimated 2.1% omission and, as a speculative upper case, about 6% including dwellings with temporarily absent residents.
+
+---
+
+## 6. Implications for Barrios Visibles
+
+**RENABAP claim** (footprints imply 2.9 to 3.4 million more residents than RENABAP's implied figure). Not touched by this audit. INDEC's reconciliation does not measure RENABAP and does not measure settlement population at any geography. Nothing here weakens or strengthens the RENABAP comparison.
+
+**Barrio-level Census spatial-discrepancy claim** (allocated Census 2022 population in high-coverage barrio radios is about half the footprint-implied figure). Consistent with the audit. The IDECBA Ricciardelli case documents a 60% omission in one barrio using INDEC's own sheets. The reconciliation cannot see this kind of error. The claim should be stated as a radio-level enumeration discrepancy, and the adjacent-radio diagnostic stays as it is now described in the supplement: it does not distinguish omission from misallocation.
+
+**National-Census-total claim** (about 3 million absent from the national count). Not supported. The reconciliation's net figure is +236,273 with an unpublished uncertainty that public inputs place in the range of about −0.5 to +0.5 million. A 3 million national undercount needs a 2.77 million reconstruction error that no single published component can carry. The canonical manuscript already disclaims this claim. Paper II (L25, L31, L60, L70, L72) and `CITATION.cff` (L42-47) still carry it, and the public blog post is outside the repository.
+
+The two mechanisms by which a large barrio undercount could still coexist with the national figure are both real and both unmeasured: offsetting overcount elsewhere inside the same sex-age cells (the women 15-64 cell shows +427,555 with no published explanation; residual undetected duplicates are unquantified), and reconstruction error. Neither mechanism is evidence of a 3 million national undercount. Both are reasons the national figure cannot be used to deny a barrio-level one.
+
+---
+
+## 7. Recommended wording right now
+
+**What we can safely say.** Census 2022 allocated population inside high-coverage barrio radios is about half of what building footprints imply, and INDEC's 2025 reconciliation contains no mechanism that would detect an undercount located in specific radios or departments.
+
+**What we cannot currently say.** That roughly 3 million people are missing from Argentina's national Census 2022 total, because INDEC's reconciliation implies a net national differential of about 236,000 and a 3 million gap would require reconstruction errors far beyond any published component uncertainty.
+
+**What remains an open research question.** Whether the barrio-level discrepancy reflects omission, misallocation to other radios, or offsetting overcount elsewhere, and at what national scale, which only a record-level coverage study or a local re-enumeration such as IDECBA's Ricciardelli comparison can answer.
+
+---
+
+## Appendix: verification log
+
+- AD39, AD40, AD42, AM, RP, RD, dossier, and the national CSV downloaded from indec.gob.ar, censo.gob.ar, and redatam.indec.gob.ar on 2026-09-09.
+- All AD39 Table 4 figures recomputed (Section 2.1).
+- DEIS Serie 5 annuals N° 45-66 (2001-2022) downloaded; totals cross-checked against DEIS microdata for 2005-2022 (vitals §2).
+- AD40 Tables 3, 4, 5 and the definitive and provisional jurisdiction counts extracted; sums verified (geo §C).
+- `git status` in the repository after the audit shows only the pre-existing untracked `AGENTS.md`.

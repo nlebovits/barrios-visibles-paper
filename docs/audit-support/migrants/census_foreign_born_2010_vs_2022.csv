@@ -1,0 +1,35 @@
+country_or_group,persons_2010,persons_2022,change_abs,change_pct,note
+Total foreign-born,1805957,1933463,127506,7.1,UNIVERSES DIFFER: 2010 = total population (incl. collective dwellings + street); 2022 = private dwellings only
+"Total foreign-born, like-for-like approx.",1760241,1933463,173222,9.8,"2010 net of the 45,716 foreign-born in collective dwellings (Tomo 1 ch.9, printed p.266) = private dwellings + street"
+Paraguay,550713,522598,-28115,-5.1,2010: Tomo 1 Cuadro 2 (PDF p.94) / Tomo 2 Cuadro P6; 2022: Cuadro 10
+Bolivia,345272,338299,-6973,-2.0,2010: Tomo 1 Cuadro 2 (PDF p.94) / Tomo 2 Cuadro P6; 2022: Cuadro 10
+Chile,191147,149082,-42065,-22.0,2010: Tomo 1 Cuadro 2 (PDF p.94) / Tomo 2 Cuadro P6; 2022: Cuadro 10
+Perú,157514,156251,-1263,-0.8,2010: Tomo 1 Cuadro 2 (PDF p.94) / Tomo 2 Cuadro P6; 2022: Cuadro 10
+Italia,147499,68169,-79330,-53.8,2010: Tomo 1 Cuadro 2 (PDF p.94) / Tomo 2 Cuadro P6; 2022: Cuadro 10
+Uruguay,116592,95384,-21208,-18.2,2010: Tomo 1 Cuadro 2 (PDF p.94) / Tomo 2 Cuadro P6; 2022: Cuadro 10
+España,94030,48492,-45538,-48.4,2010: Tomo 1 Cuadro 2 (PDF p.94) / Tomo 2 Cuadro P6; 2022: Cuadro 10
+Brasil,41330,49943,8613,20.8,2010: Tomo 1 Cuadro 2 (PDF p.94) / Tomo 2 Cuadro P6; 2022: Cuadro 10
+Resto (all other countries),161860,505245,343385,212.1,"2022 'Resto' includes Venezuela 161,495, Colombia 46,482 and Ignorado 179,239; 2010 'Resto' has no Ignorado category"
+AMÉRICA,1471399,1567110,95711,6.5,"aggregate group; 2010 Tomo 2 Cuadro P6, 2022 Cuadro 3"
+Países limítrofes,1245054,1155306,-89748,-7.2,"aggregate group; 2010 Tomo 2 Cuadro P6, 2022 Cuadro 3"
+Países no limítrofes (América),226345,411804,185459,81.9,"aggregate group; 2010 Tomo 2 Cuadro P6, 2022 Cuadro 3"
+Resto de América,68831,47576,-21255,-30.9,"NOT COMPARABLE: 2010 'Resto de América' includes Venezuela, Colombia, Ecuador; 2022 'Resto de América' excludes Venezuela and Colombia (shown separately)"
+Resto de América (2010 basis: incl. Venezuela + Colombia),68831,255553,186722,271.3,"like-for-like: 2022 = Venezuela 161,495 + Colombia 46,482 + Resto de America 47,576"
+EUROPA,299394,145808,-153586,-51.3,"aggregate group; 2010 Tomo 2 Cuadro P6, 2022 Cuadro 3"
+Resto de Europa,42454,29147,-13307,-31.3,"aggregate group; 2010 Tomo 2 Cuadro P6, 2022 Cuadro 3"
+ASIA,31001,37342,6341,20.5,"aggregate group; 2010 Tomo 2 Cuadro P6, 2022 Cuadro 3"
+ÁFRICA,2738,3243,505,18.4,"aggregate group; 2010 Tomo 2 Cuadro P6, 2022 Cuadro 3"
+OCEANÍA,1425,721,-704,-49.4,"aggregate group; 2010 Tomo 2 Cuadro P6, 2022 Cuadro 3"
+Alemania,8416,4087,-4329,-51.4,2010 Tomo 2 Cuadro P6; 2022 Cuadro 10
+Francia,6995,3960,-3035,-43.4,2010 Tomo 2 Cuadro P6; 2022 Cuadro 10
+China,8929,18629,9700,108.6,2010 Tomo 2 Cuadro P6; 2022 Cuadro 10
+Corea,7321,5337,-1984,-27.1,2010 Tomo 2 Cuadro P6; 2022 Cuadro 10
+Japón,4036,2703,-1333,-33.0,2010 Tomo 2 Cuadro P6; 2022 Cuadro 10
+Taiwán,2875,3018,143,5.0,2010 Tomo 2 Cuadro P6; 2022 Cuadro 10
+Siria,1337,1324,-13,-1.0,2010 Tomo 2 Cuadro P6; 2022 Cuadro 10
+Venezuela,,161495,,,"NOT published separately in 2010: inside 'Resto de América' 68,831"
+Colombia,,46482,,,"NOT published separately in 2010: inside 'Resto de América' 68,831"
+Ecuador,,8879,,,"NOT published separately in 2010: inside 'Resto de América' 68,831"
+Ignorado (country of birth not stated),,179239,,,2010 has NO Ignorado category; unknowns were absorbed into the 'Resto de ...' residuals
+Women (share of foreign-born),974261,1061421,87160,8.9,"2010 53.9% of 1,805,957; 2022 54.9% of 1,933,463"
+Men,831696,872042,40346,4.9,
