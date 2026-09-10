@@ -10,6 +10,7 @@ estimate = "python estimate.py"
 census-comparison = "python census_comparison.py"
 dwelling-footprint = "python census_dwelling_footprint.py"
 fetch-ms-buildings = "python fetch_ms_buildings.py"
+diagnostic-multiplier = "python diagnostic_household_multiplier.py"
 reproduce = { depends-on = ["estimate", "census-comparison"] }
 lint = "prek run --all-files"
 # Render each paper for submission. xelatex comes from the system TeX
