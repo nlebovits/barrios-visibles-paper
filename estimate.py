@@ -9,13 +9,21 @@ Runs the full pipeline in one shot, with per-phase timing:
 Estimates household counts in informal settlements by joining satellite-derived
 building footprints to official RENABAP settlement boundaries.
 
-Logic: max(building_count × occupation_rate × 1.1, renabap_families) per settlement.
-- 1.1 = RENABAP's families-per-dwelling multiplier (SISU 2023a pp. 14-15)
-- Occupation rate discounts building counts only (familias_aproximadas is enumerated)
+Logic: H_i = max(R_i, F_i × y × 1.1) per settlement, where
+- R_i = RENABAP families (enumerated, never discounted)
+- F_i = eligible building footprints
+- y   = occupied dwellings per mapped footprint. One net factor covering
+        residential use, vacancy, partial construction, delineation error,
+        merged roofs, and multi-dwelling buildings. These components are
+        poorly measured, correlated, and offsetting, so they are not tested
+        separately.
+- 1.1 = RENABAP's families-per-inhabited-dwelling multiplier (SISU 2023a pp. 14-15)
 
 Includes sensitivity analysis across:
 - Building size filters (none, ≥6m², ≥10m²)
-- Occupation rates (85%, 90%, 95%, 100%)
+- Dwelling yields y (0.60, 0.70, 0.85, 1.00, 1.15). Aggregate parity, the y at
+  which the footprint branch summed nationally equals RENABAP's implied
+  dwellings, is reported per size filter.
 - Population multipliers (2.8, 3.35)
 
 Data sources:
@@ -49,6 +57,7 @@ Run with:
 """
 
 import argparse
+import csv
 import hashlib
 import json
 import time
@@ -81,6 +90,7 @@ URBAN_AREAS_PATH = DATA_DIR / "urban_areas.parquet"
 OUTPUT_GEOJSON = OUTPUT_DIR / "settlement_estimates.geojson"
 OUTPUT_PARQUET = OUTPUT_DIR / "settlement_estimates.parquet"
 OUTPUT_MD = OUTPUT_DIR / "settlement_analysis_summary.md"
+OUTPUT_SENSITIVITY_CSV = OUTPUT_DIR / "sensitivity_dwelling_yield.csv"
 
 # --------------------------------------------------------------------------- #
 # Download sources
@@ -130,7 +140,12 @@ BUILDING_SIZE_FILTERS = [
     (6, "≥6 m²"),
     (10, "≥10 m²"),
 ]
-OCCUPATION_RATES = [0.85, 0.90, 0.95, 1.00]
+# Occupied dwellings per mapped footprint. 0.60 sits near aggregate parity
+# with RENABAP; 0.85 is the literature-anchored low-retention scenario
+# (IBGE 2022: 84.8% of favela dwellings occupied); 1.15 represents merged
+# roofs and multi-dwelling buildings.
+DWELLING_YIELDS = [0.60, 0.70, 0.85, 1.00, 1.15]
+FAMILIES_PER_DWELLING = 1.1
 POP_MULTIPLIERS = [2.8, 3.35]
 
 # Argentina total population (2022 census)
@@ -439,36 +454,39 @@ def run_analysis() -> dict:
                 familias_aproximadas, geometry, is_urban
         """)
 
-        # For each occupation rate and pop multiplier, calculate estimates
-        # estimated_families depends on occupation_rate, so computed per scenario
-        for occ_rate in OCCUPATION_RATES:
-            total_buildings = int(
-                con.execute(
-                    "SELECT SUM(building_count) FROM settlement_buildings"
-                ).fetchone()[0]
-            )
-            renabap_households = int(
-                con.execute(
-                    "SELECT SUM(familias_aproximadas) FROM settlement_buildings"
-                ).fetchone()[0]
-            )
+        total_buildings = int(
+            con.execute(
+                "SELECT SUM(building_count) FROM settlement_buildings"
+            ).fetchone()[0]
+        )
+        renabap_households = int(
+            con.execute(
+                "SELECT SUM(familias_aproximadas) FROM settlement_buildings"
+            ).fetchone()[0]
+        )
+        # The yield at which the footprint branch, summed nationally, equals
+        # RENABAP's implied dwelling count. Below it the national floor is
+        # carried mostly by the RENABAP branch of the maximum.
+        parity_yield = renabap_households / FAMILIES_PER_DWELLING / total_buildings
 
-            # Apply methodology fix:
-            # - building_count * occ_rate * 1.1 (occupancy + families-per-dwelling multiplier)
-            # - familias_aproximadas unchanged (already enumerated families, no discount)
-            # - max() selects higher of the two per settlement
-            est_households = float(
-                con.execute(f"""
-                SELECT SUM(
-                    CASE
-                        WHEN building_count * {occ_rate} * 1.1 > familias_aproximadas
-                        THEN building_count * {occ_rate} * 1.1
-                        ELSE familias_aproximadas
-                    END
-                )
+        # For each dwelling yield and pop multiplier, calculate estimates.
+        # estimated_families depends on the yield, so it is computed per scenario.
+        for dwelling_yield in DWELLING_YIELDS:
+            # H_i = max(R_i, F_i × y × 1.1):
+            # - building_count * y * 1.1 (occupied dwellings per footprint,
+            #   then families per inhabited dwelling)
+            # - familias_aproximadas unchanged (already enumerated, no discount)
+            # - the maximum selects the higher branch per settlement
+            branch = f"building_count * {dwelling_yield} * {FAMILIES_PER_DWELLING}"
+            est_households, footprints_higher, renabap_higher = con.execute(f"""
+                SELECT
+                    SUM(CASE WHEN {branch} > familias_aproximadas
+                             THEN {branch} ELSE familias_aproximadas END)::DOUBLE,
+                    SUM(CASE WHEN {branch} > familias_aproximadas THEN 1 ELSE 0 END),
+                    SUM(CASE WHEN {branch} <= familias_aproximadas THEN 1 ELSE 0 END)
                 FROM settlement_buildings
-            """).fetchone()[0]
-            )
+            """).fetchone()
+            est_households = float(est_households)
 
             for pop_mult in POP_MULTIPLIERS:
                 est_pop = est_households * pop_mult
@@ -478,11 +496,14 @@ def run_analysis() -> dict:
                     {
                         "size_filter": filter_label,
                         "min_area": min_area,
-                        "occupation": occ_rate,
+                        "dwelling_yield": dwelling_yield,
+                        "parity_yield": round(parity_yield, 3),
                         "pop_multiplier": pop_mult,
                         "total_buildings": total_buildings,
                         "est_households": int(est_households),
                         "renabap_households": renabap_households,
+                        "footprints_higher": int(footprints_higher),
+                        "renabap_higher": int(renabap_higher),
                         "est_population": int(est_pop),
                         "renabap_population": int(renabap_pop),
                         "pct_of_argentina": est_pop / ARGENTINA_POP * 100,
@@ -510,7 +531,7 @@ def run_analysis() -> dict:
             familias_aproximadas, geometry, is_urban
     """)
 
-    # Apply 1.1 multiplier (baseline: 100% occupation for exports)
+    # Apply 1.1 multiplier (baseline: y = 1.00 for exports)
     # DOUBLE because building_count * 1.1 is no longer whole-number
     con.execute("""
         ALTER TABLE settlement_buildings ADD COLUMN estimated_families DOUBLE;
@@ -636,7 +657,7 @@ def run_analysis() -> dict:
     print("\nConurbano vertical density by partido:")
     print(conurbano_partidos.to_string(index=False))
 
-    # National totals (baseline: no filter, 100% occupation)
+    # National totals (baseline: no filter, y = 1.00)
     national = con.execute("""
         SELECT
             COUNT(*) as n_settlements,
@@ -734,6 +755,12 @@ def export_outputs(results: dict) -> None:
     """)
 
     # Write markdown summary
+    print(f"    writing {OUTPUT_SENSITIVITY_CSV}...")
+    with open(OUTPUT_SENSITIVITY_CSV, "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=list(sensitivity_results[0]))
+        writer.writeheader()
+        writer.writerows(sensitivity_results)
+
     print(f"    writing {OUTPUT_MD}...")
     with open(OUTPUT_MD, "w") as f:
         f.write("# Argentina Informal Settlement Population Estimates\n\n")
@@ -743,18 +770,33 @@ def export_outputs(results: dict) -> None:
         # Sensitivity Analysis Table (the main deliverable)
         f.write("## Sensitivity Analysis\n\n")
         f.write(
-            "Estimated households and population across building size filters, occupation rates, and population multipliers.\n\n"
+            "Estimated households and population across building size filters, "
+            "dwelling yields per footprint (y), and population multipliers. "
+            "Per settlement, H = max(RENABAP families, footprints × y × 1.1). "
+            "y is the net number of occupied dwellings per mapped footprint.\n\n"
         )
         f.write(
-            "| Size Filter | Occupation | Pop Mult | Buildings | Est. Households | Est. Population | % of Argentina |\n"
+            "| Size Filter | Dwelling yield (y) | Pop Mult | Buildings | Est. Households | Est. Population | % of Argentina | Footprints higher | RENABAP higher |\n"
         )
         f.write(
-            "|-------------|------------|----------|-----------|-----------------|-----------------|----------------|\n"
+            "|-------------|--------------------|----------|-----------|-----------------|-----------------|----------------|-------------------|----------------|\n"
         )
         for r in sensitivity_results:
             f.write(
-                f"| {r['size_filter']} | {r['occupation']:.0%} | {r['pop_multiplier']} | {r['total_buildings']:,} | {r['est_households']:,} | {r['est_population']:,} | {r['pct_of_argentina']:.2f}% |\n"
+                f"| {r['size_filter']} | {r['dwelling_yield']:.2f} | {r['pop_multiplier']} | {r['total_buildings']:,} | {r['est_households']:,} | {r['est_population']:,} | {r['pct_of_argentina']:.2f}% | {r['footprints_higher']:,} | {r['renabap_higher']:,} |\n"
             )
+        f.write("\n")
+        f.write(
+            "*Footprints higher / RENABAP higher: settlements in which the "
+            "footprint branch or the RENABAP branch sets the floor at that yield.*\n\n"
+        )
+        f.write("**Aggregate parity yield** (RENABAP families / 1.1 / footprints):\n\n")
+        seen: set[str] = set()
+        for r in sensitivity_results:
+            if r["size_filter"] in seen:
+                continue
+            seen.add(r["size_filter"])
+            f.write(f"- {r['size_filter']}: y = {r['parity_yield']:.3f}\n")
         f.write("\n")
 
         # Summary range
@@ -784,7 +826,7 @@ def export_outputs(results: dict) -> None:
             )
         f.write("\n")
         f.write(
-            "*Logic: max(building_count × occ_rate × 1.1, renabap_families) per settlement*\n\n"
+            "*Logic: max(building_count × 1.1, renabap_families) per settlement, y = 1.00*\n\n"
         )
 
         # Aglomerado tier analysis
@@ -840,7 +882,7 @@ def export_outputs(results: dict) -> None:
 
         # National summary (baseline scenario)
         f.write("## Baseline National Summary\n\n")
-        f.write("*Baseline: No building filter, 100% occupation*\n\n")
+        f.write("*Baseline: No building filter, dwelling yield y = 1.00*\n\n")
         f.write(
             "| Metric | RENABAP Official | Building-Based Estimate | Difference |\n"
         )
@@ -882,13 +924,21 @@ def export_outputs(results: dict) -> None:
         # Methodology
         f.write("## Methodology\n\n")
         f.write(
-            "**Per-settlement logic:** `max(building_count × occupation_rate × 1.1, renabap_families)`\n\n"
+            "**Per-settlement logic:** `H = max(renabap_families, building_count × y × 1.1)`\n\n"
         )
         f.write(
-            "- **1.1 multiplier**: RENABAP documents ~1.1 families per dwelling (SISU 2023a pp. 14-15)\n"
+            "- **1.1 multiplier**: RENABAP documents ~1.1 families per inhabited dwelling (SISU 2023a pp. 14-15)\n"
         )
         f.write(
-            "- **Occupation rate**: Applied only to building-derived counts, not RENABAP\n"
+            "- **Dwelling yield y**: occupied dwellings per mapped footprint, net of "
+            "residential use, vacancy, partial construction, delineation error, "
+            "merged roofs, and multi-dwelling buildings. Applied only to the "
+            "building-derived branch, never to RENABAP\n"
+        )
+        f.write(
+            "- **Tested yields**: 0.60 (near aggregate parity), 0.70, 0.85 "
+            "(literature-anchored low-retention scenario), 1.00 (baseline), "
+            "1.15 (merged roofs and multifamily buildings)\n"
         )
         f.write(
             "- `familias_aproximadas` is already enumerated families, needs no discount\n"
@@ -973,6 +1023,7 @@ def main(argv: list[str] | None = None) -> None:
     print("\nDone! Output files:")
     print(f"  - {OUTPUT_GEOJSON}")
     print(f"  - {OUTPUT_PARQUET}")
+    print(f"  - {OUTPUT_SENSITIVITY_CSV}")
     print(f"  - {OUTPUT_MD}")
 
 

@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
-"""Diagnostic: footprints against Census households under a 0.85 x 1.1 factor.
+"""Diagnostic: footprints against Census households under y x 1.1 factors.
 
 This reads the summary that census_dwelling_footprint.py already wrote. It
 recomputes nothing, changes no methodology, and leaves every existing output
 in place. It adds two files of its own.
 
 The headline analysis deliberately applies no multiplier, because its purpose
-is to compare physical inventories directly. This diagnostic overlays one:
-footprints are scaled by 0.85 x 1.1 = 0.935 before the comparison with Census
-households. The two factors come from outside this analysis and are taken as
-given. Treat the result as a sensitivity, not as a second estimate.
+is to compare physical inventories directly. This diagnostic overlays the
+paper's footprint branch: footprints are scaled by y x 1.1 for each tested
+dwelling yield y (occupied dwellings per mapped footprint) before the
+comparison with Census households. Both factors come from outside this
+analysis and are taken as given. Treat the result as a sensitivity, not as a
+second estimate. The break-even yield, at which implied households equal
+Census households, is reported per stratum.
 
 Scope: the >=95 percent RENABAP coverage sample, VIDA footprints at the
 >=10 m2 filter, in two strata reported separately. The strata overlap, because
@@ -40,9 +43,9 @@ FILTER = ">=10 m2"
 INVENTORY = "vida"
 STRATA = ("Horizontal regime", "Excluding CABA")
 
-OCCUPANCY_FACTOR = 0.85
+# Same grid as estimate.py: occupied dwellings per mapped footprint.
+DWELLING_YIELDS = (0.60, 0.70, 0.85, 1.00, 1.15)
 FAMILIES_PER_DWELLING = 1.1
-COMBINED = OCCUPANCY_FACTOR * FAMILIES_PER_DWELLING
 
 
 def build() -> pd.DataFrame:
@@ -64,41 +67,47 @@ def build() -> pd.DataFrame:
         footprints = int(row["footprints"])
         dwellings = int(row["dwellings_occupied_broad"])
         households = int(row["households"])
-        implied = footprints * COMBINED
-        rows.append(
-            {
-                "stratum": name,
-                "n_radios": int(row["n_radios"]),
-                "n_barrios": int(row["n_barrios"]),
-                "vida_footprints_ge10": footprints,
-                "census_occupied_dwellings": dwellings,
-                "census_households": households,
-                "raw_fp_per_occupied_dwelling": footprints / dwellings,
-                "raw_fp_per_household": footprints / households,
-                "adjustment_factor": COMBINED,
-                "implied_households": implied,
-                "implied_household_ratio": implied / households,
-                "excess_over_census_households": implied - households,
-                "excess_over_census_households_pct": implied / households - 1,
-            }
-        )
+        break_even = households / (footprints * FAMILIES_PER_DWELLING)
+        for dwelling_yield in DWELLING_YIELDS:
+            combined = dwelling_yield * FAMILIES_PER_DWELLING
+            implied = footprints * combined
+            rows.append(
+                {
+                    "stratum": name,
+                    "n_radios": int(row["n_radios"]),
+                    "n_barrios": int(row["n_barrios"]),
+                    "vida_footprints_ge10": footprints,
+                    "census_occupied_dwellings": dwellings,
+                    "census_households": households,
+                    "raw_fp_per_occupied_dwelling": footprints / dwellings,
+                    "raw_fp_per_household": footprints / households,
+                    "dwelling_yield": dwelling_yield,
+                    "combined_factor": combined,
+                    "break_even_yield": break_even,
+                    "implied_households": implied,
+                    "implied_household_ratio": implied / households,
+                    "excess_over_census_households": implied - households,
+                    "excess_over_census_households_pct": implied / households - 1,
+                }
+            )
     return pd.DataFrame(rows)
 
 
 def write_markdown(table: pd.DataFrame) -> None:
     lines = [
-        "# Diagnostic: footprints against Census households with a 0.85 x 1.1 factor",
+        "# Diagnostic: footprints against Census households under y x 1.1 factors",
         "",
         f"Sample: census radios with RENABAP coverage at or above {THRESHOLD:.0%}.",
         f"Footprints: VIDA, September 2024, {FILTER} filter.",
         "Census: May 2022.",
         "",
-        "The headline analysis applies no multiplier. This table overlays one, so",
-        "that footprints are scaled by "
-        f"{OCCUPANCY_FACTOR} x {FAMILIES_PER_DWELLING} = {COMBINED:.3f} before the",
-        "comparison with Census households. Both factors come from outside this",
-        "analysis and are taken as given here. It is a sensitivity, not a second",
-        "estimate, and it does not change any existing output.",
+        "The headline analysis applies no multiplier. This table overlays the",
+        f"paper's footprint branch: footprints are scaled by y x {FAMILIES_PER_DWELLING}",
+        "for each tested dwelling yield y (occupied dwellings per mapped",
+        "footprint) before the comparison with Census households. Both factors",
+        "come from outside this analysis and are taken as given here. It is a",
+        "sensitivity, not a second estimate, and it does not change any existing",
+        "output.",
         "",
         "The two strata are reported separately and overlap. Most CABA radios are",
         "already outside the horizontal regime, so the rows are not additive.",
@@ -107,7 +116,8 @@ def write_markdown(table: pd.DataFrame) -> None:
         "Households | FP / dwelling | FP / household |",
         "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
     ]
-    for row in table.itertuples():
+    first = table.drop_duplicates("stratum")
+    for row in first.itertuples():
         lines.append(
             f"| {row.stratum} | {row.n_radios:,} | {row.n_barrios:,} | "
             f"{row.vida_footprints_ge10:,} | {row.census_occupied_dwellings:,} | "
@@ -117,15 +127,23 @@ def write_markdown(table: pd.DataFrame) -> None:
         )
     lines += [
         "",
-        f"After the {COMBINED:.3f} factor:",
+        "Break-even yield, at which footprints x y x 1.1 equals Census households:",
         "",
-        "| Stratum | Implied households | Census households | Ratio | "
+    ]
+    for row in first.itertuples():
+        lines.append(f"- {row.stratum}: y = {row.break_even_yield:.3f}")
+    lines += [
+        "",
+        f"After the y x {FAMILIES_PER_DWELLING} factor:",
+        "",
+        "| Stratum | y | Implied households | Census households | Ratio | "
         "Excess | Excess % |",
-        "| --- | ---: | ---: | ---: | ---: | ---: |",
+        "| --- | ---: | ---: | ---: | ---: | ---: | ---: |",
     ]
     for row in table.itertuples():
         lines.append(
-            f"| {row.stratum} | {row.implied_households:,.0f} | "
+            f"| {row.stratum} | {row.dwelling_yield:.2f} | "
+            f"{row.implied_households:,.0f} | "
             f"{row.census_households:,} | {row.implied_household_ratio:.2f} | "
             f"{row.excess_over_census_households:+,.0f} | "
             f"{row.excess_over_census_households_pct:+.1%} |"

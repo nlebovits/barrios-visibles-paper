@@ -16,15 +16,20 @@ same polygons.
 
 The version 1.0.0 data snapshot is archived at
 [10.5281/zenodo.22656880](https://doi.org/10.5281/zenodo.22656880).
-A recovered mismatch between its derived footprint total and the manuscript is
-documented in REPRODUCIBILITY.md and must be resolved before submission.
+The manuscript reports the footprint series that this archive reproduces.
+The frozen Census-comparison input holds an earlier join that differs by
+2,962 footprints, as documented in REPRODUCIBILITY.md.
 
 ## Findings
 
 Inside registered boundaries, detected footprints exceed recorded families by
-59%. A per-settlement household floor exceeds RENABAP's national total by 83%.
-Under conservative population multipliers that implies 6.3 to 7.6 million
-residents, or 2.9 to 3.4 million above the official figure.
+59%. A per-settlement household floor, max(RENABAP families, footprints × y ×
+1.1), exceeds RENABAP's national total by 83% at a yield of y = 1 occupied
+dwelling per footprint. Under the two population multipliers that implies 6.3
+to 7.6 million residents, or 2.9 to 3.4 million above the official figure.
+The sensitivity sweep varies y from 0.6 to 1.15. At y = 0.6, near the value
+that would reconcile the footprint and registry totals, the floor still
+exceeds the registry by roughly a fifth.
 
 The gap splits by geography. In the consolidated vertical villas of CABA,
 RENABAP records residents whom footprints miss. Everywhere else, building

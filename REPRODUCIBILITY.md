@@ -22,14 +22,32 @@ The Census comparison can be checked before publication with:
 
 Retain the files already in version 1.0.0 and add:
 
-| Archive filename | Purpose | Expected SHA-256 |
-| --- | --- | --- |
-| census_2022_radios.parquet | INDEC population and private-dwelling totals joined to corrected radio geometry | ade36a340854bf3e616ff28f34527ba193aa515274c503929877f831276a4936 |
+| Archive filename                 | Purpose                                                                          | Expected SHA-256                                                 |
+| -------------------------------- | -------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| census_2022_radios.parquet       | INDEC population and private-dwelling totals joined to corrected radio geometry  | ade36a340854bf3e616ff28f34527ba193aa515274c503929877f831276a4936 |
 | census_settlement_counts.parquet | Settlement polygons and footprint counts used in the validated Census comparison | a90503b0ef3ad5e9359cb93fba7363cf7bb872ecbb9be84fc446ea40da5ac012 |
 
 After publishing the version, replace
 REPLACE_WITH_VERSION_RECORD_ID in census_comparison.py and both manuscript
 DOI placeholders with the exact version DOI. Do not use the concept DOI.
+
+## Household floor and dwelling-yield sweep
+
+**pixi run estimate** computes, per settlement, H = max(R, F × y × 1.1),
+where R is the RENABAP family count, F is the eligible footprint count, and y
+is the assumed number of occupied dwellings per mapped footprint. The yield is
+one net factor for every mechanism between a mapped polygon and an occupied
+household. The sweep runs 30 scenarios: five yields from 0.60 to 1.15, three
+size filters, and two population multipliers. It also reports the aggregate
+parity yield (R / 1.1 / F) per size filter. Results are written to
+outputs/sensitivity_dwelling_yield.csv and outputs/settlement_analysis_summary.md.
+The supplement's table S1 is copied from the CSV.
+
+**pixi run diagnostic-multiplier** overlays the same y × 1.1 factor on the
+Census dwelling-inventory comparison at the 95 percent coverage threshold and
+reports the break-even yield at which implied households equal Census
+households. It reads outputs/census-dwelling-footprint/ and writes
+diagnostic_household_multiplier.csv and .md there.
 
 ## Census calculation
 
@@ -77,10 +95,10 @@ dwellings with people present.
 
 Temporal mismatch, labelled but not corrected:
 
-| Quantity | Date |
-| --- | --- |
-| Census dwelling, household, and population counts | May 2022 |
-| VIDA building footprint snapshot | September 2024 |
+| Quantity                                          | Date           |
+| ------------------------------------------------- | -------------- |
+| Census dwelling, household, and population counts | May 2022       |
+| VIDA building footprint snapshot                  | September 2024 |
 
 Results are written to outputs/census-dwelling-footprint/. The analysis does
 not support any inference about national census omission.
@@ -95,10 +113,10 @@ against a building inventory that predates Census Day.
       --census-path /path/to/radios-hilbert.parquet \
       --settlements-path /path/to/barrios-hilbert.parquet
 
-| Release | Layout | Declared imagery |
-| --- | --- | --- |
+| Release    | Layout                                | Declared imagery         |
+| ---------- | ------------------------------------- | ------------------------ |
 | 2022-06-14 | one whole-country partition, 22 parts | 2014-04-15 to 2021-06-06 |
-| 2023-04-25 | Bing level-9 quadkeys | 2014-04-15 to 2021-06-06 |
+| 2023-04-25 | Bing level-9 quadkeys                 | 2014-04-15 to 2021-06-06 |
 
 Microsoft's own copies of the 2022 releases are gone. Both 2022 link tables
 survive in the git history of microsoft/GlobalMLBuildingFootprints, at commits
@@ -127,13 +145,17 @@ sentinel of 2000-01. No Overture release predates Census Day.
 
 ## Known gaps requiring resolution
 
-1. **Paper I output mismatch.** The manuscript and recovered Paper II input
-   contain 1,969,975 footprints. The frozen version-1.0.0 Zenodo-derived
-   settlement_estimates.parquet contains 1,967,013. Counts differ in 302
-   settlements by 2,962 footprints in total. The current archived national
-   footprint input reproduces 1,967,013. The exact raw footprint input or
-   processing step that produced 1,969,975 has not been recovered. The
-   manuscript numbers have not been silently changed.
+1. **Footprint series.** The manuscript and supplement now
+   report the series that the frozen version-1.0.0 Zenodo input reproduces:
+   1,967,013 footprints. The recovered Census-comparison input
+   (census_settlement_counts.parquet) holds an earlier join with 1,969,975
+   footprints. Counts differ in 302 settlements by 2,962 footprints in total,
+   and the difference is confined to the 0% coverage row of the Census sweep.
+   The exact raw input or processing step that produced 1,969,975 has not
+   been recovered. Both manuscripts state the difference next to the Census
+   table. Adopted on September 10, 2026 when the dwelling-yield sensitivity
+   sweep was added, because the new scenarios can only be computed from the
+   archived input.
 2. **Adjacent-radio implementation.** The validation report preserved the
    result and the 1-percent coverage rule, but not the exact two-kilometre
    distance query. The executable workflow does not yet reproduce that

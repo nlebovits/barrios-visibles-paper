@@ -2,7 +2,7 @@
 title: "Supplementary material for Barrios Visibles"
 author: Nissim Lebovits
 affiliation: Independent Researcher
-date: 2026-09-08
+date: 2026-09-10
 ---
 
 # Supplementary material
@@ -12,69 +12,99 @@ This file contains supporting tables and imagery for *Barrios Visibles: Building
 
 ## S1 Sensitivity Analysis
 
-Estimated households and population across building size filters, occupation rates, and population multipliers. Range: 1,907,348 – 2,265,499 households; 5,340,576 – 7,589,423 population (11.4% – 16.3% of Argentina's total population).
+Estimated households and population across building size filters, dwelling yields per footprint, and population multipliers. Per settlement, H = max(RENABAP families, footprints × y × 1.1), where y is the net number of occupied dwellings per mapped footprint. Range: 1,484,666 – 2,570,022 households; 4,157,065 – 8,609,576 population (8.9% – 18.4% of Argentina's total population).
 
-| Size filter | Occupation | Pop mult | Buildings | Est. households | Est. population | % of Argentina |
+| Size filter | Dwelling yield (y) | Pop mult | Buildings | Est. households | Est. population | % of Argentina |
 | --- | --- | --- | --- | --- | --- | --- |
-| No filter | 85% | 2.8 | 1,969,975 | 1,966,580 | 5,506,425 | 11.79% |
-| No filter | 85% | 3.35 | 1,969,975 | 1,966,580 | 6,588,045 | 14.11% |
-| No filter | 90% | 2.8 | 1,969,975 | 2,064,787 | 5,781,404 | 12.38% |
-| No filter | 90% | 3.35 | 1,969,975 | 2,064,787 | 6,917,038 | 14.81% |
-| No filter | 95% | 2.8 | 1,969,975 | 2,164,567 | 6,060,788 | 12.98% |
-| No filter | 95% | 3.35 | 1,969,975 | 2,164,567 | 7,251,300 | 15.53% |
-| No filter | 100% | 2.8 | 1,969,975 | 2,265,499 | 6,343,398 | 13.58% |
-| No filter | 100% | 3.35 | 1,969,975 | 2,265,499 | 7,589,423 | 16.25% |
-| ≥6 m² | 85% | 2.8 | 1,962,707 | 1,960,296 | 5,488,831 | 11.75% |
-| ≥6 m² | 85% | 3.35 | 1,962,707 | 1,960,296 | 6,566,994 | 14.06% |
-| ≥6 m² | 90% | 2.8 | 1,962,707 | 2,058,032 | 5,762,490 | 12.34% |
-| ≥6 m² | 90% | 3.35 | 1,962,707 | 2,058,032 | 6,894,407 | 14.76% |
-| ≥6 m² | 95% | 2.8 | 1,962,707 | 2,157,374 | 6,040,647 | 12.94% |
-| ≥6 m² | 95% | 3.35 | 1,962,707 | 2,157,374 | 7,227,203 | 15.48% |
-| ≥6 m² | 100% | 2.8 | 1,962,707 | 2,257,846 | 6,321,971 | 13.54% |
-| ≥6 m² | 100% | 3.35 | 1,962,707 | 2,257,846 | 7,563,787 | 16.20% |
-| ≥10 m² | 85% | 2.8 | 1,900,612 | 1,907,348 | 5,340,576 | 11.44% |
-| ≥10 m² | 85% | 3.35 | 1,900,612 | 1,907,348 | 6,389,618 | 13.68% |
-| ≥10 m² | 90% | 2.8 | 1,900,612 | 2,000,911 | 5,602,552 | 12.00% |
-| ≥10 m² | 90% | 3.35 | 1,900,612 | 2,000,911 | 6,703,053 | 14.35% |
-| ≥10 m² | 95% | 2.8 | 1,900,612 | 2,096,321 | 5,869,700 | 12.57% |
-| ≥10 m² | 95% | 3.35 | 1,900,612 | 2,096,321 | 7,022,677 | 15.04% |
-| ≥10 m² | 100% | 2.8 | 1,900,612 | 2,193,014 | 6,140,441 | 13.15% |
-| ≥10 m² | 100% | 3.35 | 1,900,612 | 2,193,014 | 7,346,599 | 15.73% |
+| No filter | 0.60 | 2.8 | 1,967,013 | 1,517,947 | 4,250,253 | 9.10% |
+| No filter | 0.60 | 3.35 | 1,967,013 | 1,517,947 | 5,085,124 | 10.89% |
+| No filter | 0.70 | 2.8 | 1,967,013 | 1,684,321 | 4,716,101 | 10.10% |
+| No filter | 0.70 | 3.35 | 1,967,013 | 1,684,321 | 5,642,478 | 12.08% |
+| No filter | 0.85 | 2.8 | 1,967,013 | 1,964,359 | 5,500,205 | 11.78% |
+| No filter | 0.85 | 3.35 | 1,967,013 | 1,964,359 | 6,580,603 | 14.09% |
+| No filter | 1.00 | 2.8 | 1,967,013 | 2,262,798 | 6,335,835 | 13.57% |
+| No filter | 1.00 | 3.35 | 1,967,013 | 2,262,798 | 7,580,374 | 16.23% |
+| No filter | 1.15 | 2.8 | 1,967,013 | 2,570,022 | 7,196,064 | 15.41% |
+| No filter | 1.15 | 3.35 | 1,967,013 | 2,570,022 | 8,609,576 | 18.44% |
+| ≥6 m² | 0.60 | 2.8 | 1,959,840 | 1,514,279 | 4,239,981 | 9.08% |
+| ≥6 m² | 0.60 | 3.35 | 1,959,840 | 1,514,279 | 5,072,835 | 10.86% |
+| ≥6 m² | 0.70 | 2.8 | 1,959,840 | 1,679,504 | 4,702,611 | 10.07% |
+| ≥6 m² | 0.70 | 3.35 | 1,959,840 | 1,679,504 | 5,626,338 | 12.05% |
+| ≥6 m² | 0.85 | 2.8 | 1,959,840 | 1,957,993 | 5,482,381 | 11.74% |
+| ≥6 m² | 0.85 | 3.35 | 1,959,840 | 1,957,993 | 6,559,278 | 14.05% |
+| ≥6 m² | 1.00 | 2.8 | 1,959,840 | 2,255,074 | 6,314,208 | 13.52% |
+| ≥6 m² | 1.00 | 3.35 | 1,959,840 | 2,255,074 | 7,554,498 | 16.18% |
+| ≥6 m² | 1.15 | 2.8 | 1,959,840 | 2,561,021 | 7,170,861 | 15.36% |
+| ≥6 m² | 1.15 | 3.35 | 1,959,840 | 2,561,021 | 8,579,423 | 18.37% |
+| ≥10 m² | 0.60 | 2.8 | 1,897,960 | 1,484,666 | 4,157,065 | 8.90% |
+| ≥10 m² | 0.60 | 3.35 | 1,897,960 | 1,484,666 | 4,973,632 | 10.65% |
+| ≥10 m² | 0.70 | 2.8 | 1,897,960 | 1,639,581 | 4,590,827 | 9.83% |
+| ≥10 m² | 0.70 | 3.35 | 1,897,960 | 1,639,581 | 5,492,597 | 11.76% |
+| ≥10 m² | 0.85 | 2.8 | 1,897,960 | 1,905,233 | 5,334,655 | 11.42% |
+| ≥10 m² | 0.85 | 3.35 | 1,897,960 | 1,905,233 | 6,382,533 | 13.67% |
+| ≥10 m² | 1.00 | 2.8 | 1,897,960 | 2,190,465 | 6,133,303 | 13.13% |
+| ≥10 m² | 1.00 | 3.35 | 1,897,960 | 2,190,465 | 7,338,059 | 15.71% |
+| ≥10 m² | 1.15 | 2.8 | 1,897,960 | 2,485,471 | 6,959,318 | 14.90% |
+| ≥10 m² | 1.15 | 3.35 | 1,897,960 | 2,485,471 | 8,326,327 | 17.83% |
+
+Aggregate parity yield (RENABAP families / 1.1 / footprints): 0.572 with no filter, 0.574 at ≥6 m², 0.593 at ≥10 m².
+
+### S1.1 Which branch sets the floor, by yield
+
+The columns count settlements in which the footprint branch or the RENABAP branch of the per-settlement maximum is larger at that yield.
+
+| Size filter | y | Footprints higher | RENABAP higher |
+| --- | --- | --- | --- |
+| No filter | 0.60 | 3,894 | 2,573 |
+| No filter | 0.70 | 4,729 | 1,738 |
+| No filter | 0.85 | 5,450 | 1,017 |
+| No filter | 1.00 | 5,803 | 664 |
+| No filter | 1.15 | 6,042 | 425 |
+| ≥6 m² | 0.60 | 3,861 | 2,602 |
+| ≥6 m² | 0.70 | 4,715 | 1,748 |
+| ≥6 m² | 0.85 | 5,436 | 1,027 |
+| ≥6 m² | 1.00 | 5,796 | 667 |
+| ≥6 m² | 1.15 | 6,039 | 424 |
+| ≥10 m² | 0.60 | 3,602 | 2,861 |
+| ≥10 m² | 0.70 | 4,558 | 1,905 |
+| ≥10 m² | 0.85 | 5,342 | 1,121 |
+| ≥10 m² | 1.00 | 5,739 | 724 |
+| ≥10 m² | 1.15 | 5,995 | 468 |
 
 ## S2 Estimate Source by Urban Intersection
 
-Share of settlements in which the building-footprint count (scaled by 1.1) versus the RENABAP family count established the per-settlement household floor, split by whether the settlement intersects an IGN Planta Urbana polygon.
+Share of settlements in which the building-footprint count (scaled by 1.1 at y = 1.00) versus the RENABAP family count established the per-settlement household floor, split by whether the settlement intersects an IGN Planta Urbana polygon.
 
 | Urban? | Settlements | Used buildings | Used RENABAP | % buildings | % RENABAP |
 | --- | --- | --- | --- | --- | --- |
-| Yes | 5,381 | 4,811 | 570 | 89.4% | 10.6% |
-| No | 1,084 | 999 | 85 | 92.2% | 7.8% |
+| Yes | 5,380 | 4,805 | 575 | 89.3% | 10.7% |
+| No | 1,083 | 998 | 85 | 92.2% | 7.8% |
 
 ## S3 Province Breakdown
 
 | Provincia | Settlements | RENABAP | Buildings | Est. families | Used bldg | Used RENABAP |
 | --- | --- | --- | --- | --- | --- | --- |
-| Buenos Aires | 2,065 | 588,779 | 997,923 | 1,120,504 | 1,844 | 221 |
-| Santa Fe | 469 | 92,776 | 134,135 | 153,206 | 413 | 56 |
-| Chaco | 442 | 55,821 | 107,871 | 118,824 | 425 | 17 |
-| Misiones | 413 | 58,322 | 88,822 | 101,200 | 348 | 65 |
+| Buenos Aires | 2,065 | 588,779 | 997,071 | 1,119,569 | 1,844 | 221 |
+| Santa Fe | 469 | 92,776 | 134,103 | 153,171 | 413 | 56 |
+| Chaco | 442 | 55,821 | 107,865 | 118,817 | 425 | 17 |
+| Misiones | 413 | 58,322 | 87,582 | 99,990 | 344 | 69 |
 | Tucumán | 370 | 48,003 | 82,136 | 92,044 | 356 | 14 |
-| Ciudad Autónoma de Buenos Aires | 49 | 80,517 | 27,987 | 80,971 | 6 | 43 |
-| Salta | 354 | 39,319 | 65,830 | 74,783 | 331 | 23 |
-| Córdoba | 318 | 37,039 | 55,811 | 63,138 | 264 | 54 |
-| Río Negro | 240 | 36,239 | 51,059 | 61,860 | 221 | 19 |
-| Corrientes | 257 | 29,136 | 50,364 | 56,319 | 233 | 24 |
-| Formosa | 126 | 27,942 | 48,975 | 54,720 | 114 | 12 |
-| Mendoza | 360 | 26,432 | 47,635 | 52,619 | 342 | 18 |
-| Santiago del Estero | 128 | 20,947 | 44,998 | 49,687 | 121 | 7 |
-| Entre Ríos | 231 | 26,276 | 41,913 | 46,801 | 204 | 27 |
-| Jujuy | 159 | 18,938 | 27,983 | 31,379 | 148 | 11 |
-| Neuquén | 116 | 14,813 | 26,886 | 30,080 | 102 | 14 |
-| Chubut | 83 | 10,660 | 19,868 | 22,226 | 76 | 7 |
-| Tierra del Fuego | 49 | 6,147 | 11,530 | 12,729 | 43 | 6 |
-| San Juan | 81 | 5,563 | 9,528 | 10,597 | 73 | 8 |
-| San Luis | 32 | 4,442 | 7,919 | 8,722 | 27 | 5 |
-| La Rioja | 34 | 2,476 | 6,722 | 7,394 | 34 | 0 |
+| Ciudad Autónoma de Buenos Aires | 49 | 80,517 | 27,730 | 80,960 | 5 | 44 |
+| Salta | 354 | 39,319 | 65,824 | 74,777 | 331 | 23 |
+| Córdoba | 318 | 37,039 | 55,755 | 63,097 | 264 | 54 |
+| Río Negro | 240 | 36,239 | 51,057 | 61,858 | 221 | 19 |
+| Corrientes | 257 | 29,136 | 50,276 | 56,227 | 231 | 26 |
+| Formosa | 126 | 27,942 | 48,742 | 54,533 | 114 | 12 |
+| Mendoza | 360 | 26,432 | 47,634 | 52,618 | 342 | 18 |
+| Santiago del Estero | 128 | 20,947 | 44,945 | 49,661 | 121 | 7 |
+| Entre Ríos | 231 | 26,276 | 41,912 | 46,799 | 204 | 27 |
+| Jujuy | 159 | 18,938 | 27,962 | 31,356 | 148 | 11 |
+| Neuquén | 116 | 14,813 | 26,881 | 30,074 | 102 | 14 |
+| Chubut | 83 | 10,660 | 19,862 | 22,219 | 76 | 7 |
+| Tierra del Fuego | 49 | 6,147 | 11,524 | 12,722 | 43 | 6 |
+| San Juan | 81 | 5,563 | 9,445 | 10,509 | 73 | 8 |
+| San Luis | 32 | 4,442 | 7,912 | 8,714 | 27 | 5 |
+| La Rioja | 34 | 2,476 | 6,715 | 7,387 | 34 | 0 |
 | Catamarca | 61 | 3,936 | 6,490 | 7,350 | 55 | 6 |
 | Santa Cruz | 21 | 2,863 | 6,539 | 7,193 | 21 | 0 |
 | La Pampa | 9 | 409 | 1,051 | 1,156 | 9 | 0 |
@@ -102,6 +132,8 @@ The following author-produced overlays are linked rather than redistributed pend
 | 75% | 544 | 607,405 | 990,041 | 2,034,807 | 2.06 |
 | 90% | 304 | 405,682 | 687,672 | 1,359,035 | 1.98 |
 | 95% | 223 | 305,226 | 542,938 | 1,022,507 | 1.88 |
+
+The Census comparison uses the earlier footprint join, which holds 1,969,975 footprints. The Paper I series reported in S1 holds 1,967,013. They differ by 2,962 footprints (0.15%) in 302 settlements, and the difference is confined to the 0% row.
 
 ### S5.2 Persons per enumerated private dwelling
 
@@ -148,3 +180,24 @@ The ≥75% subset is small in several provinces. These diagnostics are not used 
 | Río Negro | 22 | 17,253 | 20,126 | 2.87 |
 | Buenos Aires | 283 | 379,062 | 616,392 | 2.06 |
 | Ciudad Autónoma de Buenos Aires | 13 | 24,223 | 111,973 | 0.72 |
+
+### S5.6 Dwelling-yield diagnostic against Census households
+
+This diagnostic takes Census radios with RENABAP coverage at or above 95%, VIDA footprints of at least 10 m², and Census households from May 2022. The horizontal regime and all radios excluding CABA are reported as separate, overlapping strata, so the rows are not additive. Footprints are scaled by y × 1.1 for each tested dwelling yield and compared with Census households, and the 2022 to 2024 temporal mismatch is not corrected.
+
+Break-even yield, at which footprints × y × 1.1 equals Census households: 0.553 in the horizontal regime and 0.544 excluding CABA.
+
+| Stratum | y | Implied households | Census households | Ratio | Excess % |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Horizontal regime | 0.60 | 172,133 | 158,522 | 1.09 | +8.6% |
+| Horizontal regime | 0.70 | 200,822 | 158,522 | 1.27 | +26.7% |
+| Horizontal regime | 0.85 | 243,855 | 158,522 | 1.54 | +53.8% |
+| Horizontal regime | 1.00 | 286,889 | 158,522 | 1.81 | +81.0% |
+| Horizontal regime | 1.15 | 329,922 | 158,522 | 2.08 | +108.1% |
+| Excluding CABA | 0.60 | 210,700 | 190,994 | 1.10 | +10.3% |
+| Excluding CABA | 0.70 | 245,817 | 190,994 | 1.29 | +28.7% |
+| Excluding CABA | 0.85 | 298,492 | 190,994 | 1.56 | +56.3% |
+| Excluding CABA | 1.00 | 351,167 | 190,994 | 1.84 | +83.9% |
+| Excluding CABA | 1.15 | 403,842 | 190,994 | 2.11 | +111.4% |
+
+The growth analysis attributes about 20 percent of the excess above parity to construction after Census Day.
