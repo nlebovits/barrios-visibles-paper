@@ -12,6 +12,7 @@ dwelling-footprint = "python census_dwelling_footprint.py"
 fetch-ms-buildings = "python fetch_ms_buildings.py"
 diagnostic-multiplier = "python diagnostic_household_multiplier.py"
 combined = "python combined_analysis.py"
+dasymmetric = "python dasymmetric_allocation.py"
 # Needs `-- --census-path /path/to/radios.parquet` and the per-radio output of
 # dwelling-footprint. Reads Open Buildings Temporal GeoTIFFs over the network.
 openbuildings-growth = "python openbuildings_growth.py"

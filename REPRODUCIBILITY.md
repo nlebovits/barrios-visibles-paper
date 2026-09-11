@@ -10,6 +10,10 @@ rebuilds.
 - **pixi run census-comparison** will default to the new version-specific
   Zenodo record after its record id is inserted in census_comparison.py.
 - **pixi run reproduce** runs both analyses.
+- **pixi run dwelling-footprint**, **pixi run diagnostic-multiplier**, and
+  **pixi run openbuildings-growth** run the Census inventory comparison, the
+  yield overlay, and the post-Census construction check described below.
+  They need the radio and settlement files passed on the command line.
 - **python estimate.py --source live** and
   **python census_comparison.py --source live** retrieve current upstream data.
   They need not reproduce submitted values.
@@ -48,6 +52,48 @@ Census dwelling-inventory comparison at the 95 percent coverage threshold and
 reports the break-even yield at which implied households equal Census
 households. It reads outputs/census-dwelling-footprint/ and writes
 diagnostic_household_multiplier.csv and .md there.
+
+## Dasymmetric allocation
+
+**pixi run dasymmetric** is the project's primary allocation method. It assigns
+Census quantities to barrios by the share of a radio's building footprints that
+fall inside the barrio, rather than by the share of its area.
+
+    pixi run dasymmetric -- \
+      --census-path /path/to/radios-hilbert.parquet \
+      --settlements-path /path/to/barrios-hilbert.parquet
+
+Areal weighting assumes population is spread evenly across a radio. A dense
+settlement inside a large, mostly empty radio is then credited only its area
+share, and the shortfall appears as an inflated discrepancy. The coverage sweep
+existed to filter around that. Footprint-share allocation removes it at source.
+
+The method is checked against the artefact hypothesis, not assumed:
+
+| Check | Areal | Dasymmetric |
+| --- | --- | --- |
+| Spread of the coverage sweep | 0.74 | 0.13 |
+| Ratio at 95 percent coverage | 1.88 | 1.86 |
+| San Juan, unfiltered | 7.57 | 2.28 |
+
+The sweep flattens, the two methods converge where a radio is almost entirely
+barrio, and the provincial outliers collapse. All three are what the artefact
+hypothesis predicts.
+
+Weights are computed three ways from one spatial join: footprint count, total
+footprint area, and count restricted to footprints between 6 and 200 square
+metres. The band weight is within 1.3 percent of the count weight. The area
+weight allocates about 11 percent less to barrios, because barrio footprints
+are smaller, which makes the count weight the more conservative of the two.
+
+Footprints are assigned by centroid containment. Measured on the current
+inputs: 33,750,748 of 33,754,731 footprints fall in a radio, 66,456 of 66,502
+radios contain at least one footprint, the 46 that do not hold 7,847 people,
+and no footprint falls in two barrios.
+
+**census_comparison.py is superseded but retained.** Its assertions pin the
+published areal sweep, so the article's figures remain verifiable and the
+historical numbers reproducible.
 
 ## Census calculation
 
@@ -102,6 +148,31 @@ Temporal mismatch, labelled but not corrected:
 
 Results are written to outputs/census-dwelling-footprint/. The analysis does
 not support any inference about national census omission.
+
+### Construction after census day
+
+**pixi run openbuildings-growth** measures change only. It reads the radios
+that census_dwelling_footprint.py selected at the 95 percent threshold in the
+horizontal regime outside CABA, sums the Open Buildings Temporal
+`building_fractional_count` band over each radio for 2021, 2022, and 2023,
+and forms per-radio growth rates. A year counts for a radio only when its
+valid-pixel count reaches 90 percent of the best-covered year, because a
+missing tile reads as a spurious fall of 100 percent. Rates are aggregated
+with the current VIDA footprint count as weight, and the 2022 to 2023 rate is
+carried forward 2.33 years from Census Day to the VIDA snapshot to report how
+much of the footprint excess construction could explain. Absolute Temporal
+counts are never compared with Census dwellings or VIDA footprints.
+
+    pixi run openbuildings-growth -- \
+      --census-path /path/to/radios-hilbert.parquet
+
+Inputs: outputs/census-dwelling-footprint/census_dwelling_footprint_by_radio.parquet,
+the radio geometry file, tile manifests cached under data/ob-temporal-manifests/,
+and GeoTIFFs streamed from storage.googleapis.com/open-buildings-temporal-data.
+Raw per-radio sums are cached in outputs/openbuildings-growth/openbuildings_raw_counts.parquet
+and reused unless --refresh is passed. The script asserts the published
+selection of 460 radios and the usable 2022 to 2023 set of 356 radios with
+200,094 VIDA footprints. Results go to outputs/openbuildings-growth/.
 
 ### Building inventories predating the census
 

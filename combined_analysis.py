@@ -44,6 +44,7 @@ import census_comparison as population_branch
 ROOT = Path(__file__).resolve().parent
 DATA_DIR = ROOT / "data"
 OUTPUT_DIR = ROOT / "outputs" / "combined"
+DASYMMETRIC_SWEEP = ROOT / "outputs" / "dasymmetric" / "coverage_sweep_dasymmetric.csv"
 INVENTORY_SUMMARY = (
     ROOT
     / "outputs"
@@ -270,6 +271,7 @@ def inventory_rows() -> pd.DataFrame:
 
 def write_report(
     sweep: list[dict],
+    dasymmetric: pd.DataFrame,
     sensitivity: list[dict],
     inventory: pd.DataFrame,
     adjacent: pd.DataFrame,
@@ -277,6 +279,9 @@ def write_report(
     families: dict,
 ) -> None:
     top = provincial[provincial["threshold"] == 0.0].head(8)
+    areal_by_threshold = {
+        round(float(row["threshold"]), 2): float(row["ratio"]) for row in sweep
+    }
     lines = [
         "# Combined report: population branch and dwelling-inventory branch",
         "",
@@ -297,8 +302,26 @@ def write_report(
         "",
         "## 1. Population branch",
         "",
-        "Reproduced from `census_comparison.py`, which asserts every value below",
-        "and fails if any drifts.",
+        "Allocation is by footprint share, from `dasymmetric_allocation.py`.",
+        "The areal column is the superseded method, kept for comparison and",
+        "still asserted by `census_comparison.py` so the published figures stay",
+        "verifiable.",
+        "",
+        "| Minimum radio coverage | Barrios | Areal ratio | Dasymmetric ratio |",
+        "| ---: | ---: | ---: | ---: |",
+        *[
+            f"| {row.threshold:.0%} | {row.barrios:,} | "
+            f"{areal_by_threshold.get(round(row.threshold, 2), float('nan')):.2f} | "
+            f"{row.legacy_population_ratio:.2f} |"
+            for row in dasymmetric.itertuples()
+        ],
+        "",
+        "Areal weighting produced a gradient from 2.62 to 1.88. Footprint-share",
+        "allocation removes it: the same sweep on the same filter is flat near",
+        "1.9, and the two agree at 95 percent coverage, where a radio is almost",
+        "all barrio and the choice of weight stops mattering.",
+        "",
+        "### Superseded areal sweep",
         "",
         "| Minimum radio coverage | Barrios | Footprints | Census population | "
         f"Footprint population (x{MULTIPLIER}) | Ratio |",
@@ -484,8 +507,13 @@ def main() -> None:
     (OUTPUT_DIR / "family_ratio.json").write_text(
         json.dumps(families, indent=2) + "\n", encoding="utf-8"
     )
+    if not DASYMMETRIC_SWEEP.exists():
+        raise FileNotFoundError(
+            f"{DASYMMETRIC_SWEEP} is missing. Run dasymmetric_allocation.py first."
+        )
     write_report(
         results["coverage_sweep"],
+        pd.read_csv(DASYMMETRIC_SWEEP),
         results["multiplier_sensitivity"],
         inventory,
         adjacent,

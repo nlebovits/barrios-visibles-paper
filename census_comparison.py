@@ -1,6 +1,17 @@
 #!/usr/bin/env python3
 """Reproduce the Census 2022 robustness checks reported in the article.
 
+SUPERSEDED. This script allocates radio population to barrios in proportion to
+intersection area, which assumes population is spread evenly across a radio.
+dasymmetric_allocation.py replaces that with allocation by footprint share, and
+is the project's primary method.
+
+This file is retained deliberately. Its assertions pin the published sweep, so
+it remains a regression guard on the historical numbers and keeps the article's
+figures verifiable. The coverage gradient it reports, 2.62 down to 1.88, is
+largely an artefact of the areal assumption: under dasymmetric allocation the
+same sweep on the same filter is flat near 1.9.
+
 The publication calculation starts from settlement-level footprint counts and
 INDEC census-radio aggregates. It does not treat footprints as population
 observations: the population side remains conditional on an explicit
