@@ -316,33 +316,33 @@ presentation and review, not modification.
 
 ## C + D. Jurisdiction comparison, joined to RENABAP
 
-| Jurisdiction | Census 2022 definitive | AD40 reconciled 18 May 2022 | Recon − census | Recon − census % | RENABAP families | Footprint families | RENABAP pop ×2.8 | Footprint pop ×2.8 | Footprint gap % of census |
-|---|---|---|---|---|---|---|---|---|---|
-| Chaco | 1,129,606 | 1,189,884 | 60,278 | +5.34 | 55,821 | 118,817 | 156,299 | 332,687 | 15.62 |
-| La Rioja | 383,865 | 398,296 | 14,431 | +3.76 | 2,476 | 7,386 | 6,933 | 20,682 | 3.58 |
-| Santa Fe | 3,544,908 | 3,669,573 | 124,665 | +3.52 | 92,776 | 153,171 | 259,773 | 428,879 | 4.77 |
-| Río Negro | 750,768 | 775,839 | 25,071 | +3.34 | 36,239 | 61,858 | 101,469 | 173,202 | 9.55 |
-| La Pampa | 361,859 | 373,802 | 11,943 | +3.30 | 409 | 1,156 | 1,145 | 3,237 | 0.58 |
-| Misiones | 1,278,873 | 1,312,397 | 33,524 | +2.62 | 58,322 | 99,990 | 163,302 | 279,973 | 9.12 |
-| Córdoba | 3,840,905 | 3,921,832 | 80,927 | +2.11 | 37,039 | 63,097 | 103,709 | 176,670 | 1.90 |
-| Formosa | 607,419 | 620,097 | 12,678 | +2.09 | 27,942 | 54,533 | 78,238 | 152,692 | 12.26 |
-| Salta | 1,441,351 | 1,466,305 | 24,954 | +1.73 | 39,319 | 74,777 | 110,093 | 209,375 | 6.89 |
-| San Juan | 822,853 | 836,714 | 13,861 | +1.68 | 5,563 | 10,508 | 15,576 | 29,424 | 1.68 |
-| Entre Ríos | 1,425,578 | 1,449,417 | 23,839 | +1.67 | 26,276 | 46,799 | 73,573 | 131,038 | 4.03 |
-| Tucumán | 1,731,820 | 1,757,461 | 25,641 | +1.48 | 48,003 | 92,044 | 134,408 | 257,724 | 7.12 |
-| Catamarca | 429,562 | 434,528 | 4,966 | +1.16 | 3,936 | 7,350 | 11,021 | 20,579 | 2.23 |
-| Chubut | 592,621 | 597,148 | 4,527 | +0.76 | 10,660 | 22,219 | 29,848 | 62,214 | 5.46 |
-| Ciudad Autónoma de Buenos Aires | 3,121,707 | 3,122,464 | 757 | +0.02 | 80,517 | 80,960 | 225,448 | 226,688 | 0.04 |
-| Mendoza | 2,043,540 | 2,032,130 | -11,410 | -0.56 | 26,432 | 52,618 | 74,010 | 147,330 | 3.59 |
-| Buenos Aires | 17,523,996 | 17,407,546 | -116,450 | -0.66 | 588,779 | 1,119,569 | 1,648,581 | 3,134,792 | 8.48 |
-| Santa Cruz | 337,226 | 334,310 | -2,916 | -0.86 | 2,863 | 7,193 | 8,016 | 20,140 | 3.60 |
-| Santiago del Estero | 1,060,906 | 1,044,587 | -16,319 | -1.54 | 20,947 | 49,660 | 58,652 | 139,049 | 7.58 |
-| Corrientes | 1,212,696 | 1,188,384 | -24,312 | -2.00 | 29,136 | 56,227 | 81,581 | 157,435 | 6.25 |
-| Jujuy | 811,611 | 795,110 | -16,501 | -2.03 | 18,938 | 31,356 | 53,026 | 87,797 | 4.28 |
-| San Luis | 542,069 | 527,034 | -15,035 | -2.77 | 4,442 | 8,714 | 12,438 | 24,399 | 2.21 |
-| Neuquén | 710,814 | 688,557 | -22,257 | -3.13 | 14,813 | 30,074 | 41,476 | 84,208 | 6.01 |
-| Tierra del Fuego, Antártida e Islas del Atlántico Sur | 185,732 | 179,436 | -6,296 | -3.39 | 6,147 | 12,722 | 17,212 | 35,621 | 9.91 |
-| **Total (24 jurisdictions)** | 45,892,285 | 46,122,851 | 230,566 | +0.50 | 1,237,795 | 2,262,798 | 3,465,827 | 6,335,835 | 4.13 |
+| Jurisdiction                                          | Census 2022 definitive | AD40 reconciled 18 May 2022 | Recon − census | Recon − census % | RENABAP families | Footprint families | RENABAP pop ×2.8 | Footprint pop ×2.8 | Footprint gap % of census |
+| ----------------------------------------------------- | ---------------------- | --------------------------- | -------------- | ---------------- | ---------------- | ------------------ | ---------------- | ------------------ | ------------------------- |
+| Chaco                                                 | 1,129,606              | 1,189,884                   | 60,278         | +5.34            | 55,821           | 118,817            | 156,299          | 332,687            | 15.62                     |
+| La Rioja                                              | 383,865                | 398,296                     | 14,431         | +3.76            | 2,476            | 7,386              | 6,933            | 20,682             | 3.58                      |
+| Santa Fe                                              | 3,544,908              | 3,669,573                   | 124,665        | +3.52            | 92,776           | 153,171            | 259,773          | 428,879            | 4.77                      |
+| Río Negro                                             | 750,768                | 775,839                     | 25,071         | +3.34            | 36,239           | 61,858             | 101,469          | 173,202            | 9.55                      |
+| La Pampa                                              | 361,859                | 373,802                     | 11,943         | +3.30            | 409              | 1,156              | 1,145            | 3,237              | 0.58                      |
+| Misiones                                              | 1,278,873              | 1,312,397                   | 33,524         | +2.62            | 58,322           | 99,990             | 163,302          | 279,973            | 9.12                      |
+| Córdoba                                               | 3,840,905              | 3,921,832                   | 80,927         | +2.11            | 37,039           | 63,097             | 103,709          | 176,670            | 1.90                      |
+| Formosa                                               | 607,419                | 620,097                     | 12,678         | +2.09            | 27,942           | 54,533             | 78,238           | 152,692            | 12.26                     |
+| Salta                                                 | 1,441,351              | 1,466,305                   | 24,954         | +1.73            | 39,319           | 74,777             | 110,093          | 209,375            | 6.89                      |
+| San Juan                                              | 822,853                | 836,714                     | 13,861         | +1.68            | 5,563            | 10,508             | 15,576           | 29,424             | 1.68                      |
+| Entre Ríos                                            | 1,425,578              | 1,449,417                   | 23,839         | +1.67            | 26,276           | 46,799             | 73,573           | 131,038            | 4.03                      |
+| Tucumán                                               | 1,731,820              | 1,757,461                   | 25,641         | +1.48            | 48,003           | 92,044             | 134,408          | 257,724            | 7.12                      |
+| Catamarca                                             | 429,562                | 434,528                     | 4,966          | +1.16            | 3,936            | 7,350              | 11,021           | 20,579             | 2.23                      |
+| Chubut                                                | 592,621                | 597,148                     | 4,527          | +0.76            | 10,660           | 22,219             | 29,848           | 62,214             | 5.46                      |
+| Ciudad Autónoma de Buenos Aires                       | 3,121,707              | 3,122,464                   | 757            | +0.02            | 80,517           | 80,960             | 225,448          | 226,688            | 0.04                      |
+| Mendoza                                               | 2,043,540              | 2,032,130                   | -11,410        | -0.56            | 26,432           | 52,618             | 74,010           | 147,330            | 3.59                      |
+| Buenos Aires                                          | 17,523,996             | 17,407,546                  | -116,450       | -0.66            | 588,779          | 1,119,569          | 1,648,581        | 3,134,792          | 8.48                      |
+| Santa Cruz                                            | 337,226                | 334,310                     | -2,916         | -0.86            | 2,863            | 7,193              | 8,016            | 20,140             | 3.60                      |
+| Santiago del Estero                                   | 1,060,906              | 1,044,587                   | -16,319        | -1.54            | 20,947           | 49,660             | 58,652           | 139,049            | 7.58                      |
+| Corrientes                                            | 1,212,696              | 1,188,384                   | -24,312        | -2.00            | 29,136           | 56,227             | 81,581           | 157,435            | 6.25                      |
+| Jujuy                                                 | 811,611                | 795,110                     | -16,501        | -2.03            | 18,938           | 31,356             | 53,026           | 87,797             | 4.28                      |
+| San Luis                                              | 542,069                | 527,034                     | -15,035        | -2.77            | 4,442            | 8,714              | 12,438           | 24,399             | 2.21                      |
+| Neuquén                                               | 710,814                | 688,557                     | -22,257        | -3.13            | 14,813           | 30,074             | 41,476           | 84,208             | 6.01                      |
+| Tierra del Fuego, Antártida e Islas del Atlántico Sur | 185,732                | 179,436                     | -6,296         | -3.39            | 6,147            | 12,722             | 17,212           | 35,621             | 9.91                      |
+| **Total (24 jurisdictions)**                          | 45,892,285             | 46,122,851                  | 230,566        | +0.50            | 1,237,795        | 2,262,798          | 3,465,827        | 6,335,835          | 4.13                      |
 
 Sorted by "Recon − census %", descending. Full machine-readable versions:
 `geo/jurisdiction_comparison.csv` (census + AD40 columns) and `geo/renabap_by_province.csv`
@@ -400,12 +400,12 @@ publish them as omission rates by jurisdiction.
 Ranking the 24 jurisdictions by reconciled-minus-censused (%) against the footprint-minus-RENABAP gap
 as a share of censused population:
 
-| Pair | Pearson | Spearman |
-|---|---|---|
-| recon − census % ~ footprint gap % of census | 0.176 | 0.036 |
-| recon − census % ~ RENABAP pop (×2.8) as % of census | 0.216 | 0.129 |
-| recon − census % ~ footprint pop (×2.8) as % of census | 0.203 | 0.096 |
-| recon − census (persons) ~ footprint − RENABAP pop (persons) | −0.524 | 0.256 |
+| Pair                                                         | Pearson | Spearman |
+| ------------------------------------------------------------ | ------- | -------- |
+| recon − census % ~ footprint gap % of census                 | 0.176   | 0.036    |
+| recon − census % ~ RENABAP pop (×2.8) as % of census         | 0.216   | 0.129    |
+| recon − census % ~ footprint pop (×2.8) as % of census       | 0.203   | 0.096    |
+| recon − census (persons) ~ footprint − RENABAP pop (persons) | −0.524  | 0.256    |
 
 Essentially no rank association. The negative Pearson on the absolute-persons pair is driven entirely
 by Buenos Aires province, which is the single largest negative on one axis and the single largest
@@ -494,12 +494,12 @@ magnitude too small to be the same phenomenon.
 
 All under `docs/audit-support/` (PDF and raw text files were not copied):
 
-| File | Contents |
-|---|---|
-| `geo_findings.md` | This note |
-| `jurisdiction_comparison.csv` | 24 jurisdictions: census definitive, census provisional, AD40 Table 4, AD40 Table 5, reconciled − censused (persons and %), definitive − provisional |
-| `renabap_by_province.csv` | The above joined to RENABAP families, building counts, footprint families, ×2.8 and ×3.35 populations, footprint/RENABAP ratio, and shares of censused population |
-| `ad40_table4_reconciled_18may2022.csv` | AD40 Table 4 verbatim (both sexes, men, women) |
-| `ad40_table5_base_1jul2022.csv` | AD40 Table 5 verbatim |
-| `census2022_definitive_by_jurisdiction.csv` | Definitive censused population by jurisdiction (sum 45,892,285, verified) |
-| `census2022_provisional_by_jurisdiction.csv` | Provisional population by jurisdiction (sum 46,044,703, verified) |
+| File                                         | Contents                                                                                                                                                          |
+| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `geo_findings.md`                            | This note                                                                                                                                                         |
+| `jurisdiction_comparison.csv`                | 24 jurisdictions: census definitive, census provisional, AD40 Table 4, AD40 Table 5, reconciled − censused (persons and %), definitive − provisional              |
+| `renabap_by_province.csv`                    | The above joined to RENABAP families, building counts, footprint families, ×2.8 and ×3.35 populations, footprint/RENABAP ratio, and shares of censused population |
+| `ad40_table4_reconciled_18may2022.csv`       | AD40 Table 4 verbatim (both sexes, men, women)                                                                                                                    |
+| `ad40_table5_base_1jul2022.csv`              | AD40 Table 5 verbatim                                                                                                                                             |
+| `census2022_definitive_by_jurisdiction.csv`  | Definitive censused population by jurisdiction (sum 45,892,285, verified)                                                                                         |
+| `census2022_provisional_by_jurisdiction.csv` | Provisional population by jurisdiction (sum 46,044,703, verified)                                                                                                 |

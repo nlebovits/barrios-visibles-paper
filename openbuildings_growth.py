@@ -23,7 +23,12 @@ Method:
 
 Dates. Each annual layer is inferred at 30 June. Census Day is 18 May 2022, six
 weeks before the 2022 layer. The VIDA snapshot is September 2024, which is 26
-months after the 2022 layer and 14 months after the last available layer.
+months after the 2022 layer and about 15 months after the last available layer.
+
+    pixi run openbuildings-growth -- --census-path /path/to/radios.parquet
+
+The script asserts the published selection before it writes anything, so a
+changed upstream input fails loudly rather than silently moving the result.
 """
 
 from __future__ import annotations
@@ -66,6 +71,12 @@ EPSG_CODES = (32718, 32719, 32720, 32721)
 INFERENCE_DAY = "06-30"
 CENSUS_DAY = pd.Timestamp("2022-05-18")
 VIDA_DATE = pd.Timestamp("2024-09-15")
+
+# Publication values. The selection comes from census_dwelling_footprint.py, so
+# these pin both scripts to the same radio set. The usable 2022 to 2023 set is
+# the subset with valid imagery in both years.
+EXPECTED_TARGET_RADIOS = 460
+EXPECTED_2022_2023 = {"n_radios": 356, "vida_footprints": 200_094}
 LAYER_2022 = pd.Timestamp("2022-06-30")
 LAYER_2023 = pd.Timestamp("2023-06-30")
 
@@ -651,6 +662,11 @@ def main() -> None:
     radios = target_radios(args.census_path)
     if args.limit:
         radios = radios.head(args.limit)
+    elif len(radios) != EXPECTED_TARGET_RADIOS:
+        raise RuntimeError(
+            f"Selected {len(radios):,} radios, and the publication run selected "
+            f"{EXPECTED_TARGET_RADIOS:,}. The per-radio input has changed."
+        )
     print(f"Target radios: {len(radios):,}")
 
     index = build_tile_index()
@@ -666,6 +682,13 @@ def main() -> None:
         counts.to_parquet(cache, index=False)
     frame = growth(counts, radios)
     summary = summarise(frame)
+    if not args.limit:
+        observed = {k: int(summary[k]) for k in EXPECTED_2022_2023}
+        if observed != EXPECTED_2022_2023:
+            raise RuntimeError(
+                f"Usable 2022 to 2023 set is {observed}, and the publication "
+                f"run had {EXPECTED_2022_2023}."
+            )
     attribution = attribute(summary)
 
     columns = [
