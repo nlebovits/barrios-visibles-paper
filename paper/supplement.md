@@ -121,6 +121,8 @@ The following author-produced overlays are linked rather than redistributed pend
 
 ## S5 Census 2022 diagnostics
 
+The article does not use these diagnostics. They compare allocated Census 2022 population with footprint-based population inside census radios covered by registered settlements, and they are retained here as supporting evidence. The comparison shares the footprint baseline with the article and is not an independent population count.
+
 ### S5.1 Complete coverage sweep
 
 | Minimum tract coverage | Barrios | Footprints | Allocated Census population | Footprint-based population (×3.35) | Ratio |

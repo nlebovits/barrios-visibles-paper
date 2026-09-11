@@ -14,7 +14,7 @@ link-citations: true
 
 ## Abstract
 
-Argentina's Registro Nacional de Barrios Populares (RENABAP) lists approximately 1.24 million families across 6,467 registered informal settlements. I compare this enumeration with 1.97 million building footprints spatially joined to the same settlement polygons. Detected footprints exceed recorded families by 59% in raw counts. A per-settlement household floor, defined as the larger of the recorded family count and the footprint count scaled by RENABAP's 1.1 families-per-dwelling ratio, exceeds the national RENABAP total by 83%. Population inference depends on dwelling-yield and demographic assumptions. The baseline assumes one occupied dwelling per footprint, the upper end of the tested range, and gives 6.3 to 7.6 million residents, approximately 2.9 to 3.4 million above RENABAP's implied figure. At the literature-anchored yield of 0.85 the range is 5.3 to 6.4 million. At a yield of only 0.6 the floor still exceeds the registry by about a fifth. These ranges indicate approximate magnitude. Results differ by settlement form. RENABAP exceeds footprint-derived estimates in consolidated, vertically developed settlements in the Ciudad Autónoma de Buenos Aires, while footprints predominate in horizontal settlements elsewhere. A separate comparison with allocated Census 2022 population declines from a ratio of 2.62 to 1.88 as the analysis is restricted to tracts increasingly covered by registered settlements. The Census comparison provides robustness evidence whose independence is limited by shared inputs and institutional context. Open building data also provide a reproducible view of the built environment against which administrative population records can be audited.
+Argentina's Registro Nacional de Barrios Populares (RENABAP) lists approximately 1.24 million families across 6,467 registered informal settlements. I compare this enumeration with 1.97 million building footprints spatially joined to the same settlement polygons. Detected footprints exceed recorded families by 59% in raw counts. A per-settlement household floor, defined as the larger of the recorded family count and the footprint count scaled by RENABAP's 1.1 families-per-dwelling ratio, exceeds the national RENABAP total by 83%. Population inference depends on dwelling-yield and demographic assumptions. The baseline assumes one occupied dwelling per footprint, the upper end of the tested range, and gives 6.3 to 7.6 million residents, approximately 2.9 to 3.4 million above RENABAP's implied figure. At the literature-anchored yield of 0.85 the range is 5.3 to 6.4 million. At a yield of only 0.6 the floor still exceeds the registry by about a fifth. These ranges indicate approximate magnitude. Results differ by settlement form. RENABAP exceeds footprint-derived estimates in consolidated, vertically developed settlements in the Ciudad Autónoma de Buenos Aires, while footprints predominate in horizontal settlements elsewhere. Open building data also provide a reproducible view of the built environment against which administrative population records can be audited.
 
 ## Policy Significance Statement
 
@@ -46,7 +46,7 @@ This paper is complementary. Their question is where the registered area is conc
 
 ## 2. Data Sources
 
-This analysis uses four datasets.
+This analysis uses three datasets.
 
 **Settlement boundaries and family counts** come from RENABAP (Registro Nacional de Barrios Populares), the official Argentine registry of barrios populares. Following national-government restructuring, formal responsibility for RENABAP administration and evaluation, including follow-up, rests with the Secretaría de Obras Públicas. The relevant functions did not disappear with changes to the former Secretaría de Integración Socio-Urbana [@decreto764; @decreto70]. This formal continuity is distinct from the age of the public data.
 
@@ -65,8 +65,6 @@ Building-footprint derivation from satellite imagery is imperfect, particularly 
 I do apply area filtering as a sensitivity test, reporting results across lower thresholds of 0, 6, and 10 m². The thresholds are not calibrated. Slum mapping reviews report dwellings below 20 m² and note that extraction algorithms both delete small dwellings as noise and merge adjacent ones [@kuffer2016; @mahabir2018]. A 6 or 10 m² cut removes some latrines, sheds, and animal enclosures, and also some one-room dwellings, in proportions that only local validation could establish. I apply no upper threshold. Large structures in informal settlements are predominantly multi-family residential, so filtering them would undercount rather than overcount. Full sensitivity tables are reported in the supplementary material.
 
 **Urban-extent classification** uses the Planta Urbana layer published by Argentina's Instituto Geográfico Nacional [@ign2021], which delineates each Planta Urbana polygon as an approximate urban area covering the contiguous zone of built blocks with recognizable limits. The layer belongs to IGN's Hábitat e Infraestructura Social dataset. It covers Argentina and arrives as a monthly shapefile in WGS 1984 (EPSG:4326). It is used here to classify each RENABAP settlement as intersecting or not intersecting an IGN-recognized urban area, supporting the urban/non-urban split reported in the supplementary material.
-
-**Census population and private-dwelling totals** come from INDEC's 2022 Census REDATAM release. I joined the release to a corrected version of the official census-radio cartography [@indec2023; @indec2024; @lebovits2025census; @rodriguez2024]. The processed tract file contains 66,502 radios, 45,618,784 people, and 17,783,028 private dwellings. The available tract-level variables and geographic records sum to less than INDEC's later revised national population. The comparison below uses the same file throughout and does not substitute the later national total.
 
 The analysis uses VIV_TOT_P as a count of private dwellings, which may be occupied or unoccupied and may contain more than one household. Ratios formed with this field are described as persons per private dwelling. Household size is a different measure.
 
@@ -97,31 +95,6 @@ Across 6,467 registered settlements, 1,967,013 building footprints intersect set
 | Outside Aglomerados | 4,257 | 305 | 3,932 | 1.88 |
 
 In CABA, building footprints undercount families due to vertical multi-story construction in consolidated villas. Everywhere else, the pattern reverses: building counts substantially exceed official family estimates, even after applying RENABAP's own 1.1 families-per-dwelling multiplier.
-
-### 3.1 Census 2022 robustness comparison
-
-Census 2022 provides a useful second official comparison, although not an independent population ground truth. INDEC publishes population at census-radio rather than building level. I initially allocated each radio's population to intersecting barrios in proportion to intersection area. This assumes uniform population density within each radio and can assign too little population to a dense barrio occupying a small portion of a large radio. The unfiltered result is biased upward.
-
-To reduce this problem, I calculated the fraction of each radio covered by all intersecting RENABAP polygons and progressively excluded radios below specified coverage thresholds. At every threshold, a barrio remains in the comparison only if eligible radios cover at least half its area. If the discrepancy were only an areal-allocation artifact, the ratio would approach parity as the threshold increased. It declines, but remains substantial.
-
-**Table 3. Footprint-based population relative to Census 2022 allocated population.**
-
-| Minimum barrio coverage of eligible radios | Barrios | Footprints | Allocated Census population | Footprint-based population (×3.35) | Ratio |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| 0% | 6,467 | 1,969,975 | 2,518,282 | 6,599,416 | 2.62 |
-| 25% | 2,151 | 1,364,480 | 2,010,840 | 4,571,008 | 2.27 |
-| 50% | 1,089 | 959,971 | 1,479,959 | 3,215,903 | 2.17 |
-| 75% | 544 | 607,405 | 990,041 | 2,034,807 | 2.06 |
-| 90% | 304 | 405,682 | 687,672 | 1,359,035 | 1.98 |
-| 95% | 223 | 305,226 | 542,938 | 1,022,507 | 1.88 |
-
-The Census comparison uses the earlier footprint join, which holds 1,969,975 footprints. The Paper I series in Table 1 holds 1,967,013. They differ by 2,962 footprints (0.15%) in 302 settlements, and the difference is confined to the 0% row. At the 75% threshold, the ratio is 1.72 using 2.80 persons per footprint, 1.91 using 3.12, and 2.06 using 3.35. The 3.12 value is the observed ratio of people to private dwellings across all barrio-intersecting radios. It is an intermediate sensitivity value. The private-dwelling denominator prevents a direct household-size interpretation.
-
-Radios with at least 75% barrio coverage contain 3.25 people per enumerated private dwelling. The corresponding national value in the processed radio file is 2.57.
-
-A further diagnostic classified radios with at least 1% barrio coverage, radios within 2 km but without that coverage, and more distant radios. I then restricted the comparison to urban radios. Adjacent radios did not show the elevated persons-per-private-dwelling ratio that systematic reassignment of barrio residents would predict. Adjacent radios contained 2.55 people per private dwelling, close to the national 2.57 value. The diagnostic provides no strong evidence of spillover. Its design cannot independently determine whether residents absent inside barrios are also absent from the national total.
-
-The Census comparison uses different population totals from RENABAP. It shares the building-footprint baseline and cannot be described as fully statistically or institutionally independent. Census enumeration in informal settlements and RENABAP have also used overlapping territorial organizations and earlier census baselines. The Census comparison supplies additional robustness evidence: the discrepancy falls under safer spatial comparisons but does not collapse toward parity. No second national estimate of missing residents is produced from this comparison.
 
 ---
 
@@ -159,7 +132,7 @@ The geographic distinction between these regimes justifies settlement-level maxi
 
 Within Conurbano-AMBA, vertical density decays sharply with distance from the urban core. Eighty-eight percent of CABA settlements show vertical density, with a median ratio of 0.53. The inner ring of partidos adjacent to CABA approaches this; the outer ring drops to single digits.
 
-**Table 4. Vertical density gradient across Conurbano partidos.**
+**Table 3. Vertical density gradient across Conurbano partidos.**
 
 | Partido | Ring | N settlements | RENABAP higher | % vertical |
 | --- | --- | --- | --- | --- |
@@ -181,7 +154,7 @@ Total population estimates use two persons-per-household multipliers. The first 
 
 Applied to the 2,262,798 household floor, these multipliers yield a baseline national estimate of 6,335,835 to 7,580,374 informal-settlement residents. This baseline uses no size filter and $y = 1$. The literature-anchored scenario of $y = 0.85$ with the ≥10 m² filter and 2.8 persons per household gives 5,334,655 residents.
 
-The stress test lowers the yield to implausible values and reports whether the floor still exceeds the registry. Aggregate parity, the yield at which the footprint branch summed nationally equals RENABAP's implied dwelling count, is $1{,}237{,}795 / 1.1 / F$: 0.57 on raw footprints and 0.59 after the ≥10 m² filter. At $y = 0.6$, close to parity, the per-settlement maximum still exceeds the registry, because the footprint branch remains larger in 3,894 settlements while RENABAP carries the other 2,573. The floor is then 1,517,947 households with no filter, or 1,484,666 with the ≥10 m² filter, and the population floor at 2.8 persons per household is 4,157,065 against RENABAP's 3,465,826. The margin over the registry falls from 83% to 20 to 23%. At $y = 0.7$ the floor is 1,639,581 to 1,684,321 households and at least 4,590,827 residents. The Census comparison in §4.4 supplies an independent reading of the same quantity. In radios almost entirely covered by barrios, Census 2022 counted one occupied dwelling per 1.66 footprints, which corresponds to $y \approx 0.6$ before any allowance for construction after Census Day. Full sensitivity tables are reported in the supplementary material.
+The stress test lowers the yield to implausible values and reports whether the floor still exceeds the registry. Aggregate parity, the yield at which the footprint branch summed nationally equals RENABAP's implied dwelling count, is $1{,}237{,}795 / 1.1 / F$: 0.57 on raw footprints and 0.59 after the ≥10 m² filter. At $y = 0.6$, close to parity, the per-settlement maximum still exceeds the registry, because the footprint branch remains larger in 3,894 settlements while RENABAP carries the other 2,573. The floor is then 1,517,947 households with no filter, or 1,484,666 with the ≥10 m² filter, and the population floor at 2.8 persons per household is 4,157,065 against RENABAP's 3,465,826. The margin over the registry falls from 83% to 20 to 23%. At $y = 0.7$ the floor is 1,639,581 to 1,684,321 households and at least 4,590,827 residents. Full sensitivity tables are reported in the supplementary material.
 
 #### 4.3.1 On the dwelling yield per footprint
 
@@ -207,25 +180,15 @@ Formal resettlement housing built to replace informal settlements often stands e
 
 None of this establishes a lower bound. Dwelling occupancy is one link between a mapped footprint and an occupied household, and the other links are site-specific. In one dispersed rural compound settlement, only 137 of 226 inventoried structures were houses, the rest being kitchens, stores, and shelters [@gaugris2007], a morphology unlike a barrio popular but a reminder that structure counts can exceed household counts by large margins. The important test is not whether every footprint is one dwelling. It is whether the floor still exceeds the registry at yields low enough to be implausible. §4.3 shows that it does, with a much reduced margin.
 
-### 4.4 Census comparison method
+### 4.4 Ground-truthing and direct inspection
 
-For every census radio intersecting a RENABAP polygon, I calculate its spheroidal area. I also calculate the area intersecting each barrio and the share of the radio covered by all barrios. I allocate population to a barrio as the radio total multiplied by the barrio-radio intersection area divided by radio area.
-
-Threshold scenarios retain only radios whose total barrio coverage is at least 0%, 10%, 25%, 50%, 75%, 90%, or 95%. A barrio is included in a scenario when those eligible radios cover at least 50% of the barrio. I then sum building counts once per barrio and multiply them by the stated persons-per-footprint sensitivity value. Table 3 reports the 3.35 scenario so that the demographic assumption matches the RENABAP-based upper scenario. The 2.80 and 3.12 values are reported as sensitivity checks.
-
-The recovered adjacent-radio diagnostic first classifies radios with at least 1% barrio coverage. Among the remainder, it separates radios within 2 km of a barrio from more distant radios. The comparison is restricted to radios intersecting IGN Planta Urbana polygons to reduce urban-rural confounding. The original validation report preserved its output but not the exact distance-query implementation. The coverage sweep, occupancy diagnostics, and multiplier tests are executable in this repository; the precise adjacent-radio classification remains a documented reproducibility limitation.
-
-### 4.5 Ground-truthing and direct inspection
-
-These findings have not been formally ground-truthed. Systematic field enumeration remains a need this paper motivates rather than satisfies. Published accounts document Census 2022 coverage and revision problems [@marin2023; @ocar2023]. The Census comparison supplies an additional consistency check, but it does not replace field validation and is not fully independent of RENABAP.
-
-The CABA operation illustrates the qualification. Enumeration in the city's villas was delegated to the Ministerio de Desarrollo Humano y Hábitat and coordinated through barrio referentes, delegados, and social organizations, the same community infrastructure that RENABAP relies on for its family-count estimates [@gomez2022]. The projections going in were drawn from the 2010 census, and the city's own Dirección General de Estadísticas y Censos anticipated that the resulting figures might undercount informal-settlement population. RENABAP and Census 2022 are distinct official products, but they are not wholly separate measurements of the same underlying reality.
+These findings have not been formally ground-truthed. Systematic field enumeration remains a need this paper motivates rather than satisfies.
 
 During earlier research in La Plata, I examined the most recently available high-resolution satellite basemaps for most of the area's informal settlements. I visually confirmed that footprint polygons generally match existing buildings. In several cases the discrepancies were acute. RENABAP lists a newer settlement in the Los Hornos neighborhood at 330 families, whereas the area currently contains more than 4,200 building footprints. Applying the 1.1 families-per-dwelling and 2.8–3.35 persons-per-household multipliers to La Plata yielded an estimated 221,000 to 265,000 informal-settlement residents. The official figure is approximately 112,000. The difference in La Plata is consistent with the national pattern documented above.
 
 The supplementary material provides illustrative imagery. An interactive web map at [https://barriosvisibles.org](https://barriosvisibles.org) displays every settlement boundary and every building footprint in Argentina against current high-resolution basemap imagery, allowing readers to inspect detection quality across the study area.
 
-### 4.6 Use of generative AI
+### 4.5 Use of generative AI
 
 Anthropic Claude and OpenAI Codex were used during 2025–2026 across multiple model versions; exact historical version identifiers are not recoverable. They supported literature discovery and review. Their technical use covered analysis-code drafting and debugging as well as implementation of parts of the workflow. They also provided methodological, research, drafting, restructuring, and editing assistance.
 
@@ -259,8 +222,6 @@ Samper's team retro-mapped growth from satellite imagery, but the settlements in
 
 Several sources of error remain unaddressed by this analysis. Settlement boundaries change over time relative to those recorded by RENABAP, and the relationship between buildings, households, and persons per household is itself uncertain. Settlement-level variation in that relationship, especially vertical density as documented in §4.2, is only partially captured by the max-of-two approach; settlements with mixed vertical and horizontal construction may be understated by either component of the floor. Nonresidential or vacant footprints can bias building-derived estimates upward; the dwelling-yield scenarios in §4.3 bound that bias but do not measure it. No Argentine study reports occupied households per raw mapped footprint. The validation this analysis most needs is a stratified sample of RENABAP settlements with a footprint-level use audit and an occupied-dwelling enumeration, reporting the households-per-footprint distribution by settlement morphology. Missed structures, construction after the September 2024 footprint snapshot, vertical or mixed construction, settlements absent from RENABAP, and polygon boundaries that omit later expansion generally bias the national estimate downward.
 
-The Census comparison adds separate limitations. Census population refers to 2022. The public RENABAP snapshot is dated December 2023. The VIDA footprint snapshot was updated in September 2024. Areal allocation assumes uniform population density within radios. That assumption is least plausible when a dense barrio occupies a small part of a large radio. The coverage restriction reduces that bias by selecting a smaller and nonrepresentative subset, without removing the bias or establishing a national Census undercount. The Census and RENABAP products are distinct but share some territorial infrastructure and historical baselines. The Census comparison and primary analysis also share the same footprint counts.
-
 A more structural limitation is coverage. RENABAP only registered settlements meeting size minima for the surrounding locality — initially >10,000 inhabitants, later relaxed to >2,000 — so settlements in smaller localities are absent from the registry entirely. This analysis cannot detect them, because there is no polygon against which to spatially join building footprints. Whatever population lives in sub-threshold-locality informal settlements is missing from both RENABAP's count and mine, and the true national informal-settlement population is correspondingly higher than either figure.
 
 A reader might object that RENABAP was never designed to enumerate all occupants, only titleable households. As noted in §2, however, Ley 27.453 gives the registry a mandate that extends well beyond titling, and in practice it is the population basis for infrastructure planning, resource allocation, and service delivery. That downstream use — not any narrower original purpose — is what this paper critiques.
@@ -277,8 +238,6 @@ The age of the public snapshot remains a limitation. Formal responsibility for R
 
 RENABAP's family totals imply approximately 3.5 to 4.1 million people in Argentina's registered informal settlements under the two demographic multipliers used here. The building-based household floor implies 6.3 to 7.6 million, a difference of approximately 2.9 to 3.4 million people. This range describes the magnitude implied by explicit assumptions, not an exact count of unenumerated residents. At the lowest tested yield of 0.6 occupied dwellings per footprint, the floor still implies 4.2 to 5.0 million.
 
-Census 2022 provides an additional robustness check. The footprint-based comparison remains 1.88 to 2.06 times the allocated Census population in the safer high-coverage subsets, but it does not independently establish the national total.
-
 Flood risk assessment, infrastructure planning, and service delivery all depend on recognizing this uncertainty rather than treating an aging administrative estimate as complete.
 
 The method first spatially joins settlement boundaries and building footprints. It then applies a per-settlement max-of-two household floor. The maximum keeps the floor from falling below the registry value, but it is not a statistical lower confidence bound. The building-derived side uses RENABAP's own 1.1 families-per-dwelling ratio and an explicit dwelling yield per footprint. The method runs in seconds on a standard laptop using open data and open-source tools.
@@ -291,7 +250,7 @@ Local governments without current settlement-level population data can use the c
 
 ## Acknowledgements
 
-Anthropic Claude and OpenAI Codex provided drafting, restructuring, and editing assistance as described in §4.6. The author reviewed and approved all resulting text and accepts full responsibility for the manuscript.
+Anthropic Claude and OpenAI Codex provided drafting, restructuring, and editing assistance as described in §4.5. The author reviewed and approved all resulting text and accepts full responsibility for the manuscript.
 
 ---
 
@@ -317,19 +276,17 @@ Competing interests: The author declares none.
 
 The code and manuscript-generation workflow are available at [https://github.com/nlebovits/barrios-visibles-paper](https://github.com/nlebovits/barrios-visibles-paper). The version-specific Zenodo archive contains the frozen inputs and derived files for the RENABAP analysis [@lebovits2026data].
 
-A new version of that record, to be cited here as **[INSERT EXACT CENSUS-ENABLED ZENODO VERSION DOI BEFORE SUBMISSION]**, will add the processed Census 2022 radio file and the settlement-count file used for the Census comparison. The Census robustness calculations can then be reproduced with **pixi run census-comparison** from the frozen files, with checksums verified before analysis.
+The results reported here reproduce from the archived output, which contains 1,967,013 footprints.
 
-The Paper I results reported here reproduce from the archived output, which contains 1,967,013 footprints. The frozen Census-comparison input holds an earlier join with 1,969,975 footprints, as noted under Table 3.
+The workflow also has live-source modes that retrieve the current public RENABAP, VIDA, and IGN inputs. Live-source runs answer the same analytical questions against changing upstream sources and need not reproduce the publication values. The frozen Zenodo version, rather than a live rerun or the Zenodo concept DOI, defines exact publication reproducibility.
 
-The workflow also has live-source modes that retrieve the current public RENABAP, VIDA, IGN, and processed Census inputs. Live-source runs answer the same analytical questions against changing upstream sources and need not reproduce the publication values. The frozen Zenodo version, rather than a live rerun or the Zenodo concept DOI, defines exact publication reproducibility.
-
-Census radio data are also available from [Source Cooperative](https://source.coop/nlebovits/censo-argentino). The interactive map at [https://barriosvisibles.org](https://barriosvisibles.org) supports settlement-level inspection.
+The interactive map at [https://barriosvisibles.org](https://barriosvisibles.org) supports settlement-level inspection.
 
 ---
 
 ## Supplementary Material
 
-The supplementary PDF contains the full building sensitivity analysis, urban and provincial breakdowns, additional Census diagnostics, and illustrative satellite imagery. The article's results and interpretation do not depend on the imagery.
+The supplementary PDF contains the full building sensitivity analysis, urban and provincial breakdowns, a Census 2022 comparison that the article does not use, and illustrative satellite imagery. The article's results and interpretation do not depend on the imagery.
 
 ---
 

@@ -5,8 +5,8 @@
 This repository contains the canonical manuscript, supplement, and analysis
 code for submission of *Barrios Visibles* to Cambridge University Press's
 *Data & Policy*. Paper I is the submission manuscript. The former Paper II
-remains as a historical working paper; its Census 2022 evidence is integrated
-into Paper I as a compact robustness comparison.
+remains as a historical working paper. Its Census 2022 evidence is kept in
+the supplement and is not used in the article.
 
 Argentina's Registro Nacional de Barrios Populares (RENABAP) records about
 1.24 million families across 6,467 registered informal settlements. The
@@ -33,10 +33,10 @@ exceeds the registry by roughly a fifth.
 
 The gap splits by geography. In the consolidated vertical villas of CABA,
 RENABAP records residents whom footprints miss. Everywhere else, building
-counts run well above the recorded family estimates. A Census 2022 robustness
-comparison declines from 2.62 to 1.88 as the analysis is restricted to radios
-increasingly covered by registered settlements. It is a consistency check, not
-an independent population count.
+counts run well above the recorded family estimates. A Census 2022 comparison
+in the supplement declines from 2.62 to 1.88 as the analysis is restricted to
+radios increasingly covered by registered settlements. The article does not
+use it.
 
 ## Reproduce the analysis
 
@@ -55,7 +55,7 @@ The default RENABAP analysis uses the version-specific Zenodo snapshot:
 
     pixi run estimate
 
-The Census comparison requires a new Zenodo version containing the processed
+The supplement's Census comparison requires a new Zenodo version containing the processed
 radio and recovered settlement-count files. Until the author publishes that
 version and inserts its record id, run it against the recovered inputs:
 
