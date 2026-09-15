@@ -22,6 +22,13 @@ tract-examples = "python tract_examples.py"
 openbuildings-growth = "python openbuildings_growth.py"
 reproduce = { depends-on = ["estimate", "census-comparison"] }
 lint = "prek run --all-files"
+# Source registry. `sources-check` validates paper/references.bib against the
+# notes in paper/sources/ and every citation in paper/ and docs/. It never
+# writes. `sources-index` regenerates literature/index.md,
+# literature/evidence-matrix.csv, literature/schema.json, and the three
+# parquet tables in outputs/.
+sources-check = "python check_sources.py"
+sources-index = "python check_sources.py --write"
 # Render each paper for submission. xelatex comes from the system TeX
 # installation, not from pixi, because a full TeX distribution would dwarf
 # the rest of this environment. DejaVu carries the glyphs the papers use,
@@ -62,6 +69,9 @@ requests = ">=2.32,<3"
 matplotlib-base = ">=3.9,<4"
 rasterio = ">=1.3,<2"
 geopandas = ">=1.1.4,<2"
+# check_sources.py imports these directly.
+pydantic = ">=2.11,<3"
+pyyaml = ">=6,<7"
 contextily = ">=1.7.1,<2"
 
 # geoparquet-io and prek publish to PyPI only.

@@ -1,0 +1,18 @@
+# URLs that appear in docs/ but are not citations. One per line.
+#
+# check_sources.py requires every URL cited in docs/ to belong to a registered
+# source in paper/references.bib. This file holds the exceptions: links to
+# this project's own artefacts, and URL templates written to show a pattern
+# rather than to point at a document.
+#
+# A real source does not belong here. Register it in Zotero instead.
+
+# A template showing the INDEC serial-publication URL pattern, not a document.
+https://www.argentina.gob.ar/sites/default/files/serie5nro<NN
+
+# This project's own artefacts, cited in docs/ as pointers rather than as
+# evidence. They are not external sources, so they get no bib entry.
+https://barriosvisibles.org
+https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6588819
+https://ssrn.com/abstract=6588819
+https://www.clarin.com
