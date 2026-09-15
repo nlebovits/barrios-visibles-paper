@@ -2,7 +2,7 @@
 key: moultrie2024
 status: retained
 lang: en
-verification: needs_follow_up
+verification: verified_secondary
 strength: medium
 source_type: peer_reviewed
 method: independent_analysis
@@ -35,7 +35,8 @@ claims:
       modern census undercount.
 does_not_establish:
   - "It critiques the South African survey and establishes nothing about Latin American or Argentine coverage."
-  - "The bibliographic record is incomplete, so the specific criticisms are not yet recorded."
+  - "The specific criticisms are not yet recorded, because the critique itself has not been read."
+  - "It is a Commentary rather than a research article, and Statistics South Africa disputes it, so it does not settle the South African figure either."
 ---
 
 Moultrie and Dorrington publish a peer-reviewed critique of the South

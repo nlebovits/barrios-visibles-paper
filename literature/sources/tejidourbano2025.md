@@ -1,5 +1,5 @@
 ---
-key: tejidourbano2023
+key: tejidourbano2025
 status: retained
 lang: es
 verification: verified_secondary
@@ -13,7 +13,7 @@ tags: [Tejido-Urbano, Villa-1-11-14, CABA, independent-detection]
 cited_in_manuscript: false
 retrieved: 2026-09-15
 follow_up: >-
-  Record the report's publication year. Reconcile the 6,868 figure with
+  Publication year confirmed as 2025 (published 30 April 2025). Reconcile the 6,868 figure with
   IDECBA's 3,640 for the same barrio, which use different geographic
   units.
 evidence:

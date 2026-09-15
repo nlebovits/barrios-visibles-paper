@@ -101,6 +101,9 @@ The remaining rules keep the registry consistent:
 - A URL cited in `docs/` belongs to a registered source, or to
   `literature/url-allowlist.txt`.
 - A source the manuscript cites has `cited_in_manuscript: true`.
+- An entry lacking both a note and a citation is reported. An entry with a
+  note but no citation passes, because the project keeps sources it has read
+  and not yet used.
 - A `do-not-use` source is not cited in the manuscript.
 - `literature/index.md` and `literature/evidence-matrix.csv` match a fresh
   regeneration.

@@ -763,9 +763,16 @@ def check_registry() -> tuple[list[Problem], dict]:
                 )
             )
 
-    for key in sorted(set(bib) - set(citations)):
+    # An entry with a note is registered deliberately, so being uncited is a
+    # normal state. The project keeps sources it has read and not yet used.
+    # Only an entry with neither a note nor a citation is untouched.
+    for key in sorted(set(bib) - set(citations) - set(notes)):
         problems.append(
-            Problem("WARN", "paper/references.bib", f"@{key} is never cited")
+            Problem(
+                "WARN",
+                "paper/references.bib",
+                f"@{key} has neither a note nor a citation",
+            )
         )
     for key, (note, _) in sorted(notes.items()):
         gaps = [item.id for item in note.evidence if item.kind == "unlocated"]
