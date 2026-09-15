@@ -68,14 +68,15 @@ evidence:
       built-up pixels without sufficient land-use or height information.
     origin: annotated-review
   - id: E7
-    label: Top-down disaggregation assumes admin-unit average densities hold at fine scale
-    kind: unlocated
+    label: Absence of a land-use layer sends population to non-residential built-up area and underestimates dense residential area
+    kind: verbatim
+    loc: "p. 12"
     quote: |
-      Top-down disaggregation assumes admin-unit average densities hold at
-      fine scale, collapsing precisely where density is most extreme. Most
-      products also lack a building-density auxiliary that would let the
-      model resolve intra-urban heterogeneity.
-    origin: manuscript
+      The absence of a basic land-use map in the modelling approach of the
+      GHS-POP causes a major problem, i.e., much of the population is
+      allocated to non-residential built-up areas while the population of
+      high-density residential areas is underestimated.
+    origin: zotero-annotation
 claims:
   - claim: national-total-conceals-geographic-error
     relationship: supports
@@ -95,11 +96,12 @@ claims:
       settlements have.
   - claim: footprints-contain-population-information
     relationship: qualifies
-    strength: medium
+    strength: high
     evidence: [E6, E7]
     note: >-
-      Built-up area without land use or height is not enough. This is the
-      argument for a building-density auxiliary rather than area alone.
+      Built-up area without land use or height is not enough. The paper names
+      the missing land-use layer as the major problem, which is the argument
+      for a building-density auxiliary rather than built-up area alone.
 does_not_establish:
   - "It does not independently test the completeness of national censuses."
   - "São Paulo's informal-settlement category was excluded from part of the analysis because most settlements were smaller than one 1-km cell."

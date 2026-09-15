@@ -83,14 +83,14 @@ INDEC's own answer: **46,122,853** at 18 May 2022.
 **Análisis Demográfico N° 39** — INDEC (2025), *Estimaciones y proyecciones de
 población, por sexo y edad. Total del país. Años 2022-2040*, Serie Análisis
 Demográfico N° 39, Buenos Aires, octubre de 2025.
-URL: https://www.indec.gob.ar/ftp/cuadros/publicaciones/proyecciones_nacionales_2022_2040.pdf
+URL: https://www.indec.gob.ar/ftp/cuadros/publicaciones/proyecciones_nacionales_2022_2040.pdf [@indec2025ad39]
 (mirror: https://censo.gob.ar/wp-content/uploads/2025/10/proyecciones_nacionales_2022_2040.pdf)
 Local copy: `ad39.pdf` / `ad39.txt`.
 
 **Análisis Demográfico N° 40** — INDEC (2025), *Estimaciones y proyecciones de
 población, por sexo y grupos de edad. Jurisdicciones. Años 2022-2040*, Serie Análisis
 Demográfico N° 40, Buenos Aires, octubre de 2025.
-URL: https://www.indec.gob.ar/ftp/cuadros/publicaciones/proyecciones_jurisdicciones_2022_2040.pdf
+URL: https://www.indec.gob.ar/ftp/cuadros/publicaciones/proyecciones_jurisdicciones_2022_2040.pdf [@indec2025ad40]
 Local copy: `ad40.pdf` / `ad40.txt`.
 
 ### The method, in INDEC's words (AD 39, §3.1 "Conciliación demográfica", p. 16)
@@ -138,7 +138,7 @@ to the identity but worth flagging.
 | Number | What it is | Source |
 |---:|---|---|
 | 46,234,830 | INDEC projection for **1 July 2022** on the 2010-census base (the pre-census expectation; also the denominator printed in DEIS Serie 5 N° 66 Tabla 1) | INDEC Serie Análisis Demográfico N° 35 series, as carried in DEIS Serie 5 N° 66 |
-| 46,044,703 | Censo 2022 **provisional** count (published 31 Jan 2023) = 45,767,858 in viviendas particulares + 273,883 in viviendas colectivas + 2,962 en situación de calle (vía pública) | INDEC, *Censo 2022. Resultados provisionales*, Cuadro 1, "Total" row. https://www.indec.gob.ar/ftp/cuadros/poblacion/cnphv2022_resultados_provisionales.pdf (local copy `censo2022_prov.pdf`) |
+| 46,044,703 | Censo 2022 **provisional** count (published 31 Jan 2023) = 45,767,858 in viviendas particulares + 273,883 in viviendas colectivas + 2,962 en situación de calle (vía pública) | INDEC, *Censo 2022. Resultados provisionales*, Cuadro 1, "Total" row. https://www.indec.gob.ar/ftp/cuadros/poblacion/cnphv2022_resultados_provisionales.pdf [@indec2023provisional] (local copy `censo2022_prov.pdf`) |
 | **45,892,285** | Censo 2022 **definitive** count (published Nov 2023) — 152,418 *below* the provisional figure, after deduplication of the digital census | AD 39, Tabla 1, column "2022" (p. 12) |
 | **46,122,853** | **Reconciled estimate** at the census date, 18 May 2022 — the base for the 2022-2040 projections | AD 39, Tabla 4 (p. 19) |
 
@@ -181,7 +181,7 @@ Gladys Massé and Alejandro Giusti, with CELADE technical advice (José Pujol, S
 Sckholnik, Guiomar Bay).
 
 **Canonical URL** (INDEC's own library, and the URL AD 39 itself cites):
-https://biblioteca.indec.gob.ar/bases/minde/4si20_30.pdf
+https://biblioteca.indec.gob.ar/bases/minde/4si20_30.pdf [@indec2004ad30]
 Mirror given in the brief:
 https://ipiec.tierradelfuego.gob.ar/wp-content/uploads/2013/11/Estimaciones_Proyecciones_Pa%C3%ADs_1950_2015.pdf
 Both were downloaded and are **byte-identical** (md5 `be76a9dcff48ab457ca37def86dacec2`,
@@ -251,7 +251,7 @@ Cuadro 1 (p. 7), *"Porcentajes de omisión por sexo. Censos de 1991 y 2001"*
 
 INDEC (2013), *Estimaciones y proyecciones de población 2010-2040. Total del país*,
 **Serie Análisis Demográfico N° 35**.
-URL: https://www.indec.gob.ar/ftp/cuadros/publicaciones/proyeccionesyestimaciones_nac_2010_2040.pdf
+URL: https://www.indec.gob.ar/ftp/cuadros/publicaciones/proyeccionesyestimaciones_nac_2010_2040.pdf [@indec2013ad35]
 Local copy: `ad35_2010_2040.pdf` / `.txt`.
 
 §2.1 (p. 9):
@@ -365,13 +365,13 @@ URL pattern (all verified live): `https://www.argentina.gob.ar/sites/default/fil
 for N° 45-58 and 60-62; `.../serie5numero<NN>.pdf` for N° 59, 63, 64;
 `.../serie_5_nro_65_anuario_vitales_2021_-_web.pdf` (2021);
 `.../serie_5_nro_66_anuario_vitales_2022_3.pdf` (2022).
-Landing page: https://www.argentina.gob.ar/salud/deis/publicaciones
+Landing page: https://www.argentina.gob.ar/salud/deis/publicaciones [@deis2024publicaciones]
 
 **(b) DEIS aggregated microdata.** Sum of the `CUENTA` column over the full national
 files `nacweb<YY>.csv` and `defweb<YY>.csv`, 2005-2022 (2005-2019 plus `nacweb20_0`,
 `nacweb21_0`, `nacweb22_0` and death equivalents), from
-https://www.argentina.gob.ar/salud/deis/datos/nacidosvivos and
-https://www.argentina.gob.ar/salud/deis/datos/defunciones
+https://www.argentina.gob.ar/salud/deis/datos/nacidosvivos [@deis2024nacidosvivos] and
+https://www.argentina.gob.ar/salud/deis/datos/defunciones [@deis2024defunciones]
 Files in `deis/`; summation script `sum.py`. Totals include `PROVRES` codes 98
 ("otro país") and 99 ("sin especificar"), which is what reproduces the published
 national totals.
@@ -601,7 +601,7 @@ arithmetically — noted at each point.
 Massa C, *"Omisión de registro de nacimientos y muertes infantiles. Magnitud,
 desigualdades y causas"*, 1a ed., Buenos Aires: OPS – Ministerio de Salud, 2008, 196 pp.,
 ISBN 978-950-710-110-6. Working PDF:
-https://iin.oea.org/boletines/boletin6/publicaciones-recibidas-ing/OPS-Omision-de-registro.pdf
+https://iin.oea.org/boletines/boletin6/publicaciones-recibidas-ing/OPS-Omision-de-registro.pdf [@fernandez2008]
 
 Method (p. 31): direct record-matching (*pareo*), **not** capture-recapture —
 *"registros hospitalarios (libros de partos, libros de defunciones, libros de morgue,
@@ -631,7 +631,7 @@ Formosa 5.0% → 2.0%; La Rioja 16.9% → 9.3%; Chaco 6.6% → 5.9%; Tucumán 8.
 **Study 2 — the 2010-census study.** Bomben E. et al., *"Registro de nacimientos en
 Argentina"*, Ministerio de Salud (DEIS) / UNICEF / CENEP, 2017. The UNICEF landing page
 blocks automated clients; retrievable mirror:
-https://web.archive.org/web/20220124132305id_/https://www.unicef.org/argentina/media/751/file/Registro%20de%20nacimientos.pdf
+https://web.archive.org/web/20220124132305id_/https://www.unicef.org/argentina/media/751/file/Registro%20de%20nacimientos.pdf [@bomben2017]
 
 > "…es del 6% para el total del país si se toman como referencia los datos publicados por
 > DEIS para el mismo año. Y se reduce al 3,8 % si se consideran las inscripciones tardías
@@ -936,10 +936,10 @@ internally and did not disclose.
 ### 4.1 RENAPER — persons with digital DNI resident in Argentina
 
 **No published national headline total exists.** RENAPER's Sistema Estadístico de
-Población (https://estadisticas.renaper.gob.ar/app_poblacion/) renders the total over a
+Población (https://estadisticas.renaper.gob.ar/app_poblacion/) [@renaper2024poblacion] renders the total over a
 websocket in a Shiny app, so it is neither crawlable nor archived, and no DNP report or
 press release states it. Only the disaggregated open data is published, at
-https://datos.gob.ar/dataset/renaper-estructura-de-poblacion-argentina (files served
+https://datos.gob.ar/dataset/renaper-estructura-de-poblacion-argentina [@datosgob2024renaperestructura] (files served
 from https://datosabiertos.renaper.gob.ar/).
 
 Totals below are **sums computed from those official files — derived, not published.
@@ -982,7 +982,7 @@ Caveats, which are severe:
 ### 4.2 Padrón electoral 2023
 
 Source: Cámara Nacional Electoral, "Total de electores por distrito",
-https://www.electoral.gob.ar/nuevo/paginas/datos/total_electores_2023.php
+https://www.electoral.gob.ar/nuevo/paginas/datos/total_electores_2023.php [@electoral2023]
 (zip: `.../total_electores_2023.zip`; file `Totales Padron 2023 21OCT23.xlsx`, sheet
 `Hoja1`; sheet `referencias` states *"Actualizado: 21/10/2023 (12hs)"* and
 *"La cantidad de electores no incluye electores agregados ni tachas"*).
@@ -1028,16 +1028,16 @@ doses**:
 | 6 Jun 2022 | 40,802,733 | 37,503,794 | 103,507,017 |
 | 17 Jun 2022 | 40,824,848 | 37,559,032 | 104,879,079 |
 
-URLs: 23 Apr — https://www.argentina.gob.ar/noticias/argentina-recibio-mas-de-dos-millones-de-vacunas-de-moderna ;
-27 May — https://www.argentina.gob.ar/noticias/llego-hoy-al-pais-un-cargamento-con-1681500-vacunas-de-moderna ;
-6 Jun — https://www.argentina.gob.ar/noticias/argentina-recibio-el-sabado-318000-vacunas-de-moderna ;
-17 Jun — https://www.argentina.gob.ar/noticias/salud-distribuyo-741340-vacunas-de-moderna-todo-el-pais
+URLs: 23 Apr — https://www.argentina.gob.ar/noticias/argentina-recibio-mas-de-dos-millones-de-vacunas-de-moderna [@argentina2021moderna0423] ;
+27 May — https://www.argentina.gob.ar/noticias/llego-hoy-al-pais-un-cargamento-con-1681500-vacunas-de-moderna [@argentina2021moderna0527] ;
+6 Jun — https://www.argentina.gob.ar/noticias/argentina-recibio-el-sabado-318000-vacunas-de-moderna [@argentina2021moderna0606] ;
+17 Jun — https://www.argentina.gob.ar/noticias/salud-distribuyo-741340-vacunas-de-moderna-todo-el-pais [@argentina2021moderna0617]
 
 **The census-date value is therefore bracketed: 40,695,477 (23 Apr) to 40,779,344
 (27 May) — about 40.75 million. Cite the bracket, not an interpolated point.**
 
 Do **not** substitute Our World in Data, which gives `people_vaccinated` = 41,154,134 on
-2022-05-18 (https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/country_data/Argentina.csv).
+2022-05-18 (https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/country_data/Argentina.csv) [@owid2022vaccinations].
 That series is sourced from covidstats.com.ar, not the Ministry, and runs 375-460k
 **above** the Ministry's own "esquema iniciado" figures on adjacent dates — probably a
 different treatment of single-dose (CanSino) or component-1 records. The two series must
@@ -1051,7 +1051,7 @@ It is a lower bound on population, not an estimate of it. Against a reconciled
 ### 4.4 ANSES — AUH coverage, May 2022
 
 Source: ANSES, *Boletín mensual AUH — Junio 2022*,
-https://www.anses.gob.ar/sites/default/files/2022-09/Boletin%20mensual%20AUH%20Junio%202022.pdf
+https://www.anses.gob.ar/sites/default/files/2022-09/Boletin%20mensual%20AUH%20Junio%202022.pdf [@anses2022auh]
 
 | | May 2022 | (Apr 2022) | (Jun 2022) |
 |---|---:|---:|---:|
@@ -1091,7 +1091,7 @@ for *structure* comparison rather than as a level benchmark.
   publishes no aggregate, and no ARCA/AFIP publication giving a national count was
   located.
 - **SISA / PUCO padrón de salud record counts.** PUCO is documented
-  (https://sisa.msal.gov.ar/sisadoc/docs/0204/puco_intro.jsp) as covering persons with
+  (https://sisa.msal.gov.ar/sisadoc/docs/0204/puco_intro.jsp) [@sisa2024puco] as covering persons with
   *obra social* only — excluding prepagas and the uninsured — so it could not serve as a
   population denominator even if a total were published. None was.
 - **SINTyS totals.** None published.
@@ -1099,11 +1099,11 @@ for *structure* comparison rather than as a level benchmark.
   statement by AEPA/Red AEPA, the Grupo de Estudios de Población, or individual
   demographers quantifying such a discrepancy was found. The demographer commentary that
   exists (El Economista, May 2022,
-  https://eleconomista.com.ar/actualidad/censo-2022-opinion-demografos-resultados-provisorios-n53357)
+  https://eleconomista.com.ar/actualidad/censo-2022-opinion-demografos-resultados-provisorios-n53357) [@eleconomista2022]
   responded to the *preliminary* 47,327,407 figure and ran in the **opposite** direction:
   Victoria Mazzeo raised the possibility of *over*-registration arising from the new
   digital modality. Nicolás Sacco (Penn State) criticised the census design pre-fieldwork
-  (https://observatoriocensal.org/2021/11/04/). The AEPA Jornadas 2023/2025 proceedings
+  (https://observatoriocensal.org/2021/11/04/) [@sacco2021]. The AEPA Jornadas 2023/2025 proceedings
   are the likeliest place for a quantified treatment; nothing surfaced in web search.
 
 ### 4.6 Summary
@@ -1160,7 +1160,7 @@ Listed explicitly, as requested. These are genuine gaps, not items I stopped sho
    the corrected population exposures, which are also unpublished for intercensal years.
 
    **This was checked against the data annexes, not just the PDFs.** INDEC's projections
-   hub (https://censo.gob.ar/index.php/proyecciones/) publishes machine-readable annexes:
+   hub (https://censo.gob.ar/index.php/proyecciones/) [@censo2025proyecciones] publishes machine-readable annexes:
    `proyecciones_nacionales_2022_2040_base.csv`, `..._c1.xlsx` (Cuadro 1, population by
    year), `..._c2.xlsx` (Cuadros 2.1-2.3, by age and sex), `..._c3_6.xlsx` (Cuadros 3-6),
    plus jurisdictional equivalents, metadata PDFs, a dossier, and the 2019 and 2020-2022
@@ -1243,7 +1243,7 @@ Listed explicitly, as requested. These are genuine gaps, not items I stopped sho
     Deuda Social + IADEPP, on 2011 data, found **1.6% of children 0-17 born in Argentina,
     in urban Argentina, had no DNI ≈ 168,000 children** (2.3% among 0-4; 2.2% in
     villas vs 1.0% in formal areas) — cited by the Defensoría del Pueblo de la Nación
-    (https://dpn.gob.ar/articulo.php?id=31815), which notes these "are the only available
+    (https://dpn.gob.ar/articulo.php?id=31815) [@dpn2016dni], which notes these "are the only available
     data, coming from private sources."
 
     **Terminology correction for the record:** *Ley 26.774* is the 2012 *voto joven* law

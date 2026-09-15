@@ -12,6 +12,11 @@ geographies: [Nigeria, Kenya]
 tags: [undercount, gridded-population, households-per-building, community-enumeration, priority]
 cited_in_manuscript: true
 retrieved: 2026-09-15
+follow_up: >-
+  Check the 39 percent figure against the exact table and performance metric,
+  as the census-coverage notes require. The citation conflict is resolved: the
+  Zotero record gives Urban Science 5(2):48, and the IJGI 10(6):381 link in
+  those notes is an error.
 evidence:
   - id: E1
     label: Nine gridded population products compared with community field-referenced boundaries and population estimates
@@ -143,3 +148,7 @@ settlements.
 Read it with kuffer2022, which supplies the allocation mechanism, and with
 boo2022, which validates the footprint-to-population step the products get
 wrong.
+
+One citation caution. The census-coverage working notes link this paper to
+ISPRS IJGI 10(6):381. That is a different article. The Zotero record and the
+annotated review both place it in Urban Science 5(2):48.

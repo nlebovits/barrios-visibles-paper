@@ -634,21 +634,21 @@ Downloaded copies are in the session scratchpad, **not** in the repository:
 
 | Local file | Title | URL |
 |---|---|---|
-| `censo2022_migraciones_indec.pdf` (= `..._jan.pdf`, identical) | CNPHV 2022. Resultados definitivos. Migraciones internacionales e internas. **Edición ampliada, abril de 2024**. 109 pp. ISBN 978-950-896-671-1 | `https://www.indec.gob.ar/ftp/cuadros/poblacion/censo2022_migraciones.pdf` and `https://censo.gob.ar/wp-content/uploads/2024/01/censo2022_migraciones.pdf` |
-| `censo2022_viviendas_colectivas.pdf` | CNPHV 2022. Viviendas colectivas y personas en situación de calle | `https://censo.gob.ar/wp-content/uploads/2023/11/censo2022_viviendas_colectivas.pdf` |
-| `xlsx/c2022_tp_migraciones_c1..c11.xlsx` | Web tables, Cuadros 1-11 (Jan 2024) | `https://censo.gob.ar/wp-content/uploads/2024/01/c2022_tp_migraciones_cN.xlsx` |
-| `xlsx/c2022_tp_migraciones_c12..c15.xlsx` | Web tables, Cuadros 12-15 (Apr 2024, *edición ampliada*) | `https://censo.gob.ar/wp-content/uploads/2024/04/c2022_tp_migraciones_cN.xlsx` (c12 is `...c12.xlsx.xlsx`) |
-| `xlsx/c2022_tp_c_resumen.xlsx` | Cuadro resumen: population by universe and jurisdiction | `https://censo.gob.ar/wp-content/uploads/2024/01/c2022_tp_c_resumen.xlsx` |
-| `redatam_metodologia.pdf` | Base de datos REDATAM — Aspectos metodológicos | `https://redatam.indec.gob.ar/redarg/CENSOS/CPV2022/Docs/Redatam_aspectos_metodologicos.pdf` |
-| `redatam_definiciones.pdf` | Base de datos REDATAM — Definiciones de la base de datos (variable dictionary) | `https://redatam.indec.gob.ar/redarg/CENSOS/CPV2022/Docs/Redatam_Definiciones_de_la_base_de_datos.pdf` |
-| `redatam_universos.pdf` | Base de datos REDATAM — Control de universos (octubre 2024) | `https://redatam.indec.gob.ar/redarg/CENSOS/CPV2022/Docs/Redatam_control_de_universos.pdf` |
-| `redatam_introduccion.pdf` | Base de datos REDATAM — Introducción | `https://redatam.indec.gob.ar/redarg/CENSOS/CPV2022/Docs/Redatam_introduccion.pdf` |
-| `cuest_viviendas_particulares.pdf` | Cuestionario Censo 2022, viviendas particulares | `https://www.censo.gob.ar/wp-content/uploads/2022/03/Censo2022_cuestionario_viviendas_particulares_impresion.pdf` |
-| `cuest_viviendas_colectivas.pdf` | Cuestionario Censo 2022, viviendas colectivas | `https://www.censo.gob.ar/wp-content/uploads/2022/02/Censo2022_cuestionario_viviendas_colectivas.pdf` |
-| `press_paraguay_bolivia_venezuela.html` | Press release "Paraguay, Bolivia y Venezuela son los países con mayor representación inmigrante en la Argentina" | `https://censo.gob.ar/index.php/paraguay-bolivia-y-venezuela-son-los-paises-con-mayor-representacion-inmigrante-en-la-argentina/` |
-| `press_nueva_version_ampliada.html` | Press release "Nueva versión ampliada sobre la publicación de Migraciones" | `https://censo.gob.ar/index.php/nueva-version-ampliada-sobre-la-publicacion-de-migraciones/` |
-| `censo2010_tomo1.pdf`, `censo2010_tomo2.pdf` | Censo 2010, Serie B Nº 2, Tomos 1 y 2 | `https://www.indec.gob.ar/ftp/cuadros/poblacion/censo2010_tomo1.pdf`, `..._tomo2.pdf` |
-| `c2010_P6.xls` / `.csv` | Cuadro P6. Población total nacida en el extranjero por lugar de nacimiento, según sexo y grupo de edad. Año 2010 | `https://sitioanterior.indec.gob.ar/definitivos_bajarArchivoNacionales.asp?idc=13&arch=x&c=2010` |
+| `censo2022_migraciones_indec.pdf` (= `..._jan.pdf`, identical) | CNPHV 2022. Resultados definitivos. Migraciones internacionales e internas. **Edición ampliada, abril de 2024**. 109 pp. ISBN 978-950-896-671-1 | `https://www.indec.gob.ar/ftp/cuadros/poblacion/censo2022_migraciones.pdf` [@indec2024migraciones] and `https://censo.gob.ar/wp-content/uploads/2024/01/censo2022_migraciones.pdf` |
+| `censo2022_viviendas_colectivas.pdf` | CNPHV 2022. Viviendas colectivas y personas en situación de calle | `https://censo.gob.ar/wp-content/uploads/2023/11/censo2022_viviendas_colectivas.pdf` [@censo2023colectivas] |
+| `xlsx/c2022_tp_migraciones_c1..c11.xlsx` | Web tables, Cuadros 1-11 (Jan 2024) | `https://censo.gob.ar/wp-content/uploads/2024/01/c2022_tp_migraciones_cN.xlsx` [@censo2024migracionesc1] |
+| `xlsx/c2022_tp_migraciones_c12..c15.xlsx` | Web tables, Cuadros 12-15 (Apr 2024, *edición ampliada*) | `https://censo.gob.ar/wp-content/uploads/2024/04/c2022_tp_migraciones_cN.xlsx` [@censo2024migracionesc12] (c12 is `...c12.xlsx.xlsx`) |
+| `xlsx/c2022_tp_c_resumen.xlsx` | Cuadro resumen: population by universe and jurisdiction | `https://censo.gob.ar/wp-content/uploads/2024/01/c2022_tp_c_resumen.xlsx` [@censo2024resumen] |
+| `redatam_metodologia.pdf` | Base de datos REDATAM — Aspectos metodológicos | `https://redatam.indec.gob.ar/redarg/CENSOS/CPV2022/Docs/Redatam_aspectos_metodologicos.pdf` [@redatam2024metodologia] |
+| `redatam_definiciones.pdf` | Base de datos REDATAM — Definiciones de la base de datos (variable dictionary) | `https://redatam.indec.gob.ar/redarg/CENSOS/CPV2022/Docs/Redatam_Definiciones_de_la_base_de_datos.pdf` [@indec2024] |
+| `redatam_universos.pdf` | Base de datos REDATAM — Control de universos (octubre 2024) | `https://redatam.indec.gob.ar/redarg/CENSOS/CPV2022/Docs/Redatam_control_de_universos.pdf` [@redatam2024universos] |
+| `redatam_introduccion.pdf` | Base de datos REDATAM — Introducción | `https://redatam.indec.gob.ar/redarg/CENSOS/CPV2022/Docs/Redatam_introduccion.pdf` [@redatam2024introduccion] |
+| `cuest_viviendas_particulares.pdf` | Cuestionario Censo 2022, viviendas particulares | `https://www.censo.gob.ar/wp-content/uploads/2022/03/Censo2022_cuestionario_viviendas_particulares_impresion.pdf` [@censo2022cuestparticulares] |
+| `cuest_viviendas_colectivas.pdf` | Cuestionario Censo 2022, viviendas colectivas | `https://www.censo.gob.ar/wp-content/uploads/2022/02/Censo2022_cuestionario_viviendas_colectivas.pdf` [@censo2022cuestcolectivas] |
+| `press_paraguay_bolivia_venezuela.html` | Press release "Paraguay, Bolivia y Venezuela son los países con mayor representación inmigrante en la Argentina" | `https://censo.gob.ar/index.php/paraguay-bolivia-y-venezuela-son-los-paises-con-mayor-representacion-inmigrante-en-la-argentina/` [@censo2024presspaises] |
+| `press_nueva_version_ampliada.html` | Press release "Nueva versión ampliada sobre la publicación de Migraciones" | `https://censo.gob.ar/index.php/nueva-version-ampliada-sobre-la-publicacion-de-migraciones/` [@censo2024pressampliada] |
+| `censo2010_tomo1.pdf`, `censo2010_tomo2.pdf` | Censo 2010, Serie B Nº 2, Tomos 1 y 2 | `https://www.indec.gob.ar/ftp/cuadros/poblacion/censo2010_tomo1.pdf` [@indec2012censo2010], `..._tomo2.pdf` |
+| `c2010_P6.xls` / `.csv` | Cuadro P6. Población total nacida en el extranjero por lugar de nacimiento, según sexo y grupo de edad. Año 2010 | `https://sitioanterior.indec.gob.ar/definitivos_bajarArchivoNacionales.asp?idc=13&arch=x&c=2010` [@indec2012cuadrop6] |
 
 Note: `censo.gob.ar` serves an incomplete TLS chain; downloads used `curl -k`.
 

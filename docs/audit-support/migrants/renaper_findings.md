@@ -8,7 +8,7 @@ Primary source under audit:
 > Dirección Nacional de Población (DNP), *Caracterización de la migración internacional en Argentina
 > a partir de los registros administrativos del RENAPER*. Registro Nacional de las Personas
 > (RENAPER), Ministerio del Interior. **Diciembre 2022**, 31 numbered pages.
-> PDF used: `https://www.argentina.gob.ar/sites/default/files/2022/12/08_-_caracterizacion_de_la_migracion_internacional.pdf`
+> PDF used: `https://www.argentina.gob.ar/sites/default/files/2022/12/08_-_caracterizacion_de_la_migracion_internacional.pdf` [@renaper2022caracterizacion]
 > (sha-checked local copy in the session scratchpad; 32 PDF pages, 31 with printed folios).
 > Landing page: https://www.argentina.gob.ar/interior/renaper/estadistica-de-poblacion/caracterizacion-de-la-migracion-internacional-en-argentina
 
@@ -236,7 +236,7 @@ The same exclusion is restated in a later DNP publication co-issued with IOM and
 December 2023): *"…se contabilizan las personas que tienen DNI digital, y quedan afuera aquellas
 que cuentan con versiones confeccionadas manualmente (Libreta Cívica, Libreta de Enrolamiento y DNI
 tapa verde o bordo)."*
-https://argentina.iom.int/sites/g/files/tmzbdl901/files/documents/2023-12/la-movilidad-interna-de-las-personas-migrantes-en-la-republica-argentina.pdf
+https://argentina.iom.int/sites/g/files/tmzbdl901/files/documents/2023-12/la-movilidad-interna-de-las-personas-migrantes-en-la-republica-argentina.pdf [@oim2023movilidad]
 
 ### 2.2 The six-month DNM absence filter
 
@@ -331,7 +331,7 @@ in the base, not of its 2022 state. But the population it deprioritised is exact
 this report counts.
 
 **The DNP itself still reports lag and under-registration.** Its own mortality monitor
-(*Monitoreo de Mortalidad en Argentina 2020–2024*, https://estadisticas.renaper.gob.ar/app_momo/):
+(*Monitoreo de Mortalidad en Argentina 2020–2024*, https://estadisticas.renaper.gob.ar/app_momo/) [@renaper2024momo]:
 
 > "**El tiempo entre ocurrencia y registro varía según la jurisdicción, pudiendo generar déficits
 > aparentes por demoras en la carga.**" … "**Puede existir subregistro de defunciones en determinados
@@ -387,7 +387,7 @@ filter, never by immigration status. The rule can nonetheless be established fro
 > el Documento Nacional de Identidad se expedirá por el mismo plazo que corresponda a la
 > subcategoría migratoria otorgada…"
 
-**DNM states it plainly** (https://www.argentina.gob.ar/migraciones/residencias):
+**DNM states it plainly** (https://www.argentina.gob.ar/migraciones/residencias) [@dnm2024residencias]:
 
 > "Residencias **Transitorias**: […] **no habilitan la obtención de DNI**."
 > "Residencias **Temporarias**: […] **Habilitan la obtención de DNI temporario**."
@@ -571,7 +571,7 @@ dashboards plus open data**, not continued.
 
 RENAPER publishes the same universe as flat CSVs at `datosabiertos.renaper.gob.ar`, catalogued on
 `datos.gob.ar` as *"Estructura de población de origen extranjero"*
-(https://datos.gob.ar/dataset/estructura-de-poblacion-de-origen-extranjero), disaggregated by
+(https://datos.gob.ar/dataset/estructura-de-poblacion-de-origen-extranjero) [@datosgob2024extranjera], disaggregated by
 country of birth × province × department × sex × five-year age group. Four editions exist.
 **The totals below were recomputed independently from the source CSVs for this note**, not taken
 from any summary:
@@ -645,7 +645,7 @@ neither has the DNP. Two implications for the paper:
 ### 3.4 The predecessor report is a flow study, not a stock
 
 DNP, *Migración Internacional Reciente en Argentina entre 2012 y 2020*, November 2021.
-https://www.argentina.gob.ar/sites/default/files/2021/11/migracion_internacional_reciente_en_la_argentina_entre_2012_y_2020.pdf
+https://www.argentina.gob.ar/sites/default/files/2021/11/migracion_internacional_reciente_en_la_argentina_entre_2012_y_2020.pdf [@renaper2021migracionreciente]
 Its unit is *radicaciones resueltas* (resolved residence permits), not persons: *"Entre 2012 y 2020,
 se otorgaron en total 1.916.884 radicaciones y en promedio se realizaron 212.987 por año."* Permits
 are transactions; one person can generate several (temporary, then permanent). It cannot be
@@ -654,10 +654,10 @@ differenced against a stock. IOM makes the same point:
 
 ### 3.5 Other open data located
 
-- *"Estructura de población Argentina"* — https://datos.gob.ar/dataset/estructura-de-poblacion-argentina
+- *"Estructura de población Argentina"* — https://datos.gob.ar/dataset/estructura-de-poblacion-argentina [@datosgob2024estructura]
   — the whole identified population with both `pais_nacimiento` and `nacionalidad`; reproduces the
   foreign-born totals above exactly.
-- *"Población Nacionalizada en Argentina"* — https://datos.gob.ar/dataset/poblacion-nacionalizada-en-argentina
+- *"Población Nacionalizada en Argentina"* — https://datos.gob.ar/dataset/poblacion-nacionalizada-en-argentina [@datosgob2024nacionalizada]
 - Dashboards at `estadisticas.renaper.gob.ar` (`app_extranjeros`, `app_poblacion`,
   `app_naturalizados`, `app_idt`). These are R/Shiny apps rendering over websocket; values cannot be
   scraped statically. `app_migracion` is **internal** residential mobility, not international
@@ -854,7 +854,7 @@ The rates computed here reproduce DEIS's published *tasas específicas* to about
 
 For work needing a proper life table rather than period rates, INDEC published census-2022-anchored
 abridged tables in machine-readable form on 15 October 2025 —
-`https://censo.gob.ar/wp-content/uploads/2025/10/tabla_mortalidad_2020_2022_base_csv.csv`, with
+`https://censo.gob.ar/wp-content/uploads/2025/10/tabla_mortalidad_2020_2022_base_csv.csv` [@censo2025mortalidad], with
 columns `m, q (nqx), l, d, L, T, P, e`. They confirm e₀ 2022 = **73,42** (men) / **79,05** (women) /
 76,16 (both).
 
@@ -893,7 +893,7 @@ private dwellings only. The report compares the two without flagging it.
 **Ameijeiras, Analía (2025). "Estimación del saldo migratorio internacional 2001–2022 en la
 Argentina: alcances y desafíos."** XVIII Jornadas Argentinas de Estudios de Población / V Congreso
 Internacional de Población del Cono Sur, AEPA, Córdoba, 23–26 September 2025. Author affiliation
-**INDEC – CONICET**, Programa de Análisis Demográfico. https://www.aacademica.org/xviii.jornadas.aepa/17.pdf
+**INDEC – CONICET**, Programa de Análisis Demográfico. https://www.aacademica.org/xviii.jornadas.aepa/17.pdf [@ameijeiras2025]
 
 This is the conference version of the work behind INDEC's official AD39 projections, and it is the
 best available citation. The key sentence:
@@ -930,7 +930,7 @@ Second, its RENAPER row for **Perú reads 236.929**, whereas Tabla 1 of the sour
 
 **Ameijeiras, Analía (2024). "Los registros administrativos en la medición de las migraciones en la
 Argentina: desafíos y limitaciones de los métodos y fuentes disponibles."** *SaberEs* 16(2):211–228.
-https://saberes.unr.edu.ar/index.php/revista/article/view/292
+https://saberes.unr.edu.ar/index.php/revista/article/view/292 [@ameijeiras2024]
 
 Restates the DNP method precisely, and supplies the ENMA anchor used in factor (e):
 

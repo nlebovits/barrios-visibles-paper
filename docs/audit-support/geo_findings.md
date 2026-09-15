@@ -352,7 +352,7 @@ Notes on the table:
 
 - **Census 2022 definitive** is INDEC's definitive censused population by jurisdiction, from
   *CNPHV 2022 — Indicadores por sexo y edad. Resultados definitivos*
-  (`https://www.indec.gob.ar/ftp/cuadros/poblacion/censo2022_indicadores_demograficos.pdf`), table
+  (`https://www.indec.gob.ar/ftp/cuadros/poblacion/censo2022_indicadores_demograficos.pdf`) [@indec2023indicadores], table
   "Población total, por jurisdicción, sexo registrado al nacer y edad mediana". The 24 rows sum to
   **45,892,285**, matching the published national definitive total exactly.
 - **AD40 reconciled** is AD40 Table 4 (18 May 2022, census date). Its 24 rows sum to 46,122,851 against
