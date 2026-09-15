@@ -174,6 +174,19 @@ Origin = Literal[
 # A relationship that asserts more than background needs a locator.
 ASSERTIVE = ("supports", "qualifies", "contradicts", "method_validates")
 
+# Markers written at the start of a bib entry's `note` to say the record is
+# not trustworthy yet. They are a convention, so the validator enforces them:
+# a marked entry must not be cited from the manuscript. Keep them uppercase
+# and at the start of the note so they are visible when reading the .bib.
+UNTRUSTED_MARKERS = (
+    "INCOMPLETE CITATION",
+    "UNVERIFIED AND UNLOCATED",
+    "YEAR UNVERIFIED",
+    "AUTHOR UNCONFIRMED",
+    "TITLE PARAPHRASED",
+    "DEAD URL",
+)
+
 
 class Evidence(BaseModel):
     """One recorded finding, tied to a location in the source.
@@ -640,7 +653,41 @@ def check_registry() -> tuple[list[Problem], dict]:
                 )
             )
 
+    # A record marked untrustworthy must not reach the manuscript. Citing one
+    # from docs/ is fine, because the audit notes are where uncertainty gets
+    # worked out.
     manuscript = manuscript_files()
+    for key, where in sorted(citations.items()):
+        entry = bib.get(key)
+        if not entry:
+            continue
+        note = entry.fields.get("note", "")
+        marker = next(
+            (m for m in UNTRUSTED_MARKERS if note.upper().startswith(m)), None
+        )
+        if not marker:
+            continue
+        in_paper = sorted(set(where) & manuscript)
+        if in_paper:
+            problems.append(
+                Problem(
+                    "ERROR",
+                    ", ".join(in_paper),
+                    f"@{key} is marked {marker} in paper/references.bib and "
+                    "must not be cited from the manuscript. Fix the record "
+                    "first, or cite a source with a complete one.",
+                )
+            )
+        else:
+            problems.append(
+                Problem(
+                    "WARN",
+                    "paper/references.bib",
+                    f"@{key} is marked {marker} and is cited in "
+                    + ", ".join(sorted(where)),
+                )
+            )
+
     for key, (note, _) in sorted(notes.items()):
         rel = f"literature/sources/{key}.md"
         in_paper = bool(set(citations.get(key, {})) & manuscript)

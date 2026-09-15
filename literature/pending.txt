@@ -42,7 +42,6 @@ vida2024
 agenciabrasil2024
 ameijeiras2024
 ameijeiras2025
-scialabba2025
 anses2022auh
 argentina2021moderna0423
 argentina2021moderna0527
@@ -96,5 +95,5 @@ renaper2024poblacion
 rodriguez2024
 sacco2021
 sisa2024puco
-tejidourbano2024sintesis
+tejidourbano2026sintesis
 statssa2024response

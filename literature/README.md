@@ -108,6 +108,27 @@ The remaining rules keep the registry consistent:
 - `literature/index.md` and `literature/evidence-matrix.csv` match a fresh
   regeneration.
 
+## Untrusted records
+
+A bib entry whose `note` starts with an uppercase marker is a record nobody
+should cite yet:
+
+```
+INCOMPLETE CITATION        author, title, or venue unknown
+UNVERIFIED AND UNLOCATED   the document itself has not been found
+YEAR UNVERIFIED            the date is a guess
+AUTHOR UNCONFIRMED         the byline could not be confirmed
+TITLE PARAPHRASED          the title was reconstructed, not copied
+DEAD URL                   the recorded address no longer resolves
+```
+
+Citing a marked entry from `paper/` is an error. Citing it from `docs/` is a
+warning, because the audit notes are where uncertainty gets resolved. Remove
+the marker when the record is fixed.
+
+The markers are also invisible in output: `cambridge-a.csl` does not render
+the `note` field, so the text stays out of the PDF bibliography.
+
 ## The backlog
 
 `literature/pending.txt` lists bib entries that have no note yet. A key on

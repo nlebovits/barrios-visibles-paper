@@ -24,6 +24,10 @@ Hard rules:
 - Never invent a page number. Use `kind: unlocated` and set `follow_up`.
 - Never delete an annotated-review finding to make a note shorter. The reviews
   are the audit record.
+- Never cite a bib entry from `paper/` while its `note` starts with an
+  uppercase marker such as `INCOMPLETE CITATION`. Fix the record first.
+- Never remove such a marker without verifying the field it covers against
+  the source.
 - Never add a key to `literature/pending.txt` to silence an error you could
   fix by writing the note. The list is for deferred work, not for skipped
   work.
