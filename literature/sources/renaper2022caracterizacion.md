@@ -13,8 +13,9 @@ tags: [RENAPER, migration, administrative, foreign-born, priority]
 cited_in_manuscript: false
 retrieved: 2026-09-15
 follow_up: >-
-  Locate the 3,033,786 figure and the method for removing people abroad
-  more than six months.
+  Locate the method for removing people abroad more than six months. The
+  census side of the comparison is cited to indec2024migraciones p. 27
+  Cuadro 1, not to a press release.
 evidence:
   - id: E1
     label: "RENAPER reported 3,033,786 foreign-born people with a current digital identity or residence in August 2022, against 1,933,463 counted by the census in private dwellings"
