@@ -56,9 +56,9 @@ Existing core-data version DOI: https://doi.org/10.5281/zenodo.22656880
 Census-enabled submission version DOI:
 **[INSERT EXACT VERSION DOI BEFORE SUBMISSION]**
 
-Do not submit until the exact version DOI is present in the manuscript and
-metadata, the Census reproduction command succeeds, and the Paper I footprint
-total is reconciled with the frozen archive.
+The Census-enabled version is needed only for the supplement's Census
+comparison. Do not submit until the exact version DOI is present in the
+manuscript and metadata.
 
 ## Cover-letter AI disclosure
 

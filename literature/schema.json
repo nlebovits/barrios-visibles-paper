@@ -1,0 +1,417 @@
+{
+  "source_note": {
+    "$defs": {
+      "ClaimLink": {
+        "additionalProperties": false,
+        "description": "How this source bears on one project claim.",
+        "properties": {
+          "claim": {
+            "pattern": "^[a-z][a-z0-9-]*$",
+            "title": "Claim",
+            "type": "string"
+          },
+          "relationship": {
+            "enum": [
+              "supports",
+              "qualifies",
+              "contradicts",
+              "method_validates",
+              "context_only"
+            ],
+            "title": "Relationship",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          },
+          "strength": {
+            "default": "medium",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ],
+            "title": "Strength",
+            "type": "string"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Note"
+          }
+        },
+        "required": [
+          "claim",
+          "relationship",
+          "evidence"
+        ],
+        "title": "ClaimLink",
+        "type": "object"
+      },
+      "Evidence": {
+        "additionalProperties": false,
+        "description": "One recorded finding, tied to a location in the source.\n\n`kind` carries the honesty of the record. `verbatim` is text copied\nexactly from the source. `paraphrase` restates the source, which is\nlegitimate but is not the source's own words. `data` is a figure read from\na table or result. Those three require both the text and a locator.\n\n`unlocated` is the fourth case and the important one. The finding text is\nrecorded, usually from a project document rather than the source itself,\nbut nobody has found the page yet. It carries the text and refuses a\nlocator, so the debt is visible in the index and in `n_located` instead of\npassing as located evidence.",
+        "properties": {
+          "id": {
+            "pattern": "^E[0-9]+$",
+            "title": "Id",
+            "type": "string"
+          },
+          "label": {
+            "maxLength": 200,
+            "minLength": 3,
+            "title": "Label",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "verbatim",
+              "paraphrase",
+              "data",
+              "unlocated"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "loc": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Page, section, figure, or table. Required for verbatim, paraphrase, and data. Forbidden for unlocated.",
+            "title": "Loc"
+          },
+          "quote": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The finding, as text. Always required.",
+            "title": "Quote"
+          },
+          "sample_size": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Sample or study extent, as reported.",
+            "title": "Sample Size"
+          },
+          "reference_kind": {
+            "default": "not_applicable",
+            "description": "What any reference population in this finding is.",
+            "enum": [
+              "census",
+              "complete_enumeration",
+              "community_estimate",
+              "modeled_estimate",
+              "administrative_record",
+              "undocumented_literature_value",
+              "not_applicable"
+            ],
+            "title": "Reference Kind",
+            "type": "string"
+          },
+          "origin": {
+            "default": "manual",
+            "description": "Which document this record came from. A project document means the record is second-hand until located in the source.",
+            "enum": [
+              "zotero-annotation",
+              "annotated-review",
+              "litreview-docx",
+              "manuscript",
+              "audit-notes",
+              "manual"
+            ],
+            "title": "Origin",
+            "type": "string"
+          },
+          "lang": {
+            "anyOf": [
+              {
+                "pattern": "^[a-z]{2}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Lang"
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "kind"
+        ],
+        "title": "Evidence",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "description": "The frontmatter of one `literature/sources/<key>.md` file.",
+    "properties": {
+      "key": {
+        "pattern": "^[A-Za-z][A-Za-z0-9_:.+-]*$",
+        "title": "Key",
+        "type": "string"
+      },
+      "status": {
+        "enum": [
+          "queued",
+          "reading",
+          "retained",
+          "superseded",
+          "do-not-use"
+        ],
+        "title": "Status",
+        "type": "string"
+      },
+      "lang": {
+        "pattern": "^[a-z]{2}$",
+        "title": "Lang",
+        "type": "string"
+      },
+      "verification": {
+        "enum": [
+          "verified_full_text",
+          "verified_secondary",
+          "needs_follow_up"
+        ],
+        "title": "Verification",
+        "type": "string"
+      },
+      "strength": {
+        "enum": [
+          "high",
+          "medium",
+          "low"
+        ],
+        "title": "Strength",
+        "type": "string"
+      },
+      "source_type": {
+        "enum": [
+          "primary_official",
+          "official_documentation",
+          "peer_reviewed",
+          "preprint",
+          "working_paper",
+          "independent_research",
+          "journalism",
+          "dataset",
+          "review"
+        ],
+        "title": "Source Type",
+        "type": "string"
+      },
+      "method": {
+        "enum": [
+          "direct_enumeration",
+          "post_enumeration_survey",
+          "demographic_reconciliation",
+          "modeled_population_product",
+          "remote_sensing",
+          "field_survey",
+          "administrative_registry",
+          "official_documentation",
+          "journalism",
+          "independent_analysis",
+          "literature_review",
+          "not_applicable"
+        ],
+        "title": "Method",
+        "type": "string"
+      },
+      "evidence_type": {
+        "items": {
+          "enum": [
+            "direct_analogue",
+            "method_validation",
+            "method_precedent",
+            "mechanism_evidence",
+            "context",
+            "caution"
+          ],
+          "type": "string"
+        },
+        "minItems": 1,
+        "title": "Evidence Type",
+        "type": "array"
+      },
+      "unit_of_analysis": {
+        "items": {
+          "enum": [
+            "building",
+            "roof",
+            "roof_block",
+            "dwelling",
+            "household",
+            "family",
+            "resident",
+            "settlement",
+            "grid_cell",
+            "census_area",
+            "jurisdiction",
+            "national",
+            "not_applicable"
+          ],
+          "type": "string"
+        },
+        "minItems": 1,
+        "title": "Unit Of Analysis",
+        "type": "array"
+      },
+      "geographies": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Geographies",
+        "type": "array"
+      },
+      "tags": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Tags",
+        "type": "array"
+      },
+      "cited_in_manuscript": {
+        "default": false,
+        "title": "Cited In Manuscript",
+        "type": "boolean"
+      },
+      "follow_up": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Follow Up"
+      },
+      "retrieved": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Retrieved"
+      },
+      "evidence": {
+        "items": {
+          "$ref": "#/$defs/Evidence"
+        },
+        "title": "Evidence",
+        "type": "array"
+      },
+      "claims": {
+        "items": {
+          "$ref": "#/$defs/ClaimLink"
+        },
+        "title": "Claims",
+        "type": "array"
+      },
+      "does_not_establish": {
+        "description": "Mandatory. Maintenance rule 3 of the annotated review.",
+        "items": {
+          "type": "string"
+        },
+        "minItems": 1,
+        "title": "Does Not Establish",
+        "type": "array"
+      }
+    },
+    "required": [
+      "key",
+      "status",
+      "lang",
+      "verification",
+      "strength",
+      "source_type",
+      "method",
+      "evidence_type",
+      "unit_of_analysis",
+      "does_not_establish"
+    ],
+    "title": "SourceNote",
+    "type": "object"
+  },
+  "claim": {
+    "additionalProperties": false,
+    "description": "The frontmatter of one `literature/claims/<claim-id>.md` file.",
+    "properties": {
+      "id": {
+        "pattern": "^[a-z][a-z0-9-]*$",
+        "title": "Id",
+        "type": "string"
+      },
+      "status": {
+        "default": "active",
+        "enum": [
+          "active",
+          "retired"
+        ],
+        "title": "Status",
+        "type": "string"
+      },
+      "scope": {
+        "default": "international",
+        "enum": [
+          "international",
+          "argentina",
+          "method"
+        ],
+        "title": "Scope",
+        "type": "string"
+      },
+      "requires_direct_measurement": {
+        "default": false,
+        "description": "True for a claim about coverage error, where a demographic reconciliation or a modelled product does not measure the quantity directly. The census-coverage notes require this distinction to be kept.",
+        "title": "Requires Direct Measurement",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "id"
+    ],
+    "title": "Claim",
+    "type": "object"
+  }
+}

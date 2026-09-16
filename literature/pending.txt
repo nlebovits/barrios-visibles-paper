@@ -1,0 +1,119 @@
+# Bib entries registered without a source note yet.
+#
+# check_sources.py requires one note per bib entry. A key listed here
+# reports as a warning instead of an error, so the backlog is visible in a
+# tracked file and in the Open gaps table of literature/index.md rather
+# than blocking every commit.
+#
+# Remove a key when its note lands. The validator warns when a listed key
+# already has a note, and errors when a listed key has no bib entry, so the
+# list cannot rot in either direction. When this file holds no keys, the
+# one-note-per-entry rule is strict again with no code change.
+#
+# Every entry here is a real source, not a placeholder. The audit-note
+# sources in particular carry file, sheet, column, and page locators in
+# docs/, so their notes will be better located than the literature ones.
+
+# cited by key in docs (22)
+benitez2022
+cravino2006
+cravino2008
+decreto70
+decreto764
+gaugris2007
+ign2021
+indec2023
+infobae2023
+lebovits2025laplata
+lebovits2026data
+microsoft2022
+renabap2023
+resa2025
+reyes2021
+rodriguez2018
+siempro2021
+smith2019
+unhabitat2003
+unhabitat2016
+unhabitat2018
+vida2024
+
+# registered from a review, not yet cited (77)
+agenciabrasil2024
+ameijeiras2024
+ameijeiras2025
+anses2022auh
+argentina2021moderna0423
+argentina2021moderna0527
+argentina2021moderna0606
+argentina2021moderna0617
+bomben2017
+censo2022cuestcolectivas
+censo2022cuestparticulares
+censo2023colectivas
+censo2024migracionesc1
+censo2024migracionesc12
+censo2024pressampliada
+censo2024resumen
+censo2025mortalidad
+censo2025proyecciones
+chile2013comision
+dane2018censo
+dane2024metodologias
+datosgob2024estructura
+datosgob2024extranjera
+datosgob2024nacionalizada
+datosgob2024renaperestructura
+deis2024defunciones
+deis2024nacidosvivos
+deis2024publicaciones
+dnm2024residencias
+dpn2016dni
+eleconomista2022
+electoral2023
+fernandez2008
+ibge2024projecao
+indec2004ad30
+indec2012censo2010
+indec2012cuadrop6
+indec2024
+indec2024migraciones
+indec2025ad40
+inec2023ratifica
+larepublica2019
+lebovits2025census
+marin2023
+oim2023movilidad
+owid2022vaccinations
+prensalibre2019
+redatam2024introduccion
+redatam2024universos
+renaper2021migracionreciente
+renaper2024datosabiertos
+renaper2024momo
+renaper2024poblacion
+rodriguez2024
+sacco2021
+sisa2024puco
+tejidourbano2026sintesis
+statssa2024response
+
+# added from the Part III draft
+censo2022tendenciacampo
+cepalmanual74
+dane2019omision
+elcohete2022
+epa2024dasymetric
+greatdataproducts2026
+ibge2024ppenoticia
+indec2023gacetilla481
+inei2018difusion
+lanacion2019inquilinos
+oecd2024argentina
+openbuildings2024temporal
+pib2011slum
+renabap2024programa
+rionegro2022lavagna
+stiphany2022
+uscensus2022staterates
+uscensus2023undercounted

@@ -5,8 +5,8 @@
 This repository contains the canonical manuscript, supplement, and analysis
 code for submission of *Barrios Visibles* to Cambridge University Press's
 *Data & Policy*. Paper I is the submission manuscript. The former Paper II
-remains as a historical working paper; its Census 2022 evidence is integrated
-into Paper I as a compact robustness comparison.
+remains as a historical working paper. Its Census 2022 evidence is kept in
+the supplement and is not used in the article.
 
 Argentina's Registro Nacional de Barrios Populares (RENABAP) records about
 1.24 million families across 6,467 registered informal settlements. The
@@ -16,22 +16,27 @@ same polygons.
 
 The version 1.0.0 data snapshot is archived at
 [10.5281/zenodo.22656880](https://doi.org/10.5281/zenodo.22656880).
-A recovered mismatch between its derived footprint total and the manuscript is
-documented in REPRODUCIBILITY.md and must be resolved before submission.
+The manuscript reports the footprint series that this archive reproduces.
+The frozen Census-comparison input holds an earlier join that differs by
+2,962 footprints, as documented in REPRODUCIBILITY.md.
 
 ## Findings
 
 Inside registered boundaries, detected footprints exceed recorded families by
-59%. A per-settlement household floor exceeds RENABAP's national total by 83%.
-Under conservative population multipliers that implies 6.3 to 7.6 million
-residents, or 2.9 to 3.4 million above the official figure.
+59%. A per-settlement household floor, max(RENABAP families, footprints × y ×
+1.1), exceeds RENABAP's national total by 83% at a yield of y = 1 occupied
+dwelling per footprint. Under the two population multipliers that implies 6.3
+to 7.6 million residents, or 2.9 to 3.4 million above the official figure.
+The sensitivity sweep varies y from 0.6 to 1.15. At y = 0.6, near the value
+that would reconcile the footprint and registry totals, the floor still
+exceeds the registry by roughly a fifth.
 
 The gap splits by geography. In the consolidated vertical villas of CABA,
 RENABAP records residents whom footprints miss. Everywhere else, building
-counts run well above the recorded family estimates. A Census 2022 robustness
-comparison declines from 2.62 to 1.88 as the analysis is restricted to radios
-increasingly covered by registered settlements. It is a consistency check, not
-an independent population count.
+counts run well above the recorded family estimates. A Census 2022 comparison
+in the supplement declines from 2.62 to 1.88 as the analysis is restricted to
+radios increasingly covered by registered settlements. The article does not
+use it.
 
 ## Reproduce the analysis
 
@@ -50,7 +55,7 @@ The default RENABAP analysis uses the version-specific Zenodo snapshot:
 
     pixi run estimate
 
-The Census comparison requires a new Zenodo version containing the processed
+The supplement's Census comparison requires a new Zenodo version containing the processed
 radio and recovered settlement-count files. Until the author publishes that
 version and inserts its record id, run it against the recovered inputs:
 
