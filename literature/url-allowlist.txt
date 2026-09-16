@@ -16,3 +16,6 @@ https://barriosvisibles.org
 https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6588819
 https://ssrn.com/abstract=6588819
 https://www.clarin.com
+
+# A bare domain link, not a citation.
+https://www.indec.gob.ar

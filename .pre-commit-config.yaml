@@ -26,6 +26,7 @@ repos:
             |docs/barrios-visibles-census-coverage-sources-and-notes\.md
             |docs/renabap-indec-source-notes\.md
             |docs/dwelling-yield-conversation-sources\.md
+            |docs/barrios-visibles-part-iii-draft\.md
           )$
       - id: end-of-file-fixer
         exclude: |
@@ -35,6 +36,7 @@ repos:
             |docs/barrios-visibles-census-coverage-sources-and-notes\.md
             |docs/renabap-indec-source-notes\.md
             |docs/dwelling-yield-conversation-sources\.md
+            |docs/barrios-visibles-part-iii-draft\.md
           )$
       - id: check-yaml
         # CITATION.cff is YAML. The hook matches .yaml and .yml by default,

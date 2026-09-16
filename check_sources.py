@@ -536,11 +536,26 @@ def load_allowlist() -> set[str]:
     }
 
 
+# Tracking parameters that do not change which document a URL points to.
+TRACKING_PARAMS = ("utm_", "fbclid", "gclid", "mc_cid", "mc_eid", "ref_src")
+
+
 def normalise_url(url: str) -> str:
-    """Strip trailing punctuation and unwrap an archive.org URL."""
+    """Strip trailing punctuation, tracking parameters, and an archive wrapper."""
     url = url.rstrip(".,;:)»\"'").rstrip("/")
     wrapped = re.search(r"web\.archive\.org/web/\d+(?:id_)?/(https?://.*)", url)
-    return wrapped.group(1).rstrip("/") if wrapped else url
+    if wrapped:
+        url = wrapped.group(1)
+    # A utm parameter records how a link was found, not what it points to.
+    if "?" in url:
+        base, _, query = url.partition("?")
+        kept = [
+            part
+            for part in query.split("&")
+            if part and not part.lower().startswith(TRACKING_PARAMS)
+        ]
+        url = base + ("?" + "&".join(kept) if kept else "")
+    return url.rstrip("/")
 
 
 def check_registry() -> tuple[list[Problem], dict]:
@@ -787,8 +802,23 @@ def check_registry() -> tuple[list[Problem], dict]:
                     )
                 )
 
+    # A publisher URL often embeds the DOI, as sagepub.com/doi/10.1177/...,
+    # link.springer.com/article/10.1186/..., or nature.com/articles/s41467-...
+    # Treat a URL containing a registered DOI as that source.
+    dois = {
+        entry.fields["doi"].strip().lower(): key
+        for key, entry in bib.items()
+        if entry.fields.get("doi")
+    }
+
+    def resolves(url: str) -> bool:
+        lower = url.lower()
+        if url in bib_urls or lower in bib_urls or url in allowlist:
+            return True
+        return any(doi in lower or doi.partition("/")[2] in lower for doi in dois)
+
     for url, where in sorted(doc_urls.items()):
-        if url in bib_urls or url.lower() in bib_urls or url in allowlist:
+        if resolves(url):
             continue
         problems.append(
             Problem(

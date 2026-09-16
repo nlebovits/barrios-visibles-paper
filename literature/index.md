@@ -264,6 +264,7 @@ Regenerate with `pixi run sources-index`. Query `literature/evidence-matrix.csv`
 | `literature/sources/bomben2017.md` | bib entry @bomben2017 has no source note. Create the file. |
 | `literature/sources/censo2022cuestcolectivas.md` | bib entry @censo2022cuestcolectivas has no source note. Create the file. |
 | `literature/sources/censo2022cuestparticulares.md` | bib entry @censo2022cuestparticulares has no source note. Create the file. |
+| `literature/sources/censo2022tendenciacampo.md` | bib entry @censo2022tendenciacampo has no source note. Create the file. |
 | `literature/sources/censo2023colectivas.md` | bib entry @censo2023colectivas has no source note. Create the file. |
 | `literature/sources/censo2024migracionesc1.md` | bib entry @censo2024migracionesc1 has no source note. Create the file. |
 | `literature/sources/censo2024migracionesc12.md` | bib entry @censo2024migracionesc12 has no source note. Create the file. |
@@ -271,10 +272,12 @@ Regenerate with `pixi run sources-index`. Query `literature/evidence-matrix.csv`
 | `literature/sources/censo2024resumen.md` | bib entry @censo2024resumen has no source note. Create the file. |
 | `literature/sources/censo2025mortalidad.md` | bib entry @censo2025mortalidad has no source note. Create the file. |
 | `literature/sources/censo2025proyecciones.md` | bib entry @censo2025proyecciones has no source note. Create the file. |
+| `literature/sources/cepalmanual74.md` | bib entry @cepalmanual74 has no source note. Create the file. |
 | `literature/sources/chile2013comision.md` | bib entry @chile2013comision has no source note. Create the file. |
 | `literature/sources/cravino2006.md` | bib entry @cravino2006 has no source note. Create the file. |
 | `literature/sources/cravino2008.md` | bib entry @cravino2008 has no source note. Create the file. |
 | `literature/sources/dane2018censo.md` | bib entry @dane2018censo has no source note. Create the file. |
+| `literature/sources/dane2019omision.md` | bib entry @dane2019omision has no source note. Create the file. |
 | `literature/sources/dane2024metodologias.md` | bib entry @dane2024metodologias has no source note. Create the file. |
 | `literature/sources/datosgob2024estructura.md` | bib entry @datosgob2024estructura has no source note. Create the file. |
 | `literature/sources/datosgob2024extranjera.md` | bib entry @datosgob2024extranjera has no source note. Create the file. |
@@ -287,39 +290,51 @@ Regenerate with `pixi run sources-index`. Query `literature/evidence-matrix.csv`
 | `literature/sources/deis2024publicaciones.md` | bib entry @deis2024publicaciones has no source note. Create the file. |
 | `literature/sources/dnm2024residencias.md` | bib entry @dnm2024residencias has no source note. Create the file. |
 | `literature/sources/dpn2016dni.md` | bib entry @dpn2016dni has no source note. Create the file. |
+| `literature/sources/elcohete2022.md` | bib entry @elcohete2022 has no source note. Create the file. |
 | `literature/sources/eleconomista2022.md` | bib entry @eleconomista2022 has no source note. Create the file. |
 | `literature/sources/electoral2023.md` | bib entry @electoral2023 has no source note. Create the file. |
+| `literature/sources/epa2024dasymetric.md` | bib entry @epa2024dasymetric has no source note. Create the file. |
 | `literature/sources/fernandez2008.md` | bib entry @fernandez2008 has no source note. Create the file. |
 | `literature/sources/gaugris2007.md` | bib entry @gaugris2007 has no source note. Create the file. |
+| `literature/sources/greatdataproducts2026.md` | bib entry @greatdataproducts2026 has no source note. Create the file. |
+| `literature/sources/ibge2024ppenoticia.md` | bib entry @ibge2024ppenoticia has no source note. Create the file. |
 | `literature/sources/ibge2024projecao.md` | bib entry @ibge2024projecao has no source note. Create the file. |
 | `literature/sources/ign2021.md` | bib entry @ign2021 has no source note. Create the file. |
 | `literature/sources/indec2004ad30.md` | bib entry @indec2004ad30 has no source note. Create the file. |
 | `literature/sources/indec2012censo2010.md` | bib entry @indec2012censo2010 has no source note. Create the file. |
 | `literature/sources/indec2012cuadrop6.md` | bib entry @indec2012cuadrop6 has no source note. Create the file. |
 | `literature/sources/indec2023.md` | bib entry @indec2023 has no source note. Create the file. |
+| `literature/sources/indec2023gacetilla481.md` | bib entry @indec2023gacetilla481 has no source note. Create the file. |
 | `literature/sources/indec2024.md` | bib entry @indec2024 has no source note. Create the file. |
 | `literature/sources/indec2024migraciones.md` | bib entry @indec2024migraciones has no source note. Create the file. |
 | `literature/sources/indec2025ad40.md` | bib entry @indec2025ad40 has no source note. Create the file. |
 | `literature/sources/inec2023ratifica.md` | bib entry @inec2023ratifica has no source note. Create the file. |
+| `literature/sources/inei2018difusion.md` | bib entry @inei2018difusion has no source note. Create the file. |
 | `literature/sources/infobae2023.md` | bib entry @infobae2023 has no source note. Create the file. |
+| `literature/sources/lanacion2019inquilinos.md` | bib entry @lanacion2019inquilinos has no source note. Create the file. |
 | `literature/sources/larepublica2019.md` | bib entry @larepublica2019 has no source note. Create the file. |
 | `literature/sources/lebovits2025census.md` | bib entry @lebovits2025census has no source note. Create the file. |
 | `literature/sources/lebovits2025laplata.md` | bib entry @lebovits2025laplata has no source note. Create the file. |
 | `literature/sources/lebovits2026data.md` | bib entry @lebovits2026data has no source note. Create the file. |
 | `literature/sources/marin2023.md` | bib entry @marin2023 has no source note. Create the file. |
 | `literature/sources/microsoft2022.md` | bib entry @microsoft2022 has no source note. Create the file. |
+| `literature/sources/oecd2024argentina.md` | bib entry @oecd2024argentina has no source note. Create the file. |
 | `literature/sources/oim2023movilidad.md` | bib entry @oim2023movilidad has no source note. Create the file. |
+| `literature/sources/openbuildings2024temporal.md` | bib entry @openbuildings2024temporal has no source note. Create the file. |
 | `literature/sources/owid2022vaccinations.md` | bib entry @owid2022vaccinations has no source note. Create the file. |
+| `literature/sources/pib2011slum.md` | bib entry @pib2011slum has no source note. Create the file. |
 | `literature/sources/prensalibre2019.md` | bib entry @prensalibre2019 has no source note. Create the file. |
 | `literature/sources/redatam2024introduccion.md` | bib entry @redatam2024introduccion has no source note. Create the file. |
 | `literature/sources/redatam2024universos.md` | bib entry @redatam2024universos has no source note. Create the file. |
 | `literature/sources/renabap2023.md` | bib entry @renabap2023 has no source note. Create the file. |
+| `literature/sources/renabap2024programa.md` | bib entry @renabap2024programa has no source note. Create the file. |
 | `literature/sources/renaper2021migracionreciente.md` | bib entry @renaper2021migracionreciente has no source note. Create the file. |
 | `literature/sources/renaper2024datosabiertos.md` | bib entry @renaper2024datosabiertos has no source note. Create the file. |
 | `literature/sources/renaper2024momo.md` | bib entry @renaper2024momo has no source note. Create the file. |
 | `literature/sources/renaper2024poblacion.md` | bib entry @renaper2024poblacion has no source note. Create the file. |
 | `literature/sources/resa2025.md` | bib entry @resa2025 has no source note. Create the file. |
 | `literature/sources/reyes2021.md` | bib entry @reyes2021 has no source note. Create the file. |
+| `literature/sources/rionegro2022lavagna.md` | bib entry @rionegro2022lavagna has no source note. Create the file. |
 | `literature/sources/rodriguez2018.md` | bib entry @rodriguez2018 has no source note. Create the file. |
 | `literature/sources/rodriguez2024.md` | bib entry @rodriguez2024 has no source note. Create the file. |
 | `literature/sources/sacco2021.md` | bib entry @sacco2021 has no source note. Create the file. |
@@ -327,10 +342,13 @@ Regenerate with `pixi run sources-index`. Query `literature/evidence-matrix.csv`
 | `literature/sources/sisa2024puco.md` | bib entry @sisa2024puco has no source note. Create the file. |
 | `literature/sources/smith2019.md` | bib entry @smith2019 has no source note. Create the file. |
 | `literature/sources/statssa2024response.md` | bib entry @statssa2024response has no source note. Create the file. |
+| `literature/sources/stiphany2022.md` | bib entry @stiphany2022 has no source note. Create the file. |
 | `literature/sources/tejidourbano2026sintesis.md` | bib entry @tejidourbano2026sintesis has no source note. Create the file. |
 | `literature/sources/unhabitat2003.md` | bib entry @unhabitat2003 has no source note. Create the file. |
 | `literature/sources/unhabitat2016.md` | bib entry @unhabitat2016 has no source note. Create the file. |
 | `literature/sources/unhabitat2018.md` | bib entry @unhabitat2018 has no source note. Create the file. |
+| `literature/sources/uscensus2022staterates.md` | bib entry @uscensus2022staterates has no source note. Create the file. |
+| `literature/sources/uscensus2023undercounted.md` | bib entry @uscensus2023undercounted has no source note. Create the file. |
 | `literature/sources/vida2024.md` | bib entry @vida2024 has no source note. Create the file. |
 | `literature/sources/almeida2011.md` | claim 'planar-counts-conservative-when-vertical' is 'supports' but none of E1, E2, E3, E4 carries a… |
 | `literature/sources/angeles2009.md` | claim 'official-enumeration-omits-areas' is 'supports' but none of E1 carries a loc. Add a page, se… |
@@ -403,19 +421,37 @@ Regenerate with `pixi run sources-index`. Query `literature/evidence-matrix.csv`
 | `literature/sources/wang2022.md` | claim 'no-single-provider-complete' is 'qualifies' but none of E1 carries a loc. Add a page, sectio… |
 | `literature/sources/wang2022.md` | claim 'missing-footprints-push-estimates-down' is 'supports' but none of E2 carries a loc. Add a pa… |
 | `paper/references.bib` | @agenciabrasil2024 has neither a note nor a citation |
+| `paper/references.bib` | @censo2022tendenciacampo has neither a note nor a citation |
+| `paper/references.bib` | @cepalmanual74 has neither a note nor a citation |
 | `paper/references.bib` | @chile2013comision has neither a note nor a citation |
 | `paper/references.bib` | @dane2018censo has neither a note nor a citation |
+| `paper/references.bib` | @dane2019omision has neither a note nor a citation |
 | `paper/references.bib` | @dane2024metodologias has neither a note nor a citation |
+| `paper/references.bib` | @elcohete2022 has neither a note nor a citation |
+| `paper/references.bib` | @epa2024dasymetric has neither a note nor a citation |
+| `paper/references.bib` | @greatdataproducts2026 has neither a note nor a citation |
+| `paper/references.bib` | @ibge2024ppenoticia has neither a note nor a citation |
 | `paper/references.bib` | @ibge2024projecao has neither a note nor a citation |
+| `paper/references.bib` | @indec2023gacetilla481 has neither a note nor a citation |
 | `paper/references.bib` | @inec2023ratifica has neither a note nor a citation |
+| `paper/references.bib` | @inei2018difusion has neither a note nor a citation |
+| `paper/references.bib` | @lanacion2019inquilinos has neither a note nor a citation |
 | `paper/references.bib` | @larepublica2019 has neither a note nor a citation |
 | `paper/references.bib` | @lebovits2025census has neither a note nor a citation |
 | `paper/references.bib` | @marin2023 has neither a note nor a citation |
+| `paper/references.bib` | @oecd2024argentina has neither a note nor a citation |
+| `paper/references.bib` | @openbuildings2024temporal has neither a note nor a citation |
+| `paper/references.bib` | @pib2011slum has neither a note nor a citation |
 | `paper/references.bib` | @prensalibre2019 has neither a note nor a citation |
+| `paper/references.bib` | @renabap2024programa has neither a note nor a citation |
 | `paper/references.bib` | @renaper2024datosabiertos has neither a note nor a citation |
+| `paper/references.bib` | @rionegro2022lavagna has neither a note nor a citation |
 | `paper/references.bib` | @rodriguez2024 has neither a note nor a citation |
 | `paper/references.bib` | @statssa2024response has neither a note nor a citation |
+| `paper/references.bib` | @stiphany2022 has neither a note nor a citation |
 | `paper/references.bib` | @tejidourbano2026sintesis has neither a note nor a citation |
+| `paper/references.bib` | @uscensus2022staterates has neither a note nor a citation |
+| `paper/references.bib` | @uscensus2023undercounted has neither a note nor a citation |
 | `literature/sources/almeida2011.md` | 4 finding(s) still need a located quote: E1, E2, E3, E4 |
 | `literature/sources/almeida2011.md` | follow-up: Published in IEEE Earthzine rather than a peer-reviewed journal. Verify the 43,295 estim… |
 | `literature/sources/angeles2009.md` | 4 finding(s) still need a located quote: E1, E2, E3, E4 |

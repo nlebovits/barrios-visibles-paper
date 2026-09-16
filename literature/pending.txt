@@ -97,3 +97,23 @@ sacco2021
 sisa2024puco
 tejidourbano2026sintesis
 statssa2024response
+
+# added from the Part III draft
+censo2022tendenciacampo
+cepalmanual74
+dane2019omision
+elcohete2022
+epa2024dasymetric
+greatdataproducts2026
+ibge2024ppenoticia
+indec2023gacetilla481
+inei2018difusion
+lanacion2019inquilinos
+oecd2024argentina
+openbuildings2024temporal
+pib2011slum
+renabap2024programa
+rionegro2022lavagna
+stiphany2022
+uscensus2022staterates
+uscensus2023undercounted
